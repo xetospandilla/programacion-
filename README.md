@@ -7,7 +7,7 @@
 ├── 📁 personal
 │   ├── 📁 cursos
 │   │   ├── 📁 c++ (Fundamentos, Flujo, Funciones, Punteros, Referencias y POO)
-│   │   └── 📁 js (Iniciado)
+│   │   └── 📁 js
 │   └── 📁 experimentos
 │       └── 📁 c++
 │           ├── 🚀 misionMars
