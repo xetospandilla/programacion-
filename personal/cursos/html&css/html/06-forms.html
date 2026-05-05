@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Formularios</title>
+    </head>
+    <body>
+        <h1>Página web con un formulario</h1>
+        <form>
+            <input type="text" name="username" required placeholder="nombre"> <!--Recibe texto. || Require hacer que el campo sea obligatorio-->
+            <input type="email" name="useremail" placeholder="email"> <!--Solo deja enviar si contiene un email || Cuando el servidor reciba el contenido del campo, el atributo 'name=""' servira de identificador para identificarlo y pueda hacer comprobaciones-->
+            <input type="password" name="contraseña" placeholder="contraseña"> <!--Recibe una contraseña-->
+            <input type="checkbox"> <!--Caja de terminos y condiciones-->
+            <input type="radio"> <!--Seleccionar una opción-->
+            <input type="file"> <!--Recibe un archivo-->
+            <input type="date"> <!--Recibe una fecha-->
+            <input type="submit"> <!--Envia el form-->
+
+            <!--
+            
+            //  Atributos
+
+            type="" -> indica el tipo de input
+            name="" -> identifica el input
+            required -> hace que sea obligatorio rellenar el campo
+            placeholder="" -> sirve para dar ejemplos del contenido de que debe contener el input
+            value="" -> sirve para facilitarle en contenido al servidor que reciba el input.
+            
+            -->
+        </form>
+        <button><a href="../../index.html">Página de Inicio</a></button>
+    </body>
+</html>
