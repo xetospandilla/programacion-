@@ -1,0 +1,40 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión Universitaria SPA</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f4f9; }
+        .panel { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        input, button { padding: 10px; margin: 5px 0; }
+        button { background: #007BFF; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #0056b3; }
+        #resultados { padding: 15px; background: #e2e3e5; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+    <h1>Gestión Universitaria</h1>
+
+    <div class="panel">
+        <h3>Buscar Persona</h3>
+        <input type="text" id="dniBuscar" placeholder="Introduce DNI">
+        <button onclick="buscarPersona()">Buscar por DNI</button>
+    </div>
+
+    <div class="panel">
+        <h3>Buscar Asignaturas por Apellido</h3>
+        <input type="text" id="apellidoBuscar" placeholder="Introduce Apellido">
+        <button onclick="buscarPorApellido()">Buscar Asignaturas</button>
+    </div>
+
+    <div class="panel">
+        <h3>Consola de Resultados:</h3>
+        <div id="resultados">Aquí aparecerán los resultados...</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
