@@ -6,4 +6,7 @@ create table Matricula (
     foreign key (dni) references Persona(dni),
     foreign key (codigo) references Asignatura(codigo),
     primary key (dni, codigo)
-)
+);
+
+-- me matriculo:
+insert into Matricula values ('35612207L','13929'); 
