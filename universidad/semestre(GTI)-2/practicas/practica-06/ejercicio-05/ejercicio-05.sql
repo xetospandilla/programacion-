@@ -1,4 +1,4 @@
--- cosulta3.sql
+-- ejercicio05.sql
 select Persona.nombre, Persona.apellidos
 from Persona
 inner join Matricula on Persona.dni = Matricula.dni
