@@ -16,6 +16,11 @@
  - Lecciones 14 y 15 (bucles ya explicados). Esta lección los AMPLÍA y
    aclara cuándo usar cada uno; no los sustituye.
 
+ REPASO: for, while, do...while y for...of se explican por primera vez en
+ la lección 14. Las secciones 1-4 de esta lección los repasan brevemente
+ para centrarse en lo nuevo: break/continue (sección 5), cortocircuito con
+ && y || (sección 6) y bucles infinitos (sección 7).
+
  1. ¿QUÉ ES UN BUCLE Y CUÁNDO LO USO?
  Un BUCLE es una estructura que repite un bloque de instrucciones mientras
  se cumpla una condición (o, en el caso de for...of, mientras queden

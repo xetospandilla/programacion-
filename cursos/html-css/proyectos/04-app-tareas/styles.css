@@ -122,7 +122,7 @@ body {
 /* Tarea completada: tachada (además del checkbox marcado) */
 .lista li.completada .texto {
     text-decoration: line-through;
-    color: #777;
+    color: #6b6b6b;
 }
 
 /* Botón eliminar */

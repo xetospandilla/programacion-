@@ -15,6 +15,8 @@
  PRERREQUISITOS
  - Lección 32 (entorno y ejecución), 16 (funciones) y tener la idea de
    HTML (etiquetas, atributos y texto) del bloque `html-css`.
+ - Nota: `addEventListener` se usa aquí para reaccionar a los clics, pero
+   se estudia con detalle en la lección 44 (eventos).
 
  CÓMO SE EJECUTA ESTA LECCIÓN
  - NO se ejecuta con `node`: necesita un navegador.
@@ -64,8 +66,9 @@ console.log("Ejemplo: títulos h2 de esta página ->",
  textContent es una propiedad de los elementos: lee TODO el texto de un
  nodo y, si le asignas un valor, lo REEMPLAZA.
  Sirve para mostrar en pantalla datos calculados o textos nuevos.
- Regla de seguridad: para poner texto viene de usuarios (como en la
- práctica 44) usar SIEMPRE textContent y nunca innerHTML.
+ Regla de seguridad: para insertar texto que viene de usuarios (como en
+ la práctica 44) usar SIEMPRE textContent y recurrir a innerHTML solo
+ cuando de verdad se necesite interpretar HTML.
  */
 
 let parrafoDemo = document.querySelector("#parrafo-demo")
@@ -167,7 +170,7 @@ botonMarcarTodos.addEventListener("click", () => {
  2. Confundir el texto HTML con el DOM: editar el archivo .html no cambia
     el DOM de la página abierta, y viceversa. Hay que recargar para
     releer el HTML.
- 3. ussar innerHTML con textos de usuario o datos externos: puede
+ 3. usar innerHTML con textos de usuario o datos externos: puede
     inyectar código (lección 44). textContent no interpreta nada.
  4. querySelector devuelve uno solo (el primero); para varios hay que
     usar querySelectorAll y recorrer la lista.

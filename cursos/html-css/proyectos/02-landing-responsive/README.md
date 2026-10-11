@@ -20,6 +20,9 @@ aprendiste en la lección 22: estilos base para el móvil y mejoras con
 - Grid para la sección informativa en escritorio (lección 20).
 - Diseño mobile-first y media queries (lección 22).
 - Imágenes locales con `alt` y `max-width: 100%` para que no desborden.
+- Contraste de texto (lección 25): el botón secundario «Ver detalles» usa el
+  color primario del tema sobre el fondo claro del hero (≈ 7,8:1, cumple
+  WCAG AA).
 
 ## Cómo ejecutar el proyecto
 
@@ -38,7 +41,7 @@ aprendiste en la lección 22: estilos base para el móvil y mejoras con
 | `assets/producto.svg` | Ilustración local del producto (cuaderno de apuntes de muestra). |
 | `README.md` | Esta guía. |
 
-El botón «Emprender gratis» lleva a la sección de características: es una
+El botón «Empezar gratis» lleva a la sección de características: es una
 ancla, no hay ningún formulario de pago de verdad.
 
 ## Tres mejoras progresivas para intentar
@@ -61,7 +64,8 @@ ancla, no hay ningún formulario de pago de verdad.
       columnas.
 - [ ] Las tres tarjetas se reparten el ancho en escritorio.
 - [ ] Los enlaces del menú saltan a sus secciones.
-- [ ] Los botones tienen contraste y muestran un foco claro con el teclado.
+- [ ] Los botones tienen contraste suficiente (el secundario «Ver detalles»,
+      ≈ 7,8:1 sobre el hero) y muestran un foco claro con el teclado.
 - [ ] Las dos imágenes tienen textos alternativos y nunca se salen de su
       zona.
 - [ ] El pie enlaza de vuelta al índice del curso.

@@ -4,6 +4,9 @@ Vídeo: https://youtu.be/1glVfFxj8a4?t=14146
 */
 
 // NOTA: Explora diferentes sintaxis de funciones para resolver los ejercicios
+// Algunos ejercicios usan herramientas que se explican más adelante en el
+// curso: Math (lección 34), spread ... (lección 20) y map/filter/reduce
+// (lección 37).
 
 // 1. Crea una función que reciba dos números y devuelva su suma
 function sumar(a, b) {

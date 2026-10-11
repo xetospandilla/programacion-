@@ -173,7 +173,7 @@ Intento 1 de 6 > ¡Acertaste! Lo lograste en 1 intento(s).
   generarse UNA vez, antes del bucle.
 - **Los intentos se agotan enseguida**: estás haciendo `intentos++` para entradas
   inválidas. El incremento va después de validar.
-- **El número siempre es el mismo**: es el modo real con suerte; prueba muchas
+- **El número siempre es el mismo**: es el modo normal; prueba muchas
   veces o usa el modo demo. Si SIEMPRE es igual incluso en modo normal, revisa
   que la fórmula use `MAXIMO - MINIMO + 1` (sin el `+1` nunca sale el máximo).
 - **"NaN" al comparar**: no conviertes con `Number()` o el texto leído contiene

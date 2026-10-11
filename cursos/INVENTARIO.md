@@ -1,7 +1,7 @@
 # Inventario del material formativo
 
-Generado el 11 de octubre de 2026 (tanda 9, auditoría final) con inspección
-directa de los archivos en `cursos/`.
+Actualizado el 12 de octubre de 2026 (tandas 14 y 16) con inspección directa
+de los archivos en `cursos/`.
 
 ## Conteo real por curso
 
@@ -48,8 +48,8 @@ Sin `node_modules` ni dependencias declaradas (`package.json` sin
 ### `cursos/html-css/` (55 archivos)
 
 - **Portada (1)**: `index.html`.
-- **`html/` (12)**: lecciones numeradas `01-06` (la `03` tiene 3 páginas) e
-  `intro-html`, `tablas`, `semantica`, `multimedia`; 10 lecciones en total.
+- **`html/` (12)**: 10 lecciones numeradas `00-09` (la `03` tiene 3 páginas:
+  `enlaces01`, `enlaces02` y `enlaces03`).
 - **`css/` (17)**: 15 lecciones numeradas `01-15` + demo `integrarCSS/`
   (página y hoja propia). Las lecciones llevan estilos embebidos salvo las de
   práctica (19 y 21), que enlazan su hoja en `css/ejemplos/`.
@@ -88,7 +88,54 @@ Sin `node_modules` ni dependencias declaradas (`package.json` sin
 - Enlaces de `INDEX.md` y portada: sin rutas rotas.
 - `git diff --check`: sin espacios en blanco sobrantes.
 
-## Errores encontrados y corregidos en esta tanda
+## Errores encontrados y corregidos
+
+### Tanda nocturna (actual)
+
+1. Renombrado y renumerado el bloque `html/` a la secuencia `00-09`
+   (6 renombrados con `git mv`): `intro-html`→`00-introduccion-html`,
+   `01-index`→`01-encabezados-parrafos`, `tablas`→`06-tablas`,
+   `semantica`→`07-semantica`, `06-forms`→`08-formularios`,
+   `multimedia`→`09-multimedia`. Actualizadas todas las referencias en
+   lecciones HTML, hojas CSS, `index.html` e `INDEX.md`.
+2. Contraste: `.boton-claro` (landing) usaba un color con contraste
+   insuficiente; corregido a `var(--color-primario)`. El `#777` de
+   `.lista li.completada .texto` (app de tareas, 4,48:1) corregido a
+   `#6b6b6b` (5,33:1). El estado vacío `.vacio` ya cumplía (6,94:1).
+3. Navegación: `html/05-rutas.html` usaba `<button><a>` inválido; y
+   `enlaces02`/`enlaces03` no tenían enlace de regreso; corregidos.
+4. `javascript/43-dom.js`: errata «ussar» corregida.
+5. `javascript/INDEX.md`: reordenado el bloque de bucles (`35-bucles` tras
+   `14-loops`/`15-loops-exercises`), retiradas las marcas «NUEVA», añadidas
+   remisiones en las lecciones 17, 19 y 43, y enlazado el bloque H con el
+   curso de HTML/CSS.
+6. `css/05-modelo-caja.html`: la promesa «en próximas entregas: más
+   selectores, flexbox y grid» sustituida por enlaces a las lecciones
+   existentes (02, 08/09 y 10).
+7. `html/04-imagenes.html` y `html/05-rutas.html`: añadidos tres ejercicios
+   cortos a cada una.
+
+### Tanda 16 (HTML/CSS y documentación)
+
+1. Corregidos los cuatro controles HTML inválidos `<button><a>` (en
+   `html/01-encabezados-parrafos.html`, `html/02-listas.html`,
+   `html/03-enlaces/enlaces01.html` y `html/04-imagenes.html`), sustituidos
+   por `<p><a>` conservando destino y texto.
+2. Añadido `rel="noopener"` a los tres `target="_blank"` de las páginas de
+   enlaces (se mantuvo `target` por ser parte del ejemplo didáctico).
+3. Completada la navegación de `css/05-modelo-caja.html` con el enlace
+   «Siguiente: Display y flujo» a `06-display-flujo.html`.
+4. Unificada la navegación del itinerario HTML (12 páginas): enlace al índice
+   y enlaces «Anterior»/«Siguiente» encadenados según el orden 00-09 (con las
+   tres partes de enlaces intercaladas).
+5. `html-css/index.html`: reescrita la sección «Cómo navegar» para describir
+   la navegación real (antes prometía «Página de Inicio» en todas).
+6. Ortografía: `Imagenes`→`Imágenes` y `Pagina`→`Página` en
+   `html/04-imagenes.html` y `html/05-rutas.html`.
+7. `html-css/INDEX.md`: documentado el salto de orden 09→11 (el bloque de CSS
+   empieza en el 11; no existe la lección 10).
+
+### Tanda anterior
 
 1. `cursos/javascript/package.json`: la descripción decía "Lecciones 00-37";
    corregida a "Lecciones 00-45, ejercicios, proyectos, utils y components".
@@ -99,15 +146,25 @@ Sin `node_modules` ni dependencias declaradas (`package.json` sin
 (Correcciones de tandas anteriores: limpiadas reglas CSS muertas `.fx.gap` y
 `.gr.mm` en la tanda 7; `yo.png` retirado del curso en la tanda 5.)
 
+## Incidencias abiertas (no bloqueantes)
+
+- Ninguna incidencia funcional conocida. Las comprobaciones de cierre (tanda
+  17) pasan: `node --check` sin errores de sintaxis, `04-app-tareas` 30/30,
+  proyectos 1-5 con `exit=0` y `audit.js` sin rutas rotas nuevas.
+- El modo real (con Internet) del proyecto 5 de JavaScript no se ejecuta en
+  las comprobaciones; queda verificado solo su modo local.
+- Sin navegador: el comportamiento visual e interactivo de HTML/CSS, DOM,
+  eventos y de la app de tareas no se ha probado.
+
 ## Plantillas intencionales (no son errores)
 
 - `css/01-introduccion-css.html` referencia `mis-estilos.css`: hoja de
   ejemplo que el alumno debe crear.
-- `html/multimedia.html`: `../media/cancion.mp3`/`.ogg` y
+- `html/09-multimedia.html`: `../media/cancion.mp3`/`.ogg` y
   `../media/presentacion.mp4`/`.webm` son fuentes alternativas de
   demostración explicadas en la lección (el póster y `subtitulos-ejemplo.vtt`
   existen); `mi-pelicula.*` es el ejercicio propuesto al final.
-- `html/tablas.html`: `logo.svg` aparece dentro de un ejemplo de código
+- `html/06-tablas.html`: `logo.svg` aparece dentro de un ejemplo de código
   (comparativa MAL/BIEN).
 
 ## Limitaciones
@@ -115,13 +172,17 @@ Sin `node_modules` ni dependencias declaradas (`package.json` sin
 - Sin navegador disponible: no se probó la apariencia visual ni el
   comportamiento interactivo de HTML/CSS, DOM, eventos ni de la app de
   tareas; tampoco la petición real a la API del proyecto 5 (solo su modo
-  local).
+  local). No hay validación visual real de responsive, contraste, foco ni
+  teclado.
 - La entrada interactiva de los proyectos se simuló canalizando texto por
   `stdin`; la experiencia de usuario con terminal real no se evaluó.
+- Los recursos multimedia de plantilla (`../media/cancion.*`, `presentacion.*`
+  y `mi-pelicula.*`) y los enlaces de ejemplo documentados (`mis-estilos.css`,
+  `logo.svg`) siguen sin existir a propósito: no son rutas rotas nuevas.
 
 ## Estado de git
 
 Sin commits ni operaciones remotas en toda la tarea: el material está en la
-rama `programacion-cleanup` (HEAD `f301eac`) acumulado como modificaciones y
-archivos nuevos sin commitear. Rutas protegidas (`universidad/`,
-`experimentos/` y `universidad/semestre-02-gti/examenes/global.js`) intactas.
+rama `programacion-cleanup` (HEAD `572c873`) acumulado como modificaciones y
+archivos sin commitear. Rutas protegidas (`universidad/`, `experimentos/` y
+`universidad/semestre-02-gti/examenes/global.js`) intactas.

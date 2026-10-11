@@ -89,13 +89,13 @@ img { max-width: 100%; height: auto; }
 
 .boton-claro {
     background: transparent;
-    border: 2px solid #fff;
-    color: #fff;
+    border: 2px solid var(--color-primario);
+    color: var(--color-primario);
 }
 
 .boton-claro:hover,
 .boton-claro:focus-visible {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(31, 78, 121, 0.12);
 }
 
 /* --- Hero / presentación del producto --- */

@@ -153,7 +153,7 @@ function crearTarea(texto) {
  Cuando pulsamos un botón cualquiera de la lista, ¿cómo sabe el código
  qué botón fue y de qué tarea es?
 
- Two conceptos:
+ Dos conceptos:
  - event.target: el elemento CONCRETO que el usuario pulsó.
  - DELEGACIÓN: en lugar de poner un listener a cada botón (que se crean
    en marcha), ponemos UN SOLO listener en la lista (que ya existe) y

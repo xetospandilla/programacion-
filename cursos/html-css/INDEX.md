@@ -1,10 +1,12 @@
 # Índice del curso de HTML y CSS
 
 Curso personal de HTML y CSS. Están completos el bloque de HTML desde cero
-(10 lecciones), el bloque completo de CSS (15 lecciones: fundamentos 11-15
-y avanzado 16-25) y los proyectos integradores (`proyectos/`, cuatro:
-tres de HTML y CSS y uno con JavaScript). La auditoría final se realizó en
-la tanda 9 (véase [../INVENTARIO.md](../INVENTARIO.md)).
+(10 lecciones, 00-09), el bloque completo de CSS (15 lecciones: fundamentos
+11-15 y avanzado 16-25) y los proyectos integradores (`proyectos/`, cuatro:
+tres de HTML y CSS y uno con JavaScript). La revisión estática más reciente
+se hizo en la tanda nocturna de normalización (véase
+[../INVENTARIO.md](../INVENTARIO.md)); las comprobaciones visuales en
+navegador siguen pendientes.
 
 ## Cómo empezar desde cero
 
@@ -23,22 +25,23 @@ No necesitas un servidor ni herramientas adicionales.
 
 ## Orden de estudio (secuencia recomendada)
 
-El número de la primera columna es el orden de estudio. El nombre del
-archivo puede diferir: la lección 9 vive en `html/06-forms.html` (su
-numeración histórica) y la 10 en `html/multimedia.html`.
+El número de la primera columna es el orden de estudio. En el bloque de HTML
+(00-09) coincide con el nombre del archivo; el bloque de CSS continúa a partir
+del orden 11 (sus archivos van del 01 al 15). No existe una lección con el
+orden 10: el bloque de CSS comienza en el 11 para separarlo del de HTML.
 
 | Orden | Archivo | Tema |
 |---|---|---|
-| 0 | [html/intro-html.html](html/intro-html.html) | Introducción: qué es HTML, estructura mínima, atributos, anidamiento |
-| 1 | [html/01-index.html](html/01-index.html) | Encabezados y párrafos |
-| 2 | [html/02-listas.html](html/02-listas.html) | Listas ordenadas y no ordenadas |
-| 3 | [html/03-enlaces/enlaces01.html](html/03-enlaces/enlaces01.html) | Enlaces (parte 1) |
-| 4 | [html/04-imagenes.html](html/04-imagenes.html) | Imágenes, alt y title |
-| 5 | [html/05-rutas.html](html/05-rutas.html) | Rutas relativas y absolutas |
-| 7 | [html/tablas.html](html/tablas.html) | Tablas semánticas y cuándo no usarlas |
-| 8 | [html/semantica.html](html/semantica.html) | Semántica estructural: header, nav, main, section, article, aside, footer |
-| 9 | [html/06-forms.html](html/06-forms.html) | Formularios ampliados: label, input, select, validación nativa, sin backend |
-| 10 | [html/multimedia.html](html/multimedia.html) | Audio, vídeo, fuentes alternativas y subtítulos (recursos locales) |
+| 00 | [html/00-introduccion-html.html](html/00-introduccion-html.html) | Introducción: qué es HTML, estructura mínima, atributos, anidamiento |
+| 01 | [html/01-encabezados-parrafos.html](html/01-encabezados-parrafos.html) | Encabezados y párrafos |
+| 02 | [html/02-listas.html](html/02-listas.html) | Listas ordenadas y no ordenadas |
+| 03 | [html/03-enlaces/enlaces01.html](html/03-enlaces/enlaces01.html) | Enlaces (parte 1) |
+| 04 | [html/04-imagenes.html](html/04-imagenes.html) | Imágenes, alt y title |
+| 05 | [html/05-rutas.html](html/05-rutas.html) | Rutas relativas y absolutas |
+| 06 | [html/06-tablas.html](html/06-tablas.html) | Tablas semánticas y cuándo no usarlas |
+| 07 | [html/07-semantica.html](html/07-semantica.html) | Semántica estructural: header, nav, main, section, article, aside, footer |
+| 08 | [html/08-formularios.html](html/08-formularios.html) | Formularios ampliados: label, input, select, validación nativa, sin backend |
+| 09 | [html/09-multimedia.html](html/09-multimedia.html) | Audio, vídeo, fuentes alternativas y subtítulos (recursos locales) |
 | 11 | [css/01-introduccion-css.html](css/01-introduccion-css.html) | Introducción: qué es CSS, reglas, tres formas de aplicarlo |
 | 12 | [css/02-selectores.html](css/02-selectores.html) | Selectores: etiqueta, clase, ID, descendentes, combinadores, atributos |
 | 13 | [css/03-cascada-especificidad.html](css/03-cascada-especificidad.html) | Cascada, herencia, especificidad y `!important` |
@@ -76,9 +79,9 @@ dependencias. Contenido y diseño son ficticios. Cada proyecto incluye su
 
 | Proyecto | Archivo | Qué practica | Requisitos previos |
 |---|---|---|---|
-| 01 - Página personal | [proyectos/01-pagina-personal/index.html](proyectos/01-pagina-personal/index.html) | Estructura semántica, navegación por anclas, imagen local, variables y responsive | HTML 0-10; CSS 11, 22 y 24 |
+| 01 - Página personal | [proyectos/01-pagina-personal/index.html](proyectos/01-pagina-personal/index.html) | Estructura semántica, navegación por anclas, imagen local, variables y responsive | HTML 00-09; CSS 11, 22 y 24 |
 | 02 - Landing responsive | [proyectos/02-landing-responsive/index.html](proyectos/02-landing-responsive/index.html) | Landing con llamada a la acción, tarjetas Flexbox, grid y diseño mobile-first | CSS 18-22 |
-| 03 - Portfolio con Grid | [proyectos/03-portfolio-grid/index.html](proyectos/03-portfolio-grid/index.html) | Cuadrícula de proyectos con Grid (`auto-fill` + `minmax`), tarjetas Flexbox y formulario accesible | CSS 18-21; formularios (lección 9) |
+| 03 - Portfolio con Grid | [proyectos/03-portfolio-grid/index.html](proyectos/03-portfolio-grid/index.html) | Cuadrícula de proyectos con Grid (`auto-fill` + `minmax`), tarjetas Flexbox y formulario accesible | CSS 18-21; formularios (lección 08) |
 | 04 - App de tareas | [proyectos/04-app-tareas/index.html](proyectos/04-app-tareas/index.html) | HTML + CSS + JavaScript: DOM, eventos, `textContent` y accesibilidad | CSS completo; JS 43-44 (DOM y eventos) |
 
 El 04 guarda relación directa con las lecciones [43 - DOM](../javascript/43-dom.html)
@@ -109,8 +112,10 @@ es su versión completa en miniatura.
 
 ## Estado
 
-- Auditoría final realizada en la tanda 9: lecciones, enlaces, recursos y
-  proyectos revisados; sin incidencias abiertas. Inventario y detalle en
+- Revisión estática realizada (tanda nocturna de normalización): renombradas
+  y renumeradas las lecciones HTML (00-09), revisados enlaces, recursos y
+  proyectos. Quedan pendientes las comprobaciones visuales en navegador
+  (apariencia, teclado y responsive). Inventario y detalle en
   [../INVENTARIO.md](../INVENTARIO.md).
 
 ## Notas de las últimas entregas
@@ -124,11 +129,11 @@ es su versión completa en miniatura.
 - La demostración [css/integrarCSS/index.html](css/integrarCSS/index.html)
   y su hoja [css/integrarCSS/variables.css](css/integrarCSS/variables.css)
   dejaron de estar vacías: ahora muestran un ejemplo CSS real y visible.
-- Tanda 5: creadas [html/intro-html.html](html/intro-html.html),
-  [html/tablas.html](html/tablas.html),
-  [html/semantica.html](html/semantica.html) y
-  [html/multimedia.html](html/multimedia.html); ampliado
-  [html/06-forms.html](html/06-forms.html) (label, textarea, select,
+- Tanda 5: creadas [html/00-introduccion-html.html](html/00-introduccion-html.html),
+  [html/06-tablas.html](html/06-tablas.html),
+  [html/07-semantica.html](html/07-semantica.html) y
+  [html/09-multimedia.html](html/09-multimedia.html); ampliado
+  [html/08-formularios.html](html/08-formularios.html) (label, textarea, select,
   fieldset/legend, validación nativa, accesibilidad y formulario
   demostrativo sin backend); corregidos detalles menores de las lecciones
   existentes (`lang="es"`, `meta charset`, `meta viewport` y una errata en
@@ -161,3 +166,14 @@ en la propia página porque demuestran su concepto. Con esto el curso de
    recursos locales, formularios, selectores de hojas externas, la
    coherencia de los índices y la estructura didáctica; se completó el
    inventario en [../INVENTARIO.md](../INVENTARIO.md).
+- Tanda nocturna: normalizados los nombres de las lecciones HTML al orden de
+   estudio real (00-09): `intro-html` → `00-introduccion-html`, `01-index` →
+   `01-encabezados-parrafos`, `tablas` → `06-tablas`, `semantica` →
+   `07-semantica`, `06-forms` → `08-formularios` y `multimedia` →
+   `09-multimedia`. Actualizadas todas las referencias internas, los títulos
+   de lección, la portada y este índice. Corregido el contraste del botón
+   claro de la landing y el color del texto de tarea completada de la app de
+   tareas (el estado vacío ya cumplía). Añadidos el enlace de regreso en las
+   páginas de enlaces 02 y 03 y ejercicios cortos en las lecciones de imágenes
+   y rutas; y sustituida, en la lección del modelo de caja, la promesa de
+   entregas futuras por enlaces a las lecciones reales.

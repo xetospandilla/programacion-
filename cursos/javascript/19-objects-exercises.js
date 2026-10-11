@@ -53,6 +53,7 @@ console.log(usuario.direccion.ciudad)
 console.log(usuario.hobbies[1])
 
 // 9. Comprueba si los dos objetos creados son iguales
+// JSON.stringify (lección 38) convierte cada objeto en texto para compararlos.
 let obj1 = { a: 1, b: 2 }
 let obj2 = { a: 1, b: 2 }
 console.log(JSON.stringify(obj1) === JSON.stringify(obj2)) // true

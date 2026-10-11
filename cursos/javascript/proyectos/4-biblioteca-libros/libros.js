@@ -1,6 +1,6 @@
 /*
  ============================================================================
- libros.js — Clase Libro y alamacén de la biblioteca
+ libros.js — Clase Libro y almacén de la biblioteca
  ============================================================================
  Este archivo SOLO define y exporta las piezas (clase y funciones).
  No se ejecuta solo: lo usa main.js mediante import (módulos ES, lección

@@ -171,7 +171,7 @@ console.log("Apellidos:", apellidos)  // [ 'López' ]
  reaccionar: un catch vacío silencia el problema y luego es imposible
  saber qué pasó (visto en la lección 41).
 
- ANTES (división sin proteger el cero):
+ ANTES (dividir sin validar la entrada):
    function mitad(n) { return n / 2 }
  DESPUÉS (validamos el tipo y registramos el caso raro):
  */
@@ -184,10 +184,9 @@ function mitad(n) {
             "de tipo", typeof n)
         return null
     }
-    if (n === null || n === undefined) {
-        console.log("Error: valor ausente")
-        return null
-    }
+    // Ojo: typeof null === "object" y typeof undefined === "undefined",
+    // así que ambos valores ya quedaron descartados por la comprobación
+    // anterior (typeof n !== "number").
     return n / 2
 }
 

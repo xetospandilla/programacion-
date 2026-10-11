@@ -36,14 +36,14 @@ node 32-entorno.js
 
 | Orden | Archivo | Tema |
 |---|---|---|
-| 1 | [32-entorno.js](32-entorno.js) | **NUEVA** — Entorno, terminal y ejecución |
+| 1 | [32-entorno.js](32-entorno.js) | Entorno, terminal y ejecución |
 | 2 | [00-helloworld.js](00-helloworld.js) | Hola mundo y comentarios |
 | 3 | [01-variables.js](01-variables.js) | Variables: var, let, const |
 | 4 | [02-datatypes.js](02-datatypes.js) | Tipos primitivos |
 | 5 | [03-beginner-exercises.js](03-beginner-exercises.js) | Ejercicios: primeros pasos (comentarios, variables y tipos) |
 | 6 | [04-operators.js](04-operators.js) | Operadores y truthy/falsy |
 | 7 | [05-operators-exercises.js](05-operators-exercises.js) | Ejercicios de operadores (aritmética, asignación, comparación) |
-| 8 | [33-conversion-tipos.js](33-conversion-tipos.js) | **NUEVA** — Conversión de tipos, NaN, == vs === |
+| 8 | [33-conversion-tipos.js](33-conversion-tipos.js) | Conversión de tipos, NaN, == vs === |
 
 ### Bloque B — Strings, números, condicionales y bucles
 
@@ -51,12 +51,12 @@ node 32-entorno.js
 |---|---|---|
 | 9 | [06-strings.js](06-strings.js) | Strings y plantillas |
 | 10 | [07-strings-exercises.js](07-strings-exercises.js) | Ejercicios de strings |
-| 11 | [34-numeros.js](34-numeros.js) | **NUEVA** — Números y Math |
+| 11 | [34-numeros.js](34-numeros.js) | Números y Math |
 | 12 | [08-conditionals.js](08-conditionals.js) | Condicionales |
 | 13 | [09-conditionals-exercises.js](09-conditionals-exercises.js) | Ejercicios de condicionales |
-| 14 | [35-bucles.js](35-bucles.js) | **NUEVA** — Bucles ampliados y cortocircuito |
-| 15 | [14-loops.js](14-loops.js) | Bucles: for, while, do...while, for...of |
-| 16 | [15-loops-exercises.js](15-loops-exercises.js) | Ejercicios de bucles |
+| 14 | [14-loops.js](14-loops.js) | Bucles: for, while, do...while, for...of |
+| 15 | [15-loops-exercises.js](15-loops-exercises.js) | Ejercicios de bucles |
+| 16 | [35-bucles.js](35-bucles.js) | Bucles ampliados y cortocircuito |
 
 ### Bloque C — Funciones, ámbito y closures
 
@@ -64,7 +64,7 @@ node 32-entorno.js
 |---|---|---|
 | 17 | [16-functions.js](16-functions.js) | Funciones |
 | 18 | [17-functions-exercises.js](17-functions-exercises.js) | Ejercicios de funciones |
-| 19 | [36-ambito-closures.js](36-ambito-closures.js) | **NUEVA** — Ámbito y closures |
+| 19 | [36-ambito-closures.js](36-ambito-closures.js) | Ámbito y closures |
 
 ### Bloque D — Arrays, objetos y métodos de arrays
 
@@ -73,7 +73,7 @@ node 32-entorno.js
 | 20 | [10-array.js](10-array.js) | Arrays |
 | 21 | [18-objects.js](18-objects.js) | Objetos |
 | 22 | [19-objects-exercises.js](19-objects-exercises.js) | Ejercicios de objetos |
-| 23 | [37-metodos-arrays.js](37-metodos-arrays.js) | **NUEVA** — map, filter, reduce, find, some, every, sort |
+| 23 | [37-metodos-arrays.js](37-metodos-arrays.js) | map, filter, reduce, find, some, every, sort |
 | 24 | [20-destructuring-spreading.js](20-destructuring-spreading.js) | Desestructuración y propagación |
 | 25 | [21-destructuring-spreading-exercises.js](21-destructuring-spreading-exercises.js) | Ejercicios de desestructuración |
 | 26 | [11-set.js](11-set.js) | Set |
@@ -104,11 +104,11 @@ node 32-entorno.js
 
 | Orden | Archivo | Tema |
 |---|---|---|
-| 39 | [38-json-fechas-math.js](38-json-fechas-math.js) | **NUEVA** — JSON, fechas y Math aplicado |
-| 40 | [39-callbacks-temporizadores.js](39-callbacks-temporizadores.js) | **NUEVA** — Callbacks y temporizadores |
-| 41 | [40-promesas.js](40-promesas.js) | **NUEVA** — Promesas |
-| 42 | [41-async-await.js](41-async-await.js) | **NUEVA** — async/await y Promise.all |
-| 43 | [42-fetch-api.js](42-fetch-api.js) | **NUEVA** — fetch y consumo de APIs |
+| 39 | [38-json-fechas-math.js](38-json-fechas-math.js) | JSON, fechas y Math aplicado |
+| 40 | [39-callbacks-temporizadores.js](39-callbacks-temporizadores.js) | Callbacks y temporizadores |
+| 41 | [40-promesas.js](40-promesas.js) | Promesas |
+| 42 | [41-async-await.js](41-async-await.js) | async/await y Promise.all |
+| 43 | [42-fetch-api.js](42-fetch-api.js) | fetch y consumo de APIs |
 
 Prerrequisitos dentro del curso: la 38 repasa strings, objetos y `try/catch`;
 la 39 necesita funciones y `map` (lecciones 16 y 37); la 40 se apoya en
@@ -121,9 +121,9 @@ marcado como opcional y no se ejecuta en las comprobaciones del curso.
 
 | Orden | Archivo | Tema |
 |---|---|---|
-| 44 | [43-dom.html](43-dom.html) + [43-dom.js](43-dom.js) | **NUEVA** — El DOM: seleccionar, modificar y crear elementos |
-| 45 | [44-eventos.html](44-eventos.html) + [44-eventos.js](44-eventos.js) | **NUEVA** — Eventos, formularios y lista de tareas |
-| 46 | [45-buenas-practicas.js](45-buenas-practicas.js) | **NUEVA** — Buenas prácticas |
+| 44 | [43-dom.html](43-dom.html) + [43-dom.js](43-dom.js) | El DOM: seleccionar, modificar y crear elementos |
+| 45 | [44-eventos.html](44-eventos.html) + [44-eventos.js](44-eventos.js) | Eventos, formularios y lista de tareas |
+| 46 | [45-buenas-practicas.js](45-buenas-practicas.js) | Buenas prácticas |
 
 El bloque H se estudia con un NAVEGADOR, no con `node`:
 
@@ -137,6 +137,10 @@ Enlaces entre lecciones: la 43 prepara los cimientos (`querySelector`,
 `submit`, `preventDefault`, `event.target`, creación segura con
 `textContent`) y la 45 repasa ejemplos de las lecciones 33 a 42 con la
 mirada puesta en la lectura, la validación y la depuración.
+
+El HTML que estas lecciones manipulan se estudia en el curso de
+[HTML y CSS](../html-css/INDEX.md): en particular las lecciones de
+formularios (08) y multimedia (09).
 
 ## Proyectos prácticos (orden de dificultad)
 
@@ -153,7 +157,7 @@ complejidad.
 | 3 | [3-agenda-contactos](proyectos/3-agenda-contactos/README.md) | Arrays, objetos, métodos de arrays y búsqueda | 10, 18, 37 |
 | 4 | [4-biblioteca-libros](proyectos/4-biblioteca-libros/README.md) | Clases, módulos ES y organización en archivos | 22, 28, 29, 31 |
 | 5 | [5-consulta-api](proyectos/5-consulta-api/README.md) | `fetch`, `async/await` y errores Red/HTTP/Formato | 40, 41, 42 |
-| — | Práctica en navegador: [43-dom.html](43-dom.html) y [44-eventos.html](44-eventos.html) (lecciones 43-44, no modificadas en esta tanda) | DOM y eventos | 43, 44 |
+| — | Práctica en navegador: [43-dom.html](43-dom.html) y [44-eventos.html](44-eventos.html) (se abren en un navegador) | DOM y eventos | 43, 44 |
 
 Cómo ejecutar cada proyecto desde su directorio (`cd` dentro de
 `cursos/javascript/proyectos/N-nombre`):
@@ -191,10 +195,13 @@ se valida en modo local; el modo real está explicado y etiquetado como opcional
 
 - Organización de proyectos (estructura de carpetas, separación de
   responsabilidades y flujo de trabajo en proyectos pequeños).
-- Repaso integrador de HTML y CSS (material del bloque `html-css`)
-  aplicado a una página completa con JavaScript.
 - Ampliación de la colección de proyectos (opcionales más grandes, por
   ejemplo un juego completo o una aplicación de notas con almacenamiento).
+
+El antiguo pendiente «repaso integrador de HTML y CSS con JavaScript» ya
+está cubierto: las lecciones 43-44 (DOM y eventos) y el proyecto
+[04-app-tareas](../html-css/proyectos/04-app-tareas/README.md) del curso de
+HTML y CSS aplican esos conceptos sobre una página completa.
 
 ## Recursos complementarios
 
@@ -203,7 +210,20 @@ que se inspiran. Son material complementario opcional; este curso tiene su
 propia explicación y no necesita los vídeos para avanzar. Si un enlace deja
 de funcionar, no bloquea el estudio.
 
-## Notas de esta tanda
+## Notas de las tandas
+
+### Tanda nocturna (actual)
+
+- Reordenado el orden de estudio de bucles: `14-loops.js` (14) y
+  `15-loops-exercises.js` (15) preceden a `35-bucles.js` (16), que queda
+  como ampliación de los anteriores.
+- Retirada la marca «NUEVA» de las filas del índice.
+- Añadidas remisiones breves donde se usaban herramientas aún no
+  explicadas: `Math`, spread y `map`/`filter`/`reduce` en
+  `17-functions-exercises.js` (lecciones 34, 20, 37), `JSON.stringify` en
+  `19-objects-exercises.js` (lección 38) y `addEventListener` en
+  `43-dom.js` (lección 44).
+- El bloque H (DOM y eventos) remite ahora al curso de HTML y CSS.
 
 ### Tanda 4
 
@@ -236,9 +256,9 @@ de funcionar, no bloquea el estudio.
 
 ### Tanda 2
 
-- Las lecciones 38 a 42 son nuevas (bloque G) y están marcadas como **NUEVA**
-  en la tabla. Cubren JSON, fechas, Math, callbacks, temporizadores, promesas,
-  `async/await`, `Promise.all`, `fetch` y APIs.
+- Las lecciones 38 a 42 son nuevas (bloque G). Cubren JSON, fechas, Math,
+  callbacks, temporizadores, promesas, `async/await`, `Promise.all`, `fetch`
+  y APIs.
 - Ejecución comprobada con Node: las cinco lecciones terminan solas (los
   temporizadores e intervalos se cancelan o finalizan) y sin errores.
 - La lección 42 funciona sin conexión: su ejemplo principal simula la red con
@@ -249,7 +269,7 @@ de funcionar, no bloquea el estudio.
 
 ### Tanda 1
 
-- Las lecciones 32 a 37 son nuevas y están marcadas como **NUEVA** en la tabla.
+- Las lecciones 32 a 37 son nuevas (bloque F).
 - Los archivos 14, 16 y 22 se corrigieron puntualmente (variables sin
   declaración) sin alterar su contenido didáctico.
 - El `package.json` de esta carpeta habilita los módulos ES sin añadir
