@@ -1,63 +1,63 @@
-# programacion-
+# programación
 
-Repositorio personal de **aprendizaje y práctica de programación** durante el Grado en Tecnologías Interactivas (UPV).
+Repositorio personal de **aprendizaje y práctica de programación**, principalmente durante el Grado en Tecnologías Interactivas (UPV), junto con cursos y experimentos hechos por cuenta propia.
 
-No es un proyecto profesional: recoge ejercicios, apuntes de cursos, prácticas universitarias y pequeños experimentos que reflejan la evolución de mi aprendizaje.
-
-## Propósito
-
-- Practicar fundamentos de programación (C++ y JavaScript).
-- Organizar el trabajo del grado: prácticas, ejercicios propuestos y exámenes corregidos.
-- Explorar temas por mi cuenta (curso de C++, curso de JavaScript, POO, HTML/CSS, Node.js).
-
-## Lenguajes y áreas
-
-| Área | Contenido |
-|---|---|
-| C++ | Fundamentos, control de flujo, funciones, arrays, punteros, referencias y programación orientada a objetos. |
-| JavaScript | Curso de introducción (variables, estructuras, funciones, objetos, arrays, closures, clases), ejercicios, módulos y testing con Mocha. |
-| Node.js | Servidores REST con Express (práctica 6): rutas, lógica, base de datos SQLite y tests. |
-| HTML/CSS | Fundamentos de maquetación y formularios. |
-| SQL | Consultas, esquemas y scripts de las prácticas de Bases de Datos. |
+Reúne ejercicios, prácticas y apuntes de distintas etapas. No es un producto profesional terminado: es material de estudio que refleja un proceso de aprendizaje.
 
 ## Estructura
 
 ```text
-personal/
-├── cursos/                Apuntes y ejercicios de cursos propios
-│   ├── c++/               Fundamentos → punteros → POO (C++ moderno)
-│   ├── js/                Curso de JavaScript (ejercicios por tema)
-│   └── html&css/          Introducción a HTML y CSS
+programacion/
+├── universidad/
+│   ├── semestre-01-gti/   Prácticas, ejercicios propuestos y exámenes corregidos (C++)
+│   └── semestre-02-gti/   Prácticas de JavaScript/Node.js, servidores REST y SQL
+├── cursos/
+│   ├── cpp/               Curso de C++: fundamentos → punteros → POO
+│   ├── javascript/        Curso de JavaScript ordenado por temas + módulos
+│   └── html-css/          Introducción a HTML y CSS
 └── experimentos/
-    └── c++/               Mini-proyectos personales en consola
-
-universidad/
-├── semestre(GTI)-1/       Prácticas, ejercicios propuestos y exámenes corregidos (C++)
-└── semestre(GTI)-2/       Prácticas de servidores REST, Node.js y SQL
+    └── cpp/               Pequeños experimentos personales en C++ (consola)
 ```
 
-## Mini-proyectos de `personal/experimentos/`
+## Áreas y tecnologías
 
-Pequeños programas de consola (C++, un solo archivo) creados para practicar POO y lógica:
+| Área | Dónde | Qué se practica |
+|---|---|---|
+| C++ | `cursos/cpp`, `universidad/semestre-01-gti`, `experimentos/cpp` | Fundamentos, control de flujo, funciones, arrays, punteros, referencias y programación orientada a objetos. |
+| JavaScript | `cursos/javascript`, `universidad/semestre-02-gti` | Variables, tipos, estructuras, funciones, objetos, clases, módulos, manejo de errores y testing con Mocha. |
+| Node.js / Express | `universidad/semestre-02-gti` | Servidores REST básicos, lógica de negocio y acceso a datos. |
+| SQL / SQLite | `universidad/semestre-02-gti` | Scripts de esquema y consultas, y bases de datos locales `.bd`. |
+| HTML / CSS | `cursos/html-css` | Documentos, listas, enlaces, imágenes, formularios y estilos básicos. |
 
-- **misionMars** — minijuego de exploración en un mapa 10x10.
-- **tamagochi** — mascota virtual con estados (hambre, energía…).
-- **robot** — simulación con coordenadas y movimientos (clases `Punto`, robot).
-- **gestorAlumnos** — gestión de alumnos con vector de notas.
-- **tiempo** — clase para representar y operar con horas.
+## Tres bloques de contenido
 
-Son experimentos de aprendizaje, no aplicaciones profesionales.
+- **Prácticas universitarias** (`universidad/`): trabajo del grado, ordenado por semestre.
+  - `semestre-01-gti`: mayoritariamente C++. Contiene `practicas/`, `ejercicios_propuestos/` y `examenes_corregidos/`.
+  - `semestre-02-gti`: mayoritariamente JavaScript/Node.js y SQL. Contiene prácticas y exámenes, con servidores REST hechos con Express y acceso a datos con SQLite.
+- **Cursos** (`cursos/`): apuntes y ejercicios seguidos por mi cuenta, ordenados por tema: `cpp/`, `javascript/` y `html-css/`.
+- **Experimentos** (`experimentos/cpp/`): pequeños programas de consola en C++ (por ejemplo `misionMars`, `tamagochi`, `robot`, `gestorAlumnos` y `tiempo`), hechos para practicar lógica y POO. Son pruebas, no aplicaciones completas.
 
-## Cómo usar
+## Cómo orientarse y ejecutar
 
-Cada práctica o ejercicio es autocontenido:
+Cada práctica o ejercicio es autocontenido: entra en su carpeta y consulta la guía según el lenguaje.
 
-- **C++**: compilar con el compilador habitual (`g++ archivo.cpp -o programa`) y ejecutar.
-- **JavaScript/Node**: `npm install` dentro de cada subproyecto (por ejemplo `servidorREST`) y ejecutar con `node`.
-- **SQL**: importar los scripts en un gestor como MySQL/MariaDB o SQLite según la práctica.
+- **C++** (`cursos/cpp`, `universidad/semestre-01-gti`, `experimentos/cpp`): normalmente un único archivo `.cpp`. Compila y ejecuta con tu compilador habitual; por ejemplo:
 
-Los proyectos con `package.json` incluyen scripts (p. ej. `npm test` con Mocha).
+  ```bash
+  g++ archivo.cpp -o programa
+  ./programa
+  ```
+
+- **JavaScript / Node.js** (`cursos/javascript`, `universidad/semestre-02-gti`):
+  - Los archivos sueltos del curso se ejecutan con `node archivo.js`.
+  - Las carpetas con `package.json` necesitan `npm install` antes de usarse. Scripts comprobados en los propios archivos:
+    - `universidad/semestre-02-gti/practicas/practica-05/mocha`: `npm test` (ejecuta Mocha).
+    - `universidad/semestre-02-gti/practicas/practica-05/npm`: `npm run main` (ejecuta `node main.js`).
+    - `universidad/semestre-02-gti/practicas/practica-06/ejercicio-08/servidorREST`: `npm run servidor` (arranca el servidor) y `npm test` (Mocha).
+    - Los `package.json` de nivel superior de `practica-06/ejercicio-09`, `-10` y `-11` solo declaran dependencias, como `sqlite3`. Sus subcarpetas `servidorREST/` sí declaran los scripts `servidor` (ejecuta `node mainServidorREST.js`) y `test` (Mocha), igual que el servidor del ejercicio 08. Estos comandos `npm run servidor` y `npm test` corresponden a la subcarpeta `servidorREST/` y se ejecutan desde ella, no desde la carpeta raíz del ejercicio.
+
+- **SQL y bases de datos** (`universidad/semestre-02-gti`, práctica 6): los archivos `.sql` son scripts de creación y consulta pensados para SQLite, que es el motor de referencia de estos ejemplos. Los archivos `.bd` son bases de datos locales de SQLite que usan algunos ejercicios de Node.js. No se garantiza que los scripts sean directamente compatibles con otros motores.
 
 ## Nota
 
-Este repositorio representa una etapa de formación: incluye ejercicios básicos a propósito y no debe valorarse como un portfolio de desarrollo profesional.
+Este repositorio documenta un proceso de aprendizaje. Los ejercicios y prácticas tienen distintos grados de acabado: algunos están completos, otros son parciales, y no todos están pensados para ejecutarse tal cual sin revisarlos. No pretende ser un portfolio profesional.
