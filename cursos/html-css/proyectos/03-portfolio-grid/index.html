@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucía Fernández — Portfolio de ejemplo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="cabecera">
+        <div class="interior">
+            <p><strong>Lucía Fernández</strong> · portfolio de ejemplo</p>
+            <nav class="navegacion" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="#presentacion">Presentación</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="../../index.html">Volver al curso</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="principal">
+        <section id="presentacion" class="presentacion">
+            <h1>Hola, soy Lucía</h1>
+            <p class="subtitulo">Maquetadora web en formación: transformo
+                ideas en páginas con HTML y CSS.</p>
+            <p>Este portfolio es un proyecto de ejemplo del curso. Los
+                proyectos de abajo son ficticios, y la ilustración que los
+                acompaña es la imagen de muestra del propio curso.</p>
+        </section>
+
+        <section id="proyectos" aria-labelledby="titulo-proyectos">
+            <h2 id="titulo-proyectos">Proyectos</h2>
+            <!-- Cuadrícula con CSS Grid: las tarjetas encajan solas en
+                 cualquier ancho de pantalla (auto-fill + minmax). -->
+            <div class="cuadricula">
+                <article class="tarjeta">
+                    <img src="../../images/imagen-ejemplo.svg" alt="Miniatura de muestra del proyecto Tienda Verde">
+                    <div class="cuerpo">
+                        <h3>Tienda Verde</h3>
+                        <p>Catálogo ficticio de plantas con ficha de cada
+                            especie.</p>
+                        <div class="etiquetas">
+                            <span class="etiqueta">HTML</span>
+                            <span class="etiqueta">CSS</span>
+                        </div>
+                        <p><a href="#contacto">Ver proyecto →</a></p>
+                    </div>
+                </article>
+
+                <article class="tarjeta">
+                    <img src="../../images/imagen-ejemplo.svg" alt="Miniatura de muestra del proyecto Agenda semanal">
+                    <div class="cuerpo">
+                        <h3>Agenda semanal</h3>
+                        <p>Plantilla de horarios para organizar el estudio
+                            con tablas semánticas.</p>
+                        <div class="etiquetas">
+                            <span class="etiqueta">Tablas</span>
+                            <span class="etiqueta">CSS</span>
+                        </div>
+                        <p><a href="#contacto">Ver proyecto →</a></p>
+                    </div>
+                </article>
+
+                <article class="tarjeta">
+                    <img src="../../images/imagen-ejemplo.svg" alt="Miniatura de muestra del proyecto Recetario">
+                    <div class="cuerpo">
+                        <h3>Recetario</h3>
+                        <p>Colección ficticia de recetas con imágenes y
+                            listas de ingredientes paso a paso.</p>
+                        <div class="etiquetas">
+                            <span class="etiqueta">HTML</span>
+                            <span class="etiqueta">Imágenes</span>
+                        </div>
+                        <p><a href="#contacto">Ver proyecto →</a></p>
+                    </div>
+                </article>
+
+                <article class="tarjeta">
+                    <img src="../../images/imagen-ejemplo.svg" alt="Miniatura de muestra del proyecto Ciudad de noche">
+                    <div class="cuerpo">
+                        <h3>Ciudad de noche</h3>
+                        <p>Página de presentación con encabezado, galería y
+                            formulario de contacto ficticio.</p>
+                        <div class="etiquetas">
+                            <span class="etiqueta">Landing</span>
+                            <span class="etiqueta">Responsive</span>
+                        </div>
+                        <p><a href="#contacto">Ver proyecto →</a></p>
+                    </div>
+                </article>
+
+                <article class="tarjeta">
+                    <img src="../../images/imagen-ejemplo.svg" alt="Miniatura de muestra del proyecto Notas viajeras">
+                    <div class="cuerpo">
+                        <h3>Notas viajeras</h3>
+                        <p>Blog ficticio de viajes con tarjetas Flexbox y
+                            navegación por secciones.</p>
+                        <div class="etiquetas">
+                            <span class="etiqueta">Flexbox</span>
+                            <span class="etiqueta">HTML</span>
+                        </div>
+                        <p><a href="#contacto">Ver proyecto →</a></p>
+                    </div>
+                </article>
+
+                <article class="tarjeta">
+                    <img src="../../images/imagen-ejemplo.svg" alt="Miniatura de muestra del proyecto Sonidos del taller">
+                    <div class="cuerpo">
+                        <h3>Sonidos del taller</h3>
+                        <p>Demo ficticia de página con audio local y
+                            subtítulos, para practicar multimedia.</p>
+                        <div class="etiquetas">
+                            <span class="etiqueta">Multimedia</span>
+                            <span class="etiqueta">CSS</span>
+                        </div>
+                        <p><a href="#contacto">Ver proyecto →</a></p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="contacto" aria-labelledby="titulo-contacto">
+            <h2 id="titulo-contacto">Contacto</h2>
+            <form class="formulario" action="#contacto">
+                <p>
+                    <label for="nombre">Tu nombre</label>
+                    <input id="nombre" name="nombre" type="text" required
+                           autocomplete="name">
+                </p>
+                <p>
+                    <label for="correo">Tu correo electrónico</label>
+                    <input id="correo" name="correo" type="email" required
+                           autocomplete="email">
+                </p>
+                <p>
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+                </p>
+                <button class="boton" type="submit">Enviar mensaje</button>
+            </form>
+            <p>Este formulario es solo de práctica: no envía nada en realidad.
+                También puedes escribir a
+                <a href="mailto:lucia@ejemplo-ficticio.com">lucia@ejemplo-ficticio.com</a>.</p>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <p>Portfolio ficticio de ejemplo — curso de HTML y CSS ·
+            <a href="../../index.html">volver al índice del curso</a></p>
+    </footer>
+</body>
+</html>

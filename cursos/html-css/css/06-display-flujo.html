@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display y flujo normal</title>
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .demo { border: 1px solid #bbb; padding: 0.6rem 0.8rem; margin: 0.5rem 0; background: #fffdf5; }
+
+        /* --- Demostraciones de esta lección --- */
+        .d-bloque { background: #e3f2fd; border: 1px solid #1565c0; padding: 0.2rem 0.5rem; margin: 0.2rem 0; }
+        .d-inline span { background: #fdecea; border: 1px solid #b5332e; padding: 0.2rem 0.5rem; }
+        .d-inline-block span {
+            display: inline-block;
+            background: #e8f0fe; border: 1px solid #1f4e79;
+            width: 120px; height: 34px;
+            padding: 0.2rem 0.5rem; margin: 0.2rem;
+        }
+        .d-hidden { visibility: hidden; background: #eee; }
+        .d-none { display: none; background: #eee; }
+        .d-overflow {
+            width: 220px; height: 46px;
+            overflow: auto;
+            border: 1px solid #7b1fa2; background: #f3e8fd;
+            padding: 0.2rem 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 16: Display y flujo normal</h1>
+        <p>Cómo se colocan las cajas unas junto a otras por defecto, y qué
+            pasa cuando cambiamos su <code>display</code>, su
+            <code>visibility</code> o cómo desbordan.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Explicar el flujo normal de la página (block e inline).</li>
+                <li>Usar <code>display: block</code>, <code>inline</code>,
+                    <code>inline-block</code> y <code>none</code>.</li>
+                <li>Diferenciar <code>visibility</code> de <code>display</code>.</li>
+                <li>Controlar el desbordamiento con <code>overflow</code>.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>El <a href="05-modelo-caja.html">modelo de caja</a> (contenido,
+                padding, borde, margen) y los
+                <a href="02-selectores.html">selectores</a>. Aquí vemos cómo
+                se colocan esas cajas.</p>
+        </section>
+
+        <section>
+            <h2>1. El flujo normal</h2>
+            <p>Sin CSS de colocación, el navegador coloca las cajas en
+                <strong>flujo normal</strong>: de arriba abajo y de izquierda
+                a derecha. Hay dos grandes comportamientos:</p>
+            <ul>
+                <li><strong>Block (bloque):</strong> ocupa todo el ancho
+                    disponible, se apila en vertical (párrafos,
+                    <code>div</code>, títulos, listas).</li>
+                <li><strong>Inline (en línea):</strong> fluye dentro del texto
+                    sin romper la línea (<code>span</code>, <code>a</code>,
+                    <code>strong</code>). No respetan anchura ni altura.</li>
+            </ul>
+            <div class="demo">
+                <div class="d-bloque">Bloque 1 (ancho completo)</div>
+                <div class="d-bloque">Bloque 2 (se apila debajo)</div>
+                <p class="d-inline">Texto con
+                    <span>una pieza inline</span> y
+                    <span>otra pieza inline</span>: fluyen en la línea.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. <code>display</code>: cambiar el comportamiento</h2>
+            <p><code>display</code> cambia cómo se trata un elemento:</p>
+            <ul>
+                <li><code>block</code>: fuerza ancho completo y salto de línea.</li>
+                <li><code>inline</code>: fluye en línea; ignora
+                    <code>width</code>/<code>height</code>, y el
+                    <code>padding</code>/<code>margin</code> vertical no
+                    empuja a las demás cajas.</li>
+                <li><code>inline-block</code>: en línea pero con caja
+                    respetable: admite ancho, alto, márgenes y relleno.</li>
+                <li><code>none</code>: desaparece por completo, sin dejar
+                    hueco (se usa con JavaScript para mostrar/ocultar).</li>
+            </ul>
+            <div class="demo">
+                <p class="d-inline-block">Tres cajitas
+                    <span>inline-block</span> <span>con ancho</span>
+                    <span>y alto</span>: se reparten la línea pero se
+                    comportan como cajas.</p>
+            </div>
+            <pre><code>.caja { display: inline-block; width: 120px; height: 34px; }</code></pre>
+            <p>La combinación estrella para hacer botones y tarjetas es
+                <code>inline-block</code>; más adelante (lección de flexbox)
+                se hará casi todo con <code>display: flex</code>.</p>
+        </section>
+
+        <section>
+            <h2>3. <code>visibility</code>: ocultar sin mover a los demás</h2>
+            <p><code>visibility: hidden</code> oculta el contenido pero
+                <strong>deja el hueco</strong>; <code>visibility: visible</code>
+                lo restaura. No confundir con <code>display: none</code>, que
+                retira el elemento del flujo (los vecinos se juntan).</p>
+            <div class="demo">
+                <div class="d-bloque">Primera línea</div>
+                <div class="d-bloque d-hidden">Oculta con visibility (el hueco sigue)</div>
+                <div class="d-bloque">Tercera línea (separada por el hueco)</div>
+                <div class="d-bloque d-none">Esta no se ve (display none)</div>
+                <div class="d-bloque">Cuarta línea (pegada a la primera)</div>
+            </div>
+            <div class="aviso">
+                <p><strong>Regla práctica:</strong> para animar u ocultar de
+                    verdad, <code>display: none</code> + <code>block</code>;
+                    cuando el elemento debe seguir ocupando sitio
+                    (por ejemplo, mensajes de carga), <code>visibility</code>.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. <code>overflow</code> en el flujo</h2>
+            <p>Cuando el contenido no cabe en una caja con ancho/alto fijo,
+                sale por defecto (<code>overflow: visible</code>). Se decide
+                recortar (<code>hidden</code>), desplazar (<code>auto</code>,
+                <code>scroll</code>) o dejar que se vea.</p>
+            <div class="demo">
+                <div class="d-overflow">Texto largo dentro de una caja
+                    pequeña: aparece una barra de desplazamiento porque
+                    overflow vale auto y el contenido no cabe.</div>
+            </div>
+            <p>El <code>overflow</code> también crea un «contexto»: los hijos
+                que se salen ya no desbordan más allá de la caja. Útil para
+                contener esquinas redondeadas o elementos flotantes.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>«Puse width a un enlace y no cambia»:</strong> es
+                    <code>inline</code>; usa <code>display: inline-block</code>
+                    (o block) para que respete el ancho.</li>
+                <li><strong>Esperar que <code>visibility: hidden</code>
+                    ahorre espacio:</strong> no; usa <code>display: none</code>
+                    si el espacio debe cerrarse.</li>
+                <li><strong>Margen vertical «que no empuja»:</strong> en
+                    elementos inline no desplaza; conviértelos a
+                    inline-block/block.</li>
+                <li><strong>Contenido cortado «de golpe»:</strong> revisa
+                    <code>overflow: hidden</code> en alguna caja contenedora
+                    de la que no te acordabas.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-flujo.html</code> con estructura mínima.</p>
+            <ol>
+                <li><strong>Fácil — apilar bloques:</strong> tres
+                    <code>div</code> con fondo distinto. Obsérvalos apilados y
+                    di qué display tienen por defecto.</li>
+                <li><strong>Medio — inline-block:</strong> convierte los
+                    mismos tres div en <code>inline-block</code> con ancho de
+                    30%. ¿Qué pasa con la suma de anchos y los huecos?</li>
+                <li><strong>Difícil — ocultar bien:</strong> crea una línea
+                    oculta con <code>visibility</code> y otra con
+                    <code>display: none</code>; comenta en el HTML qué hueco
+                    deja cada una.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <p>Los <code>div</code> son <code>block</code>: ocupan el ancho
+                completo y se apilan. No hace falta CSS.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>.tres { display: inline-block; width: 31%; }</code></pre>
+            <p>Tres de 31% suman 93%: entre medias hay «huecos de línea»
+                (espacios en blanco del HTML) que suman; por eso se usa 3% o
+                menos de margen. Es la época pre-flexbox de maquetar.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>&lt;div class="linea"&gt;Visible&lt;/div&gt;
+&lt;div class="linea oculta-espacio"&gt;Visibility hidden&lt;/div&gt;
+&lt;div class="linea oculta-sin-espacio"&gt;Display none&lt;/div&gt;
+&lt;div class="linea"&gt;Después&lt;/div&gt;
+
+/* .oculta-espacio { visibility: hidden; } -> deja hueco
+   .oculta-sin-espacio { display: none; } -> no deja hueco */</code></pre>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>El flujo normal apila los bloques y encadena los elementos en
+                línea. <code>display</code> cambia ese comportamiento (block,
+                inline, inline-block, none), <code>visibility</code> oculta
+                dejando el hueco, y <code>overflow</code> decide qué ocurre
+                con el contenido que desborda.</p>
+            <ul>
+                <li>[ ] Explico block vs inline con un ejemplo.</li>
+                <li>[ ] Sé cuándo usar inline-block.</li>
+                <li>[ ] Diferencio visibility, display:none y overflow.</li>
+            </ul>
+            <p>Siguiente: <a href="07-posicionamiento.html">Posicionamiento</a>.
+                Vuelve al <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="05-modelo-caja.html">Anterior: Modelo de caja</a> |
+                <a href="07-posicionamiento.html">Siguiente: Posicionamiento →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

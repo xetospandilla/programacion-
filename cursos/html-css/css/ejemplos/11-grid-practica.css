@@ -1,0 +1,39 @@
+/* Hoja de la práctica de la lección 21 (11-grid-practica.html).
+   Las reglas van con prefijo .g- para no chocar con la maquetación. */
+.g-cuadricula {
+    display: grid;
+    /* Áreas de diseño: el orden del texto dentro de las comillas
+       indica dónde va cada zona en la cuadrícula. */
+    grid-template-areas:
+        "cabecera  cabecera  cabecera"
+        "navegacion principal lateral"
+        "pie       pie       pie";
+    grid-template-columns: 1fr 3fr 1fr;   /* lateral y nav estrechos */
+    grid-template-rows: auto 1fr auto;
+    gap: 0.6rem;
+    border: 1px solid #bbb;
+    padding: 0.6rem;
+    background: #fafafa;
+}
+
+.g-cuadricula > * { padding: 0.5rem 0.7rem; }
+.g-cabecera   { grid-area: cabecera;   background: #1f4e79; color: #fff; }
+.g-navegacion { grid-area: navegacion; background: #e8f0fe; }
+.g-principal  { grid-area: principal;  background: #fff; border: 1px solid #ddd; }
+.g-lateral    { grid-area: lateral;    background: #fdecea; }
+.g-pie        { grid-area: pie;        background: #eee; }
+
+/* En pantallas estrechas la cuadrícula se vuelve una sola columna:
+   el orden de las áreas sigue siendo el mismo (léxico). */
+@media (max-width: 640px) {
+    .g-cuadricula {
+        grid-template-areas:
+            "cabecera"
+            "navegacion"
+            "principal"
+            "lateral"
+            "pie";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+}

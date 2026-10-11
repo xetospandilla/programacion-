@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox</title>
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+
+        /* --- Demostraciones de la lección --- */
+        .fx { display: flex; border: 1px dashed #888; padding: 0.3rem; margin: 0.4rem 0; background: #fffdf5; }
+        .fx .item { background: #e3f2fd; border: 1px solid #1565c0; padding: 0.3rem 0.6rem; }
+        .fx.columnas { flex-direction: column; }
+        .fx.jc { justify-content: space-between; }
+        .fx.ai { align-items: center; min-height: 4.2rem; }
+        .fx.wrap { flex-wrap: wrap; gap: 0.4rem; }
+        .fx.wrap .item { flex: 1 1 45%; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 18: Flexbox</h1>
+        <p>La forma moderna de repartir espacio en una línea: alinear,
+            distribuir y adaptar cajas sin cálculos de márgenes. Una sola
+            propiedad en el contenedor y los hijos obedecen.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Crear un contenedor flex y entender sus dos ejes.</li>
+                <li>Distribuir con <code>justify-content</code> y alinear con
+                    <code>align-items</code>.</li>
+                <li>Cambiar la dirección y permitir el salto de línea.</li>
+                <li>Separar con <code>gap</code>.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p><a href="06-display-flujo.html">Display</a> (block vs inline) y
+                <a href="05-modelo-caja.html">modelo de caja</a>: flexbox
+                resuelve justo los problemas que ahí se veían (centrar,
+                repartir, encajar).</p>
+        </section>
+
+        <section>
+            <h2>1. Contenedor, ítems y ejes</h2>
+            <p>Con <code>display: flex</code> en el contenedor, sus hijos
+                directos se convierten en <strong>ítems flex</strong> y se
+                colocan en una línea. Hay dos ejes:</p>
+            <ul>
+                <li><strong>Eje principal:</strong> por defecto horizontal
+                    (de izquierda a derecha).</li>
+                <li><strong>Eje transversal:</strong> perpendicular al
+                    principal (por defecto, vertical).</li>
+            </ul>
+            <div class="fx">
+                <div class="item">Uno</div>
+                <div class="item">Dos</div>
+                <div class="item">Tres</div>
+            </div>
+            <p>Tres <code>div</code> que antes se apilaban ahora comparten
+                línea: <code>display: flex</code> en el padre, nada en los
+                hijos.</p>
+        </section>
+
+        <section>
+            <h2>2. <code>flex-direction</code>: cambiar el eje principal</h2>
+            <p><code>flex-direction</code> rota el eje principal:</p>
+            <ul>
+                <li><code>row</code> (por defecto): horizontal.</li>
+                <li><code>row-reverse</code>: horizontal invertido.</li>
+                <li><code>column</code>: vertical (el eje principal es el
+                    vertical).</li>
+                <li><code>column-reverse</code>: vertical invertido.</li>
+            </ul>
+            <div class="fx columnas">
+                <div class="item">Uno</div>
+                <div class="item">Dos</div>
+                <div class="item">Tres</div>
+            </div>
+            <p>Con <code>column</code> los ítems vuelven a apilarse, pero
+                ahora son ítems flex: se pueden alinear y repartir en
+                vertical.</p>
+        </section>
+
+        <section>
+            <h2>3. <code>justify-content</code>: repartir en el eje principal</h2>
+            <p>Distribuye los ítems a lo largo del eje principal:
+                <code>flex-start</code> (inicio), <code>flex-end</code>
+                (final), <code>center</code>, <code>space-between</code>
+                (extremos pegados y huecos iguales en medio),
+                <code>space-around</code> y <code>space-evenly</code>.</p>
+            <div class="fx jc">
+                <div class="item">Uno</div>
+                <div class="item">Dos</div>
+                <div class="item">Tres</div>
+            </div>
+            <p><code>space-between</code>: el primero y el último tocan los
+                bordes y el hueco sobrante se reparte. Perfecto para menús y
+                barras de acciones.</p>
+        </section>
+
+        <section>
+            <h2>4. <code>align-items</code>: alinear en el eje transversal</h2>
+            <p>Cuando los ítems tienen alturas distintas, se alinean con
+                <code>align-items</code>: <code>stretch</code> (estiran),
+                <code>flex-start</code>, <code>flex-end</code>,
+                <code>center</code>, <code>baseline</code>.</p>
+            <div class="fx ai">
+                <div class="item" style="height:1.6rem;">Corto</div>
+                <div class="item" style="height:3.2rem;">Largo</div>
+                <div class="item">Medio</div>
+            </div>
+            <p>Los tres quedan centrados verticalmente. La combinación
+                clásica para centrar una caja: el contenedor con
+                <code>display: flex; justify-content: center; align-items: center;</code>.</p>
+        </section>
+
+        <section>
+            <h2>5. <code>flex-wrap</code> y <code>gap</code></h2>
+            <p>Sin wrap, los ítems se encogen (o desbordan) para caber en una
+                línea. Con <code>flex-wrap: wrap</code>, los que no caben
+                <strong>bajan a la siguiente línea</strong>. Y
+                <code>gap</code> separa todos los ítems (filas y columnas)
+                sin margen en los bordes.</p>
+            <div class="fx wrap">
+                <div class="item">Tarjeta 1</div>
+                <div class="item">Tarjeta 2</div>
+                <div class="item">Tarjeta 3</div>
+                <div class="item">Tarjeta 4</div>
+            </div>
+            <p>Cuatro tarjetas con <code>flex: 1 1 45%</code>: dos por línea
+                y separación constante. Esto es la semilla de las
+                «tarjetas adaptables» de la próxima lección.</p>
+            <pre><code>.fx { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.fx .item { flex: 1 1 45%; }   /* crece, encoge, base 45% */</code></pre>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Poner flex en los hijos:</strong> flex se declara
+                    en el CONTENEDOR. Los hijos solo usan
+                    <code>flex</code>/<code>align-self</code> para ajustarse.</li>
+                <li><strong>justify-content y align-items «al revés»:</strong>
+                    <code>justify</code> reparte en el eje principal;
+                    <code>align</code> en el transversal. Si cambias
+                    <code>flex-direction</code>, los ejes se intercambian.</li>
+                <li><strong>Ítems que se aplastan:</strong> sin
+                    <code>flex-wrap</code> intentan caber en una línea;
+                    añade wrap o una base mínima con <code>flex-basis</code>.</li>
+                <li><strong>Márgenes en vez de gap:</strong> con gap sobra el
+                    «pringado» de márgenes; además gap no dobla en los bordes.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-flex.html</code>.</p>
+            <ol>
+                <li><strong>Fácil — centrar:</strong> centra una caja pequeña
+                    en el centro exacto de un contenedor de 200px de alto.</li>
+                <li><strong>Medio — menú:</strong> barra con tres enlaces a la
+                    izquierda y un botón pegado a la derecha (usa
+                    <code>margin-left: auto</code> o
+                    <code>justify-content</code>).</li>
+                <li><strong>Difícil — tarjetas adaptables:</strong> tres
+                    tarjetas con <code>flex: 1 1 30%</code> y
+                    <code>gap</code>; reduce la ventana y comprueba que bajan
+                    de línea al llegar el wrap.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>.padre { display: flex; height: 200px;
+    justify-content: center; align-items: center; }</code></pre>
+            <h3>Ejercicio 2</h3>
+            <pre><code>.barra { display: flex; align-items: center; gap: 1rem; }
+.barra .boton { margin-left: auto; }   /* empuja el botón a la derecha */</code></pre>
+            <h3>Ejercicio 3</h3>
+            <pre><code>.tarjetas { display: flex; flex-wrap: wrap; gap: 1rem; }
+.tarjeta { flex: 1 1 30%; }</code></pre>
+            <p><code>flex: 1 1 30%</code> es <code>flex-grow: 1</code>
+                (reparte el sobrante), <code>flex-shrink: 1</code> (admite
+                encoger) y <code>flex-basis: 30%</code> (base de línea). Con
+                wrap, cuando tres no caben, bajan.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Flexbox coloca ítems en un eje principal
+                (<code>flex-direction</code>) y los reparte con
+                <code>justify-content</code>; los alinea en el transversal con
+                <code>align-items</code>; el salto de línea con
+                <code>flex-wrap</code> y la separación con <code>gap</code>.
+                Es la herramienta base de menús, barras y tarjetas.</p>
+            <ul>
+                <li>[ ] Creo un contenedor flex y nombro sus dos ejes.</li>
+                <li>[ ] Distribuyo y alineo sin márgenes mágicos.</li>
+                <li>[ ] Hago tarjetas que bajan de línea con wrap.</li>
+            </ul>
+            <p>Siguiente (práctica):
+                <a href="09-flexbox-practica.html">Flexbox en la práctica</a>.
+                Vuelve al <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="07-posicionamiento.html">Anterior: Posicionamiento</a> |
+                <a href="09-flexbox-practica.html">Siguiente: Flexbox en la práctica →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

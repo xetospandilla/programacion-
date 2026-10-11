@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Martínez — Página personal de ejemplo</title>
+    <!-- Hoja externa: se carga con la etiqueta link (lección 11 del curso) -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="cabecera">
+        <div class="interior">
+            <p>Página personal de ejemplo</p>
+            <nav class="navegacion" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="#presentacion">Presentación</a></li>
+                    <li><a href="#aficiones">Aficiones</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="../../index.html">Volver al curso</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="principal">
+        <!-- Presentación con imagen local del proyecto -->
+        <section id="presentacion" class="presentacion">
+            <img src="assets/avatar.svg" alt="Retrato ficticio de Ana: ilustración en tonos azules">
+            <div>
+                <h1>¡Hola! Soy Ana</h1>
+                <p class="subtitulo">Estudiante de programación y creadora
+                    de esta página de ejemplo.</p>
+                <p>Esta página es un proyecto del curso de HTML y CSS. Todo
+                    el contenido es ficticio: sirve para practicar estructura,
+                    estilos, enlaces e imágenes locales.</p>
+            </div>
+        </section>
+
+        <section id="aficiones" aria-labelledby="titulo-aficiones">
+            <h2 id="titulo-aficiones">Mis aficiones</h2>
+            <div class="aficiones">
+                <article class="aficion">
+                    <h3>La lectura</h3>
+                    <p>Novelas de aventuras y algún ensayo de historia.
+                        Leer es la mejor forma de descansar.</p>
+                </article>
+                <article class="aficion">
+                    <h3>El senderismo</h3>
+                    <p>Rutas de montaña los fines de semana, siempre con
+                        mapa, agua y calzado cómodo.</p>
+                </article>
+                <article class="aficion">
+                    <h3>Cocinar</h3>
+                    <p>Recetas sencillas con poco presupuesto: guisos,
+                        arroces y postres para compartir.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="contacto" aria-labelledby="titulo-contacto">
+            <h2 id="titulo-contacto">Contacto y enlaces</h2>
+            <p>Puedes escribirme a
+                <a href="mailto:ana@ejemplo-ficticio.com">ana@ejemplo-ficticio.com</a>
+                (correo de ejemplo; no existe de verdad).</p>
+            <p>Estos son enlaces de muestra a perfiles ficticios. Se abren en
+                una pestaña nueva; no son obligatorios para usar la página:</p>
+            <nav class="enlaces-externos" aria-label="Enlaces externos de muestra">
+                <a href="https://github.com/ana-ficticia" target="_blank"
+                   rel="noopener">Perfil de GitHub (ficticio)</a>
+                <a href="https://www.linkedin.com/in/ana-ficticia" target="_blank"
+                   rel="noopener">Perfil de LinkedIn (ficticio)</a>
+            </nav>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <p>Página ficticia de ejemplo — curso de HTML y CSS ·
+            <a href="../../index.html">volver al índice del curso</a></p>
+    </footer>
+</body>
+</html>

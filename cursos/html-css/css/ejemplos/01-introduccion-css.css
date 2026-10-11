@@ -1,0 +1,20 @@
+/* Hoja externa de demostración de la lección 01-introduccion-css.html.
+   Estas reglas se limitan a la zona .demo-externa para no interferir con
+   los marcos de la lección (objetivos, avisos, soluciones...).
+   Es intencionado: muestra cómo una hoja externa solo afecta a los
+   elementos que seleccionan sus reglas. */
+.demo-externa p {
+    color: #1f4e79;
+    font-size: 1.1rem;
+    border-left: 4px solid #1f4e79;
+    padding-left: 0.6rem;
+}
+
+.demo-externa .destacado {
+    background-color: #e8f0fe;
+    font-weight: bold;
+}
+
+.demo-externa a {
+    color: #b5332e;
+}

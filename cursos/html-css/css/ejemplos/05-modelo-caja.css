@@ -1,0 +1,51 @@
+/* Hoja externa de demostración de la lección 05-modelo-caja.html.
+   Acotada a la zona .demo-caja para no afectar a la maquetación. */
+.demo-caja .caja {
+    width: 220px;
+    padding: 20px;                       /* espacio interior alrededor del contenido */
+    border: 5px solid #b5332e;           /* el borde se suma a la anchura */
+    margin: 10px;                        /* separación exterior */
+    background-color: #fdecea;
+}
+
+/* Con box-sizing: border-box la anchura anterior ya INCLUYE padding y borde */
+.demo-caja .caja .interior {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    padding: 2px 0;
+}
+
+.demo-caja .box-border {
+    box-sizing: border-box;
+    width: 220px;
+    padding: 20px;
+    border: 5px solid #2e7d32;
+    background-color: #eaf4ea;
+}
+
+.demo-caja .contenido-strecho {
+    width: 160px;
+    height: 40px;
+    background-color: #e3f2fd;
+    padding: 4px;
+}
+
+/* overflow: hidden recorta el contenido que desborda */
+.demo-caja .desborda-oculto {
+    width: 160px;
+    height: 40px;
+    overflow: hidden;
+    background-color: #fff8e1;
+    border: 1px solid #d97706;
+}
+
+/* overflow: auto añade barra de desplazamiento si hace falta */
+.demo-caja .desborda-scroll {
+    width: 160px;
+    height: 40px;
+    overflow: auto;
+    background-color: #f3e8fd;
+    border: 1px solid #7b1fa2;
+}

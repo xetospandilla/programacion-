@@ -1,0 +1,7 @@
+{
+  "name": "curso-javascript",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Curso personal de JavaScript. Lecciones 00-45, ejercicios, proyectos, utils y components.",
+  "type": "module"
+}

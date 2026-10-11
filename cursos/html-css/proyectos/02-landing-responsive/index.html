@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pluma — Organiza tus apuntes (proyecto de ejemplo)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="cabecera">
+        <div class="interior">
+            <p class="marca">Pluma</p>
+            <nav class="navegacion" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="#producto">El producto</a></li>
+                    <li><a href="#caracteristicas">Características</a></li>
+                    <li><a href="#detalles">Detalles</a></li>
+                    <li><a href="../../index.html">Volver al curso</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero con llamada a la acción -->
+        <section class="hero" id="producto" aria-labelledby="titulo-hero">
+            <div class="interior">
+                <img src="assets/producto.svg" alt="Ilustración de muestra: cuaderno de apuntes con una pluma">
+                <div>
+                    <h1 id="titulo-hero">Pluma: tus apuntes, ordenados</h1>
+                    <p>Una aplicación ficticia para organizar apuntes de
+                        clase por asignatura, sin perder nada. Este texto es
+                        de ejemplo: la web entera es un proyecto para
+                        practicar maquetación responsive.</p>
+                    <div class="acciones">
+                        <a class="boton" href="#caracteristicas">Empezar gratis</a>
+                        <a class="boton boton-claro" href="#detalles">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tarjetas de características -->
+        <section class="seccion" id="caracteristicas" aria-labelledby="titulo-caracteristicas">
+            <h2 id="titulo-caracteristicas">Lo que hace por ti</h2>
+            <div class="tarjetas">
+                <article class="tarjeta">
+                    <h3>Apuntes por asignatura</h3>
+                    <p>Agrupa tus notas en carpetas de colores y encuéntralas
+                        al instante.</p>
+                </article>
+                <article class="tarjeta">
+                    <h3>Recordatorios</h3>
+                    <p>Marca fechas de exámenes y entrega de trabajos con un
+                        simple recordatorio.</p>
+                </article>
+                <article class="tarjeta">
+                    <h3>Sin conexión</h3>
+                    <p>Trabaja sin internet: todo se guarda en tu dispositivo
+                        y se sincroniza cuando vuelves.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Sección informativa -->
+        <section class="informativa" id="detalles" aria-labelledby="titulo-detalles">
+            <div class="interior seccion">
+                <div>
+                    <h2 id="titulo-detalles">Pensado para estudiar</h2>
+                    <ul>
+                        <li>Búsqueda rápida entre todos tus apuntes.</li>
+                        <li>Etiquetas para relacionar temas entre asignaturas.</li>
+                        <li>Exportación de notas en PDF para repasar en papel.</li>
+                        <li>Interface sencilla, lista en pocos minutos.</li>
+                    </ul>
+                    <p>Recuerda: Pluma es un producto ficticio creado para
+                        este ejercicio de HTML y CSS. No hay que instalarlo,
+                        solo abrir la página.</p>
+                </div>
+                <p class="ilustracion">
+                    <img src="assets/producto.svg" alt="La misma ilustración de muestra de la aplicación">
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <p>Pluma (producto ficticio) — proyecto del curso de HTML y CSS ·
+            <a href="../../index.html">volver al índice del curso</a></p>
+    </footer>
+</body>
+</html>

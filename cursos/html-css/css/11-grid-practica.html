@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid en la práctica</title>
+    <!-- Hoja externa: el CSS "de verdad" de la maqueta de práctica -->
+    <link rel="stylesheet" href="ejemplos/11-grid-practica.css">
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 52rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 21: Grid en la práctica</h1>
+        <p>Maquetar una página completa con <code>grid-template-areas</code>:
+            así se describe el diseño con palabras, y una sola media query lo
+            convierte en móvil. La hoja es
+            <code>ejemplos/11-grid-practica.css</code>.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Definir áreas de diseño con
+                    <code>grid-template-areas</code>.</li>
+                <li>Asignar cada zona con <code>grid-area</code>.</li>
+                <li>Adaptar la maqueta a pantallas pequeñas con un media
+                    query.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>La <a href="10-grid.html">teoría de Grid</a> (pistas, fr,
+                repeat) y la estructura semántica de la lección HTML
+                <a href="../html/semantica.html">semántica</a>. La media query
+                se explica a fondo en la lección de
+                <a href="12-diseno-responsive.html">responsive</a>, pero aquí
+                ya la usamos.</p>
+        </section>
+
+        <section>
+            <h2>1. La maqueta completa</h2>
+            <p>El contenedor define la rejilla con <code>grid-template-areas</code>:
+                cada fila entre comillas, cada palabra es un área. La misma
+                palabra en varias posiciones hace que el área ocupe varias
+                celdas (aquí, «cabecera» y «pie» cruzan las tres columnas).</p>
+            <pre><code>.g-cuadricula {
+    display: grid;
+    grid-template-areas:
+        "cabecera  cabecera  cabecera"
+        "navegacion principal lateral"
+        "pie       pie       pie";
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 0.6rem;
+}</code></pre>
+            <!-- Mini-página de práctica con áreas -->
+            <div class="g-cuadricula">
+                <header class="g-cabecera">Cabecera (título del sitio)</header>
+                <nav class="g-navegacion" aria-label="Navegación de práctica">
+                    <p><a href="#">Inicio</a></p>
+                    <p><a href="#">Artículos</a></p>
+                    <p><a href="#">Acerca</a></p>
+                </nav>
+                <main class="g-principal">
+                    <h3>Contenido principal</h3>
+                    <p>El área «principal» recibe la columna central, la más
+                        ancha (3fr) porque es el contenido.</p>
+                </main>
+                <aside class="g-lateral">
+                    <h3>Lateral</h3>
+                    <p>Notas, enlaces o publicidad; columna estrecha (1fr).</p>
+                </aside>
+                <footer class="g-pie">Pie de página</footer>
+            </div>
+            <p>Cada zona se asigna con <code>grid-area</code> con el mismo
+                nombre elegido (no importa el orden del HTML):</p>
+            <pre><code>.g-cabecera   { grid-area: cabecera; }
+.g-navegacion { grid-area: navegacion; }
+.g-principal  { grid-area: principal; }
+.g-lateral    { grid-area: lateral; }
+.g-pie        { grid-area: pie; }</code></pre>
+        </section>
+
+        <section>
+            <h2>2. La adaptación a pantallas pequeñas</h2>
+            <p>Un solo media query reordena las áreas en una columna. El
+                texto del área «dibuja» el nuevo diseño:</p>
+            <pre><code>@media (max-width: 640px) {
+    .g-cuadricula {
+        grid-template-areas:
+            "cabecera"
+            "navegacion"
+            "principal"
+            "lateral"
+            "pie";
+        grid-template-columns: 1fr;
+    }
+}</code></pre>
+            <p>Reduce la ventana del navegador por debajo de 640px: la
+                maqueta pasa de tres columnas a una sola, con la navegación
+                antes que el contenido (se ve arriba, por el orden de las
+                áreas).</p>
+            <div class="aviso">
+                <p><strong>Por qué areas y no columnas numeradas:</strong>
+                    al cambiar una media query, todo el diseño se reordena
+                    sin tocar el HTML ni mover elementos uno a uno. Es
+                    legible y mantenible.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>«grid-area» sin efecto:</strong> el elemento debe
+                    ser hijo DIRECTO del contenedor grid, y el nombre tiene
+                    que coincidir exactamente (mayúsculas cuentan).</li>
+                <li><strong>Rectángulos imposibles:</strong> un área debe ser
+                    un rectángulo. «cabecera pie cabecera» en una fila no se
+                    puede: cada área ocupa un bloque contiguo.</li>
+                <li><strong>Huecos vacíos en el área:</strong> si dejas una
+                    celda sin nombre en el template, esa celda queda vacía;
+                    usa puntos (.) para marcar «vacía» a propósito.</li>
+                <li><strong>Media query que no dispara:</strong> revisa la
+                    unidad (640px) y que la query venga después de las reglas
+                    base en la misma hoja.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <ol>
+                <li><strong>Fácil — mover el lateral:</strong> cambia el
+                    template para que el lateral esté a la izquierda y la
+                    navegación a la derecha. Solo texto del template, no
+                    propriedades nuevas.</li>
+                <li><strong>Medio — fila extra:</strong> añade una zona
+                    «banner» que cruce las tres columnas entre la cabecera y
+                    el cuerpo (nueva fila en el template + un elemento con
+                    su grid-area).</li>
+                <li><strong>Difícil — móvil con menú primero:</strong> en el
+                    media query, coloca la navegación de nuevo en primer
+                    lugar tras la cabecera (ya está) y elimina la columna
+                    lateral dejando solo 5 filas.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>grid-template-areas:
+    "cabecera cabecera cabecera"
+    "lateral principal navegacion"
+    "pie pie pie";</code></pre>
+            <p>Las columnas se reordenan solo cambiando palabras: el lateral
+                (1fr) queda a la izquierda del contenido.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>grid-template-areas:
+    "cabecera cabecera cabecera"
+    "banner banner banner"
+    "navegacion principal lateral"
+    "pie pie pie";
+/* y en el HTML: &lt;div class="g-banner" style="grid-area:banner"&gt;... */</code></pre>
+            <h3>Ejercicio 3</h3>
+            <pre><code>@media (max-width: 640px) {
+    .g-cuadricula {
+        grid-template-areas:
+            "cabecera"
+            "navegacion"
+            "principal"
+            "lateral"
+            "pie";
+        grid-template-columns: 1fr;
+    }
+}</code></pre>
+            <p>Es el mismo del curso: una columna, cinco filas, sin lateral
+                «pegado» al contenido porque todo se apila.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Las áreas hacen que la maqueta se describa con texto:
+                <code>grid-template-areas</code> dibuja la rejilla y cada
+                elemento se asigna con <code>grid-area</code>. La misma
+                maqueta se vuelve móvil reescribiendo el template dentro de
+                un media query.</p>
+            <ul>
+                <li>[ ] Dibujo una maqueta con areas (cabecera/nav/principal/
+                    lateral/pie).</li>
+                <li>[ ] Asigno cada zona con grid-area.</li>
+                <li>[ ] Reordeno todo con un media query sin tocar el HTML.</li>
+            </ul>
+            <p>Siguiente: <a href="12-diseno-responsive.html">Diseño
+                responsive</a>. Vuelve al <a href="../index.html">índice del
+                curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="10-grid.html">Anterior: Grid</a> |
+                <a href="12-diseno-responsive.html">Siguiente: Responsive →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

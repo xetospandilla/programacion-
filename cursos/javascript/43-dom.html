@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lección 43 - El DOM</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      line-height: 1.5;
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    section { border: 1px solid #ccc; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    button { padding: 0.3rem 0.8rem; cursor: pointer; }
+    .destacada {
+      background: #ffe08a;
+      border-left: 4px solid #d97706;
+      padding: 0.4rem;
+    }
+    .resultado { color: #555; font-size: 0.9rem; }
+    code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+  </style>
+  <!--
+    defer: el navegador descarga este script en paralelo y lo EJECUTA
+    después de analizar el HTML. Así el DOM ya existe cuando corre el
+    código y no hace falta esperar a ningún evento de "carga".
+  -->
+  <script src="43-dom.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1 id="titulo-principal">Lección 43: El DOM</h1>
+    <p>
+      Toda la <strong>teoría</strong> (objetivos, explicaciones, errores y
+      ejercicios) vive en los comentarios de
+      <a href="43-dom.js">43-dom.js</a>. Esta página es la
+      <strong>práctica</strong>: cada botón dispara una función de ese archivo.
+    </p>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. textContent: leer y cambiar el texto</h2>
+      <p id="parrafo-demo">Texto original escrito en el HTML.</p>
+      <p class="resultado">Resultado esperado: al pulsar el botón, este
+        párrafo muestra el texto que JavaScript le asigna con
+        <code>textContent</code>.</p>
+      <button type="button" id="boton-cambiar-texto">Cambiar el texto</button>
+    </section>
+
+    <section>
+      <h2>2. classList: añadir y quitar clases</h2>
+      <p id="caja-destacada" class="caja">Haz clic para destacarme o
+        desdestacarme.</p>
+      <p class="resultado">Resultado esperado: cada clic añade o quita la
+        clase <code>destacada</code> (fondo amarillo). Se usa
+        <code>classList.toggle()</code>.</p>
+      <button type="button" id="boton-destacar">Añadir / quitar destacado</button>
+    </section>
+
+    <section>
+      <h2>3. Atributos: leerlos y cambiarlos</h2>
+      <a id="enlace-demo" href="https://nodejs.org">Enlace de ejemplo</a>
+      <p class="resultado">Resultado esperado: el primer botón muestra el
+        atributo <code>href</code> leído con <code>getAttribute</code>; el
+        segundo lo cambia con <code>setAttribute</code> (y el enlace pasa a
+        apuntar a otro sitio).</p>
+      <button type="button" id="boton-ver-atributo">Ver atributo href</button>
+      <button type="button" id="boton-cambiar-atributo">Cambiar atributo href</button>
+    </section>
+
+    <section>
+      <h2>4. Crear y eliminar elementos</h2>
+      <ul id="lista-dinamica">
+        <li>Elemento inicial</li>
+      </ul>
+      <p class="resultado">Resultado esperado: "Añadir ítem" crea un
+        <code>li</code> con <code>createElement</code> y
+        <code>textContent</code>; "Eliminar último" borra el último con
+        <code>remove()</code>. El contador usa <code>querySelectorAll</code>.</p>
+      <p id="contador-lista" class="resultado">Hay 1 elemento.</p>
+      <button type="button" id="boton-anadir">Añadir ítem</button>
+      <button type="button" id="boton-eliminar">Eliminar último</button>
+      <button type="button" id="boton-marcar-todos">Marcar todos como nuevos</button>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="INDEX.md">Volver al índice del curso</a></p>
+  </footer>
+</body>
+</html>

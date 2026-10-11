@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semántica: estructura de la página</title>
+    <style>
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .maqueta { border: 1px dashed #777; padding: 0.4rem 0.6rem; margin: 0.3rem 0; }
+        .maqueta span { font-family: monospace; font-size: 0.9rem; color: #005f73; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 8: Semántica estructural</h1>
+        <p>Etiquetas que dan significado a las zonas de una página:
+            cabecera, navegación, contenido principal, lateral... y por qué
+            la jerarquía de encabezados importa.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Conocer las etiquetas estructurales:
+                    <code>header</code>, <code>nav</code>, <code>main</code>,
+                    <code>section</code>, <code>article</code>, <code>aside</code>
+                    y <code>footer</code>.</li>
+                <li>Saber cuándo usar cada una y con qué criterio.</li>
+                <li>Construir la jerarquía correcta de encabezados
+                    (h1 → h2 → h3...).</li>
+                <li>Montar una página completa con estructura semántica.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>Las lecciones de <a href="intro-html.html">introducción</a> y
+                <a href="01-index.html">encabezados y párrafos</a>. También te
+                vendrá bien <a href="tablas.html">la de tablas</a>, porque
+                verás una dentro de un artículo.</p>
+        </section>
+
+        <section>
+            <h2>1. Semántica: qué significa, no solo cómo se ve</h2>
+            <p>Antes de estas etiquetas, las páginas dividían todo con
+                <code>&lt;div&gt;</code> y <code>&lt;span&gt;</code>, que no
+                significan nada: solo son "cajas". El navegador ve lo mismo,
+                pero una persona con lector de pantalla, un buscador o una
+                herramienta automática no saben qué es cada zona.</p>
+            <p>Las etiquetas semánticas dicen <strong>qué papel juega</strong>
+                cada parte de la página:</p>
+            <ul>
+                <li><code>&lt;header&gt;</code>: cabecera de la página o de una
+                    sección (suele contener el título y el logo).</li>
+                <li><code>&lt;nav&gt;</code>: navegación principal (los enlaces
+                    para moverse por el sitio).</li>
+                <li><code>&lt;main&gt;</code>: el contenido principal, único en
+                    cada página.</li>
+                <li><code>&lt;section&gt;</code>: una sección temática del
+                    contenido (suele llevar un encabezado propio).</li>
+                <li><code>&lt;article&gt;</code>: contenido autocontenido que
+                    tiene sentido por sí solo: un artículo, una noticia, una
+                    entrada de blog, un producto.</li>
+                <li><code>&lt;aside&gt;</code>: contenido relacionado pero
+                    secundario: barra lateral con enlaces, notas, publicidad.</li>
+                <li><code>&lt;footer&gt;</code>: pie de página (autor, copyright,
+                    enlaces legales).</li>
+            </ul>
+            <p>La maqueta de una página típica es esta:</p>
+            <div class="maqueta"><span>header (cabecera)</span></div>
+            <div class="maqueta"><span>nav (navegación)</span></div>
+            <div class="maqueta"><span>main (principal): article + aside</span></div>
+            <div class="maqueta"><span>footer (pie)</span></div>
+        </section>
+
+        <section>
+            <h2>2. Un documento completo y semántico</h2>
+            <p>Este es el esqueleto de una página real. Al abrirlo verás las
+                zonas una debajo de otra (el aspecto visual lo pondrá CSS,
+                más adelante):</p>
+            <pre><code>&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Mi sitio de recetas&lt;/h1&gt;
+        &lt;p&gt;Recetas sencillas para empezar a cocinar.&lt;/p&gt;
+    &lt;/header&gt;
+
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Recetas&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+
+    &lt;main&gt;
+        &lt;article&gt;
+            &lt;h2&gt;Tortilla de patatas&lt;/h2&gt;
+            &lt;p&gt;Ingredientes y pasos...&lt;/p&gt;
+        &lt;/article&gt;
+
+        &lt;aside&gt;
+            &lt;h2&gt;Enlaces de interés&lt;/h2&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Mercado de temporada&lt;/li&gt;
+                &lt;li&gt;Blog de cocina&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/aside&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;© 2026 Mi sitio de recetas&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+            <p>Detalles que importan:</p>
+            <ul>
+                <li>Solo hay <strong>un</strong> <code>&lt;main&gt;</code> por
+                    página.</li>
+                <li>El <code>&lt;h1&gt;</code> describe la página entera; los
+                    encabezados de segundo nivel cuelgan de él.</li>
+                <li><code>article</code> dentro de <code>main</code>: la receta
+                    tiene sentido aunque se lea sola.</li>
+                <li><code>aside</code> cuelga de <code>main</code> porque es
+                    contenido del mismo contexto.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. Jerarquía de encabezados</h2>
+            <p>Los encabezados <code>&lt;h1&gt;</code> a
+                <code>&lt;h6&gt;</code> forman el <strong>esquema</strong> de la
+                página. No elijas el nivel por el tamaño de letra (eso lo hace
+                CSS), sino por la lógica:</p>
+            <ul>
+                <li><code>&lt;h1&gt;</code>: título de la página (uno solo,
+                    normalmente).</li>
+                <li><code>&lt;h2&gt;</code>: secciones principales.</li>
+                <li><code>&lt;h3&gt;</code>: subsecciones de una h2.</li>
+                <li>Y así sucesivamente, sin saltarte niveles.</li>
+            </ul>
+            <pre><code>&lt;h1&gt;Manual de jardinería&lt;/h1&gt;   &lt;!-- nivel 1 --&gt;
+  &lt;h2&gt;Plantas de interior&lt;/h2&gt;   &lt;!-- nivel 2 --&gt;
+    &lt;h3&gt;Riego&lt;/h3&gt;               &lt;!-- nivel 3 --&gt;
+    &lt;h3&gt;Luz&lt;/h3&gt;
+  &lt;h2&gt;Plantas de exterior&lt;/h2&gt;   &lt;!-- nivel 2 --&gt;</code></pre>
+            <div class="aviso">
+                <p><strong>Error frecuente:</strong> saltar de un
+                    <code>h1</code> a un <code>h3</code>. El lector de pantalla
+                    anuncia "encabezado de nivel 3" de golpe y se pierde el
+                    orden. Si una subsección es importante, es que hay un nivel
+                    2 intermedio.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. Section vs. article: la duda clásica</h2>
+            <p>Regla práctica: usa <code>&lt;article&gt;</code> cuando el
+                contenido se sostiene por sí mismo (receta, noticia, entrada de
+                blog) y <code>&lt;section&gt;</code> cuando es una parte de un
+                todo mayor (capítulo de un manual, bloque de la página de
+                inicio). Un <code>article</code> puede contener
+                <code>section</code>s y una <code>section</code> varios
+                <code>article</code>s.</p>
+            <pre><code>&lt;section&gt;
+    &lt;h2&gt;Noticias recientes&lt;/h2&gt;
+    &lt;article&gt;
+        &lt;h3&gt;Nueva versión publicada&lt;/h3&gt;
+        &lt;p&gt;...&lt;/p&gt;
+    &lt;/article&gt;
+    &lt;article&gt;
+        &lt;h3&gt;Próxima charla&lt;/h3&gt;
+        &lt;p&gt;...&lt;/p&gt;
+    &lt;/article&gt;
+&lt;/section&gt;</code></pre>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Varios <code>&lt;h1&gt;</code> en una página:</strong>
+                    el título principal es uno. Los demás "grandes" deben ser
+                    h2 (o inferiores).</li>
+                <li><strong>Dividirlo todo con <code>div</code>:</strong> si el
+                    navegador no puede saber qué es cada zona, el significado se
+                    pierde. Sustituye los div por las etiquetas adecuadas.</li>
+                <li><strong><code>&lt;nav&gt;</code> duplicado con todos los
+                    enlaces del sitio:</strong> <code>nav</code> es para la
+                    navegación principal y las navegaciones importantes; no
+                    hace falta rodear cada grupo de enlaces del pie con
+                    <code>nav</code>.</li>
+                <li><strong><code>main</code> dentro de otra zona:</strong>
+                    <code>main</code> no debe ir anidado dentro de
+                    <code>header</code>, <code>nav</code> ni
+                    <code>footer</code>; es el contenedor del contenido
+                    principal.</li>
+                <li><strong>Encabezados saltados:</strong> revisa el orden
+                    h1 → h2 → h3 sin huecos (apartado 3).</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Crea el archivo <code>mi-pagina-semantica.html</code>.</p>
+            <ol>
+                <li><strong>Fácil — nombrar zonas:</strong> escribe solo las
+                    etiquetas de estructura para una página de un club de
+                    lectura: <code>header</code>, <code>nav</code> (tres
+                    enlaces), <code>main</code>, <code>section</code> y
+                    <code>footer</code>. Sin contenido todavía.</li>
+                <li><strong>Medio — llenar la página:</strong> dentro del
+                    <code>main</code> añade dos <code>article</code> (cada uno
+                    con su h2 y un párrafo) y un <code>aside</code> con una
+                    lista de recomendaciones.</li>
+                <li><strong>Difícil — jerarquía correcta:</strong> en el primer
+                    artículo añade un nivel h3, y explica con un comentario
+                    HTML (<code>&lt;!-- ... --&gt;</code>) por qué el h3 cuelga
+                    del h2 y no hay huecos.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>&lt;header&gt;...&lt;/header&gt;
+&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Libros&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#"&gt;Contacto&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;main&gt;...&lt;/main&gt;
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+            <p>El <code>nav</code> va entre la cabecera y el contenido, y
+                <code>main</code> es una sola zona.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>&lt;main&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Novela del mes&lt;/h2&gt;
+        &lt;p&gt;Nuestra recomendación: un clásico de 200 páginas.&lt;/p&gt;
+    &lt;/article&gt;
+    &lt;article&gt;
+        &lt;h2&gt;Próxima tertulia&lt;/h2&gt;
+        &lt;p&gt;Nos reunimos el primer viernes de cada mes.&lt;/p&gt;
+    &lt;/article&gt;
+    &lt;aside&gt;
+        &lt;h2&gt;Recomendaciones&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Ensayo histórico&lt;/li&gt;
+            &lt;li&gt;Novela gráfica&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/aside&gt;
+&lt;/main&gt;</code></pre>
+            <p>Cada artículo tiene sentido independiente; el aside agrupa
+                enlaces secundarios del mismo contexto.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>&lt;article&gt;
+    &lt;h2&gt;Novela del mes&lt;/h2&gt;
+    &lt;h3&gt;Argumento sin destripar&lt;/h3&gt;
+    &lt;!-- El h3 es una subsección del h2 "Novela del mes",
+         por eso su nivel es exactamente uno más. No hay salto
+         de nivel (no existe un h4 directamente después de un h2). --&gt;
+&lt;/article&gt;</code></pre>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Las etiquetas semánticas dicen qué es cada zona de la página:
+                <code>header</code>, <code>nav</code>, <code>main</code>,
+                <code>section</code>, <code>article</code>, <code>aside</code>
+                y <code>footer</code>. Los encabezados forman una jerarquía
+                sin saltos, con un solo <code>h1</code>. Esta estructura la
+                usan los lectores de pantalla, los buscadores y tus propios
+                estilos CSS.</p>
+            <ul>
+                <li>[ ] Maqueto una página con las etiquetas estructurales.</li>
+                <li>[ ] Distingo section de article y lo justifico.</li>
+                <li>[ ] Escribo encabezados en orden sin saltar niveles.</li>
+            </ul>
+            <p>Siguiente: <a href="06-forms.html">Formularios</a>. O vuelve al
+                <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="tablas.html">Anterior: Tablas</a> |
+                <a href="06-forms.html">Siguiente: Formularios →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

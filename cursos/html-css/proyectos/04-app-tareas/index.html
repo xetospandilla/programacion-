@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis tareas — práctica final integradora</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <header class="cabecera">
+        <h1>Mis tareas</h1>
+        <p>Práctica final del curso de HTML y CSS con un poco de
+            JavaScript. Añade, marca y elimina tareas; sin guardado: al
+            recargar la página, empiezas de cero.</p>
+    </header>
+
+    <main class="principal">
+        <!-- Añadir tarea -->
+        <form id="formulario" class="nueva-tarea">
+            <label for="nueva-tarea">Nueva tarea</label>
+            <div class="fila">
+                <input id="nueva-tarea" name="nueva-tarea" type="text"
+                       placeholder="Ejemplo: repasar la lección de Grid"
+                       autocomplete="off">
+                <button class="boton" type="submit">Añadir</button>
+            </div>
+            <p id="error" class="error" role="alert" hidden>Escribe una
+                tarea antes de añadirla.</p>
+        </form>
+
+        <!-- Contador y lista -->
+        <p class="estado" aria-live="polite">
+            Tareas pendientes: <span id="contador">0</span>
+        </p>
+        <p id="mensaje-vacio" class="vacio">No hay tareas. Añade la
+            primera con el formulario de arriba.</p>
+        <ul id="lista" class="lista" aria-label="Lista de tareas"></ul>
+    </main>
+
+    <footer class="pie">
+        <p>Sin persistencia: los datos se pierden al recargar ·
+            <a href="../../index.html">volver al índice del curso</a></p>
+    </footer>
+</body>
+</html>

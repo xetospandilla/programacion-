@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Imagenes</title>
     </head>
     <body>
         <h1>Pagina con una imagen</h1>
+        <!--
+            La imagen "imagen-ejemplo.svg" es una ilustracion generica creada
+            localmente: no contiene fotografias ni datos personales, por lo que
+            puede usarse libremente como ejemplo del curso.
+        -->
         <img
-        src="../images/yo.png"
-        alt="Imagen de Carlos Galán Cubells con los brazos cruzados mirando al frente"
-        title="Imagen de Carlos Galán Cubells"
+        src="../images/imagen-ejemplo.svg"
+        alt="Paisaje ilustrado de montañas con un sol y un río"
+        title="Ilustración de ejemplo del curso"
         width="200"
         ><br> <!--la etiqueta "br" sirve para hacer saltos de línea || También se puede aplicar dentro de párrafos y otras etiquetas-->
         <!--
         //  Atributos
         src="" -> sirve para indicar el archivo a mostrar
-        alt="" -> en caso de no cargar la imagen muestra un texto alternativo que indica lo que muestra la imagen
-        title="" -> se puede usar para todas las etiquetas como titulos, etc. Sirve como identificador para la base de datos
-        
+        alt="" -> texto alternativo: se muestra si la imagen no puede cargarse
+                  y lo leen los lectores de pantalla. Debe describir la
+                  INFORMACIÓN que aporta la imagen, no un nombre propio.
+        title="" -> texto emergente que aparece al pasar el ratón por encima
+                    (en navegadores de escritorio). NO lo leen los lectores
+                    de pantalla y no sustituye a alt.
+
+        //  Diferencia entre alt y title
+        - alt es imprescindible para accesibilidad: describe el CONTENIDO.
+        - title es opcional y decorativo: aporta un aviso o contexto extra.
+        Ambos atributos conviven en este ejemplo: si la imagen no carga, se
+        lee el alt; si el ratón se posa encima, se muestra el title.
+
         Existen otras propiedades como el ancho y el alto, pero es más recomendable modificarlo aplicando CSS
         -->
         <p><button><a href="../index.html">Página de Inicio</a></button></p>

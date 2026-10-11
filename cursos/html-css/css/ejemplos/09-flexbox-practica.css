@@ -1,0 +1,64 @@
+/* Hoja de la práctica de la lección 19 (09-flexbox-practica.html).
+   Es el "CSS del proyecto": todo va con prefijo .p- para no chocar
+   con la maquetación de la lección. */
+.p-sitio {
+    border: 1px solid #bbb;
+    background: #fff;
+    margin: 0.5rem 0;
+}
+
+/* --- Navegación con flexbox --- */
+.p-nav {
+    display: flex;
+    align-items: center;            /* centra verticalmente logo y enlaces */
+    gap: 1rem;                      /* separación uniforme */
+    padding: 0.6rem 0.8rem;
+    background: #1f4e79;
+    color: #fff;
+    flex-wrap: wrap;                /* en pantallas estrechas baja todo */
+}
+.p-nav .marca {
+    font-weight: bold;
+    margin-right: auto;             /* empuja el resto del menú a la derecha */
+}
+.p-nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.2rem 0.4rem;
+}
+.p-nav a.boton {
+    background: #b5332e;
+    border-radius: 4px;
+}
+
+/* --- Tarjetas distribuidas con flexbox --- */
+.p-tarjetas {
+    display: flex;
+    flex-wrap: wrap;                /* bajan de línea cuando no caben */
+    gap: 1rem;
+    padding: 0.8rem;
+}
+.p-tarjeta {
+    flex: 1 1 180px;                /* crece, encoge y base mínima 180px */
+    border: 1px solid #ddd;
+    border-top: 4px solid #1565c0;
+    padding: 0.6rem;
+    background: #fafafa;
+}
+
+/* --- Barra de etiquetas con distribución --- */
+.p-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.8rem;
+    border-top: 1px solid #eee;
+    flex-wrap: wrap;
+}
+.p-fila .etiqueta {
+    background: #e8f0fe;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+}

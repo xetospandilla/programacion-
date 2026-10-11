@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cascada, herencia y especificidad</title>
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .demo-cas { border: 1px solid #bbb; padding: 0.6rem 0.8rem; margin: 0.5rem 0; background: #fffdf5; }
+
+        /* --- Demostraciones de esta lección (van en línea, a propósito:
+           así se ve el efecto del ORDEN de aparición y de la especificidad) --- */
+
+        /* Demo A: orden de aparición. La misma regla dos veces: gana la última. */
+        .demo-cas .orden-a { color: #1f4e79; }
+        .demo-cas .orden-a { color: #b5332e; }
+
+        /* Demo B: especificidad sobre el mismo párrafo.
+           Etiqueta (0,0,1) < clase (0,1,0) < id (1,0,0) */
+        .demo-cas p.sp { color: #1565c0; }
+        .demo-cas #elem-sp { color: #b5332e; }
+
+        /* Demo C: herencia. El color y la fuente del padre bajan a los hijos. */
+        .demo-cas .hereda { color: #2e7d32; font-family: Georgia, serif; }
+        /* El borde NO se hereda: hay que pedirlo. */
+        .demo-cas .hereda .nieto { border: 1px dashed #999; padding: 2px 6px; }
+
+        /* Demo D: !important gana a todo (y por eso se evita). */
+        .demo-cas p.imp { color: #1565c0; }
+        .demo-cas #elem-imp { color: #2e7d32; }
+        .demo-cas .gana-todo { color: #7b1fa2 !important; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 13: Cascada, herencia y especificidad</h1>
+        <p>Tres reglas del juego que deciden, cuando varias reglas apuntan al
+            mismo elemento, <strong>cuál gana</strong>. Sin ellas, cualquier
+            hoja de estilos sería un caos.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Explicar qué es la cascada y por qué el orden de aparición
+                    importa.</li>
+                <li>Distinguir qué propiedades se heredan y cuáles no.</li>
+                <li>Calcular la especificidad de un selector (versión
+                    simplificada).</li>
+                <li>Entender <code>!important</code> y por qué conviene evitar
+                    abusar de él.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>La <a href="01-introduccion-css.html">introducción a CSS</a>
+                (anatomía de una regla) y
+                <a href="02-selectores.html">los selectores</a>: esta lección
+                decide qué pasa cuando varios chocan.</p>
+        </section>
+
+        <section>
+            <h2>1. La cascada y el orden de aparición</h2>
+            <p>«Cascada» significa que las reglas caen unas sobre otras, y que
+                ante el mismo selector con la misma importancia,
+                <strong>gana la última declarada</strong> (la que aparece más
+                abajo en el archivo, o más tarde en una hoja enlazada después).</p>
+            <pre><code>/* Dos reglas idénticas en especificidad: gana la última */
+.demo-cas .orden-a { color: #1f4e79; }
+.demo-cas .orden-a { color: #b5332e; }</code></pre>
+            <div class="demo-cas">
+                <p class="orden-a">Este párrafo está pintado por la SEGUNDA
+                    regla (burdeos): misma especificidad, gana la última.</p>
+            </div>
+            <p>El mismo principio aplica entre hojas: si dos
+                <code>&lt;link&gt;</code> compiten, el que va más abajo en el
+                <code>head</code> manda (a igualdad de especificidad).</p>
+        </section>
+
+        <section>
+            <h2>2. Herencia</h2>
+            <p>Muchas propiedades de texto (color, <code>font-family</code>,
+                <code>font-size</code>, <code>line-height</code>, <code>text-align</code>...)
+                se <strong>heredan</strong>: si se las pones a un padre, sus
+                hijos la usan si ellos no la definen.</p>
+            <pre><code>.demo-cas .hereda {
+    color: #2e7d32;           /* bajará a hijos y nietos */
+    font-family: Georgia, serif;
+}</code></pre>
+            <div class="demo-cas">
+                <p class="hereda">Yo soy verde y en Georgia.
+                    <span class="nieto">Yo soy su hijo: heredo el color y la
+                    fuente. El borde no se hereda: es mío y va a mi nombre.</span>
+                </p>
+            </div>
+            <p>Lo que NO se hereda: márgenes, bordes, fondos, anchuras...
+                Piensa por qué: un borde en el padre no debería repetirse en
+                cada hijo. A los hijos se les da la propiedad de forma
+                explícita.</p>
+        </section>
+
+        <section>
+            <h2>3. Especificidad</h2>
+            <p>Cuando dos reglas distintas apuntan al mismo elemento, no gana
+                la última: gana la <strong>más específica</strong>. Se puntúa
+                con tres cifras (id, clase, etiqueta):</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Selector</th>
+                        <th scope="col">Puntos (id, clase, etiqueta)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>p</code></td>
+                        <td>(0, 0, 1)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.demo-cas p</code></td>
+                        <td>(0, 1, 1)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.sp</code></td>
+                        <td>(0, 1, 0)</td>
+                    </tr>
+                    <tr>
+                        <td><code>#elem-sp</code></td>
+                        <td>(1, 0, 0)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Se comparan las cifras de izquierda a derecha: un ID gana a
+                cualquier número de clases; una clase gana a cualquier número
+                de etiquetas.</p>
+            <pre><code>.demo-cas p.sp   { color: #1565c0; }  /* (0,1,1) */
+.demo-cas #elem-sp { color: #b5332e; }  /* (1,0,0): gana */</code></pre>
+            <div class="demo-cas">
+                <p class="sp" id="elem-sp">Un párrafo con clase y con ID. La
+                    regla del ID gana aunque la de la clase va también sobre
+                    él: 1 en la primera cifra vale más que 0.</p>
+            </div>
+            <div class="aviso">
+                <p><strong>Consecuencia práctica:</strong> si abusas de IDs
+                    para estilos, luego «necesitas» IDs aún más específicos o
+                    <code>!important</code> para tocarlos. Por eso se estila
+                    con clases: toda la especificidad se mantiene baja y
+                    predecible.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. <code>!important</code>: la excepción que rompe la cascada</h2>
+            <p>Una declaración con <code>!important</code> gana a cualquier
+                otra, sea cual sea su especificidad:</p>
+            <pre><code>.demo-cas p.imp     { color: #1565c0; }
+.demo-cas #elem-imp { color: #2e7d32; }
+.demo-cas .gana-todo { color: #7b1fa2 !important; }</code></pre>
+            <div class="demo-cas">
+                <p class="imp gana-todo" id="elem-imp">Tengo etiqueta, clase e
+                    ID apuntándome; pero la declaración con !important (morada)
+                    gana a todas.</p>
+            </div>
+            <p>¿Por qué se evita? Porque deja de poder razonar el resultado
+                (la cascada ya no decide) y cualquier regla futura tendrá que
+                competir con <code>!important</code>... añadiendo más
+                <code>!important</code>. Úsalo solo como último recurso y
+                documentado, casi nunca en hojas de tu propio proyecto.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>«Puse la regla y no cambia nada»:</strong> casi
+                    siempre es especificidad: otra regla con más puntos gana.
+                    Súbele la especificidad a la tuya (clase más concreta) en
+                    lugar de añadir <code>!important</code>.</li>
+                <li><strong>Esperar que un borde «se herede»:</strong> no se
+                    hereda. Pon el borde en cada elemento que lo necesite.</li>
+                <li><strong>Creer que el orden importa más que la
+                    especificidad:</strong> primero se compara la
+                    especificidad; solo si es igual decide el orden.</li>
+                <li><strong>IDs para todo:</strong> dispara la especificidad y
+                    encadena peleas de reglas. Clases, por defecto.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-cascada.html</code> con estructura mínima.</p>
+            <ol>
+                <li><strong>Fácil — orden:</strong> escribe dos reglas sobre la
+                    misma clase `.mensaje` con distinto color. ¿Cuál gana?
+                    Compruébalo y anota en un comentario la respuesta.</li>
+                <li><strong>Medio — especificidad:</strong> da color a un
+                    párrafo con <code>p</code>, con clase y con ID, y
+                    comenta cuál gana y «cuántos puntos» tiene cada regla.</li>
+                <li><strong>Difícil — herencia + especificidad:</strong> padre
+                    con <code>color</code> e hijo con su propia clase que
+                    cambia solo su color. ¿El nieto de qué color sale?
+                    Razónalo y verifícalo en el navegador.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>.mensaje { color: #1f4e79; }
+.mensaje { color: #b5332e; }   /* gana esta: misma especificidad, última */</code></pre>
+            <h3>Ejercicio 2</h3>
+            <pre><code>p { color: #999; }            /* (0,0,1) */
+.palabra { color: #1565c0; }   /* (0,1,0) */
+#unica { color: #b5332e; }     /* (1,0,0): gana */</code></pre>
+            <h3>Ejercicio 3</h3>
+            <pre><code>.padre { color: #2e7d32; }        /* verde, se hereda */
+.nieto { color: inherit; }       /* explícito: hereda del padre */
+/* Un nieto sin regla propia heredaría el verde de su padre;
+   con la clase .nieto que solo usa inherit, también verde.
+   Si la clase del hijo pone otro color, el hijo cambia y el
+   nieto sigue verde (hereda del padre directo). */</code></pre>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>La cascada decide el ganador entre reglas: primero
+                <code>!important</code>, luego la especificidad (id &gt;
+                clase &gt; etiqueta) y, a igualdad, la última declarada. Algunas
+                propiedades se heredan (texto) y otras no (bordes, márgenes).
+                Mantén la especificidad baja con clases y evita
+                <code>!important</code> salvo excepción justificada.</p>
+            <ul>
+                <li>[ ] Predigo cuál regla gana ante dos en conflicto.</li>
+                <li>[ ] Explico por qué no se hereda un borde.</li>
+                <li>[ ] Calculo la especificidad de un selector.</li>
+                <li>[ ] Justifico cuándo (no) usar !important.</li>
+            </ul>
+            <p>Siguiente: <a href="04-colores-unidades-tipografia.html">Colores,
+                unidades y tipografía</a>. Vuelve al
+                <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="02-selectores.html">Anterior: Selectores</a> |
+                <a href="04-colores-unidades-tipografia.html">Siguiente: Colores →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,192 @@
+/* ============================================================
+   Proyecto 03 — Portfolio con Grid
+   Hoja externa del proyecto. Usa CSS Grid para la cuadrícula
+   de proyectos (lección 20) y Flexbox para la cabecera y
+   dentro de cada tarjeta (lecciones 18-19).
+   ============================================================ */
+
+/* --- Tema con variables (lección 24) --- */
+:root {
+    --color-primario: #1f4e79;
+    --color-acento: #b5332e;
+    --color-fondo: #f5f7fa;
+    --color-texto: #222;
+    --radio: 8px;
+    --espacio: 1rem;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--color-texto);
+    background: var(--color-fondo);
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-acento);
+    outline-offset: 2px;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* --- Cabecera --- */
+.cabecera {
+    background: var(--color-primario);
+    color: #fff;
+}
+
+.cabecera .interior {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: var(--espacio);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espacio);
+}
+
+.navegacion ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.2rem;
+}
+
+.navegacion a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.2rem 0;
+}
+
+.navegacion a:hover,
+.navegacion a:focus-visible { border-bottom-color: #fff; }
+
+/* --- Zona principal --- */
+.principal {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 0 var(--espacio);
+}
+
+section { margin: 2.5rem 0; }
+
+/* Presentación */
+.presentacion { text-align: center; }
+.presentacion h1 { margin-bottom: 0.25rem; }
+.presentacion .subtitulo { color: #555; margin-top: 0; }
+
+/* --- Cuadrícula de proyectos: Grid con columnas automáticas.
+   Con auto-fill y minmax no hace falta media query: las tarjetas
+   encajan solas según el ancho disponible (lección 20). --- */
+.cuadricula {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--espacio);
+}
+
+/* Cada tarjeta usa Flexbox por dentro para alinear su contenido */
+.tarjeta {
+    background: #fff;
+    border: 1px solid #dde3ea;
+    border-radius: var(--radio);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 8rem;
+    object-fit: cover;
+    border-bottom: 1px solid #dde3ea;
+}
+
+.tarjeta .cuerpo {
+    padding: 0 1rem 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.tarjeta .cuerpo h3 { margin-bottom: 0.25rem; }
+
+.tarjeta .cuerpo p { flex: 1; }
+
+/* Etiquetas de cada proyecto */
+.etiquetas { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.etiqueta {
+    background: var(--color-fondo);
+    border: 1px solid var(--color-primario);
+    color: var(--color-primario);
+    border-radius: 999px;
+    padding: 0.1rem 0.6rem;
+    font-size: 0.85rem;
+}
+
+/* Enlace de la tarjeta */
+.tarjeta a {
+    color: var(--color-primario);
+    font-weight: bold;
+}
+.tarjeta a:hover,
+.tarjeta a:focus-visible { color: var(--color-acento); }
+
+/* --- Contacto: formulario de ejemplo sin backend --- */
+.formulario {
+    background: #fff;
+    border: 1px solid #dde3ea;
+    border-radius: var(--radio);
+    padding: var(--espacio);
+    max-width: 38rem;
+}
+
+.formulario label { display: block; margin-top: var(--espacio); font-weight: bold; }
+
+.formulario input,
+.formulario textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #99a5b3;
+    border-radius: 4px;
+    font: inherit;
+    margin-top: 0.25rem;
+}
+
+.formulario input:focus-visible,
+.formulario textarea:focus-visible {
+    outline: 3px solid var(--color-acento);
+    outline-offset: 1px;
+}
+
+.boton {
+    display: inline-block;
+    background: var(--color-primario);
+    color: #fff;
+    border: 0;
+    border-radius: var(--radio);
+    padding: 0.6rem 1.2rem;
+    font: inherit;
+    margin-top: var(--espacio);
+}
+
+.boton:hover,
+.boton:focus-visible { background: var(--color-acento); }
+
+/* --- Pie --- */
+.pie {
+    background: var(--color-primario);
+    color: #fff;
+    text-align: center;
+    padding: var(--espacio);
+    margin-top: 2rem;
+}
+
+.pie a { color: #fff; }

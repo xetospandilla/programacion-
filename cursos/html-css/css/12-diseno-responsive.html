@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diseño responsive</title>
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+
+        /* --- Demostraciones de la lección --- */
+
+        /* Fluid: anchos en % que respiran con el contenedor */
+        .fluido { display: flex; gap: 0.6rem; }
+        .fluido > div { width: 30%; background: #e3f2fd; border: 1px solid #1565c0; padding: 0.3rem; }
+        .fluido .mitad { width: 70%; }
+
+        /* Imagen adaptable: nunca más ancha que su contenedor */
+        .img-adaptable img { max-width: 100%; height: auto; border: 1px solid #bbb; }
+
+        /* Mobile-first: la base es "una columna"; al superar 560px se
+           vuelven dos columnas. Fíjate que los estilos base no llevan
+           media query y los mejorados usan min-width. */
+        .mf { border: 1px dashed #888; padding: 0.4rem; background: #fffdf5; }
+        .mf article {
+            background: #e8f0fe; border: 1px solid #1f4e79;
+            padding: 0.4rem; margin-bottom: 0.6rem;
+        }
+        @media (min-width: 560px) {
+            .mf { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+            .mf article { margin-bottom: 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 22: Diseño responsive</h1>
+        <p>Que la página se vea bien en cualquier ancho: más pequeña o más
+            grande. Mobile-first, media queries, anchos fluidos e imágenes
+            que no desbordan.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Explicar el enfoque <strong>mobile-first</strong>.</li>
+                <li>Escribir <code>@media</code> y decidir entre
+                    <code>min-width</code> y <code>max-width</code>.</li>
+                <li>Usar anchos fluidos e imágenes adaptables.</li>
+                <li>Evitar los errores clásicos del responsive.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>La meta viewport (vista en la introducción de HTML) y las
+                unidades relativas de la lección
+                <a href="04-colores-unidades-tipografia.html">04</a> (%, vw,
+                rem): el responsive es su aplicación.</p>
+        </section>
+
+        <section>
+            <h2>1. El enfoque mobile-first</h2>
+            <p>Se escriben primero los estilos para la pantalla más pequeña
+                (una columna, texto cómodo) y luego se añaden los mejorados
+                dentro de <code>@media (min-width: ...)</code> conforme la
+                pantalla crece. Ventajas: el móvil, que es lo más limitado,
+                nunca se «rompe»; y el CSS base queda más corto.</p>
+            <pre><code>/* BASE (móvil): una sola columna, sin media query */
+main article { margin-bottom: 0.6rem; }
+
+/* MEJORA (pantallas de 560px o más): dos columnas */
+@media (min-width: 560px) {
+    main { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+}</code></pre>
+            <p>Demostración en vivo (reduce y ensancha la ventana):</p>
+            <div class="mf">
+                <article>Artículo 1: los estilos base valen para móvil.</article>
+                <article>Artículo 2: desde 560px esta zona se pone en dos
+                    columnas.</article>
+                <article>Artículo 3: cada artículo se apila en el móvil.</article>
+                <article>Artículo 4: el salto lo da la media query.</article>
+            </div>
+            <p>Con <code>max-width</code> se hace al revés (estilos grandes
+                primero y «descender»); mobile-first con <code>min-width</code>
+                es la práctica recomendada hoy.</p>
+        </section>
+
+        <section>
+            <h2>2. Anchos fluidos e imágenes adaptables</h2>
+            <p>Los anchos en <code>%</code> (o <code>fr</code> etc.) respiran
+                con su contenedor; evitar <code>width</code> fijas en px para
+                zonas importantes:</p>
+            <div class="fluido">
+                <div>30%</div>
+                <div class="mitad">70% (juntos suman 100%)</div>
+            </div>
+            <p>Las imágenes se vuelven adaptables con dos reglas:</p>
+            <pre><code>img { max-width: 100%; height: auto; }</code></pre>
+            <p><code>max-width: 100%</code> impide que la imagen se salga de
+                su contenedor; <code>height: auto</code> conserva la
+                proporción. Prueba a estrechar la ventana:</p>
+            <div class="img-adaptable">
+                <img src="../images/imagen-ejemplo.svg" alt="Ilustración de ejemplo que se encoge con la ventana">
+            </div>
+        </section>
+
+        <section>
+            <h2>3. La meta viewport, imprescindible</h2>
+            <p>Sin ella, los móviles muestran la página «de escritorio»
+                diminuta y con zoom. Esta meta ya está en todas las lecciones
+                del curso:</p>
+            <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Página diminuta en móvil:</strong> falta la meta
+                    viewport en el head. Añádela.</li>
+                <li><strong>Anchos fijos en px:</strong> una columna de 300px
+                    desborda un móvil de 320px. Usa %, fr, vw o max-width con
+                    min.</li>
+                <li><strong>Imagen que se sale:</strong> sin
+                    <code>max-width: 100%</code>. Añádesela (global o por
+                    clase).</li>
+                <li><strong>Media queries al revés:</strong> con mobile-first,
+                    la pantalla pequeña NO lleva media query; los breakpoints
+                    son aumentos (<code>min-width</code>).</li>
+                <li><strong>Breakpoints de «cada modelo de móvil»:</strong>
+                    diseña por contenido (560px aquí; 768, 1024...), no por
+                    cada dispositivo.</li>
+                <li><strong>Texto que no se reescala:</strong> prefiere
+                    <code>rem</code> para que el usuario pueda agrandarlo;
+                    evita tamaños fijos mínimos.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-responsive.html</code>.</p>
+            <ol>
+                <li><strong>Fácil — columna única:</strong> tres artículos
+                    apilados (base móvil) sin media query.</li>
+                <li><strong>Medio — dos columnas:</strong> a partir de 600px,
+                    ponlos en grid de dos columnas con
+                    <code>min-width</code>.</li>
+                <li><strong>Difícil — imagen y texto fluidos:</strong> un
+                    contenedor con la imagen del curso
+                    (<code>../images/imagen-ejemplo.svg</code>) adaptable y
+                    texto a su lado; estrecha la ventana y observa ambos.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>/* nada que añadir: el flujo normal ya apila los artículos */</code></pre>
+            <h3>Ejercicio 2</h3>
+            <pre><code>@media (min-width: 600px) {
+    section { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+}</code></pre>
+            <h3>Ejercicio 3</h3>
+            <pre><code>.fila { display: flex; flex-wrap: wrap; gap: 1rem; }
+.fila img { max-width: 100%; height: auto; flex: 1 1 200px; }
+.fila p   { flex: 1 1 200px; }</code></pre>
+            <p>La imagen y el texto se reparten el ancho y, en pantallas
+                pequeñas, se apilan en vertical porque el wrap los baja.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Responsive = base mobile-first + mejoras con
+                <code>@media (min-width)</code> + anchos fluidos + imágenes
+                con <code>max-width: 100%</code> + la meta viewport. Los
+                breakpoints se eligen por contenido, no por dispositivos.</p>
+            <ul>
+                <li>[ ] Escribo una página mobile-first desde cero.</li>
+                <li>[ ] Explico min-width vs max-width.</li>
+                <li>[ ] Evito los seis errores del apartado anterior.</li>
+            </ul>
+            <p>Siguiente: <a href="13-pseudoclases-elementos.html">Pseudo-clases
+                y elementos</a>. Vuelve al <a href="../index.html">índice del
+                curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="11-grid-practica.html">Anterior: Grid práctica</a> |
+                <a href="13-pseudoclases-elementos.html">Siguiente: Pseudo-clases →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>
