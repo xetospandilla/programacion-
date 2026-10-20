@@ -19,3 +19,4 @@ int main(){
 // para 6 no devuelve nada
 // para 9 devuelve +
 // para 11 devuelve +
+

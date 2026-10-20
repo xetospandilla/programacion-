@@ -1,36 +1,3 @@
-/*
-
-#include <cmath>
-#include <iostream>
-
-using namespace std;
-
-int main() 
-{
-	
-	float a, c, b, x1 = 0, x2, disc;
-
-	cout << "Este programa resuelve una ecuacion de segundo grado de la forma" << endl;
-	cout << "a x^2 + b x + c = 0" << endl;
-	cout << "... Cuidado!. Contiene errores logicos y de ejecucion ..." << endl;
-	
-	cout << "Inroduce los tres coeficientes en orden (a, b, c)" << endl;
-	cin >> a;
-	cin >> b;
-	cin >> c;
-
-    disc = b * b - 4 * a * c;
-	x1 = (-b + sqrt(disc)) / (2 * a);
-    x2 = (-b + sqrt(disc)) / (2 * a); 
-
-    cout << "Las raices son: " << endl;
-	cout << x1 << " y " << x2;
-
-	return 0;
-}
-    
-*/
-
 #include <iostream>
 #include <cmath>
 using namespace std;
