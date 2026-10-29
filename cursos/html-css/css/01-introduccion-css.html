@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a CSS</title>
+    <!-- Hoja EXTERNA de demostración: pertenece a la zona .demo-externa.
+         Es el tercer método que estudia esta lección. -->
+    <link rel="stylesheet" href="ejemplos/01-introduccion-css.css">
+    <style>
+        /* Maquetación didáctica de la lección (marcos, avisos, soluciones).
+           No son estilos que se estudien aquí: son de soporte. */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        /* Bloque style de demostración (segundo método de esta lección):
+           afecta solo a la zona .demo-style. */
+        .demo-style p {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 11: Introducción a CSS</h1>
+        <p>CSS es el lenguaje que pinta las páginas: colores, tamaños,
+            márgenes y tipografía. Aquí veremos qué es, cómo se escribe una
+            regla y las tres formas de aplicarlo.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Explicar qué es CSS y qué problema resuelve.</li>
+                <li>Reconocer la anatomía de una regla: selector, propiedad y
+                    valor.</li>
+                <li>Aplicar CSS en línea, en bloque <code>style</code> y en
+                    hoja externa.</li>
+                <li>Razonar por qué la hoja externa es la forma recomendada.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>El bloque HTML de este curso, sobre todo
+                <a href="../html/00-introduccion-html.html">la introducción</a> (qué es
+                una etiqueta y sus atributos) y
+                <a href="../html/07-semantica.html">la semántica estructural</a>
+                (las zonas <code>header</code>, <code>main</code>,
+                <code>footer</code>...).</p>
+        </section>
+
+        <section>
+            <h2>1. ¿Qué es CSS?</h2>
+            <p><strong>CSS</strong> significa <em>Cascading Style Sheets</em>
+                (Hojas de Estilo en Cascada). Es el lenguaje con el que se
+                describe <strong>cómo se ve</strong> el contenido que marcó
+                HTML: colores, tipografía, espacios, bordes, tamaños... HTML
+                dice <em>qué hay</em>; CSS dice <em>cómo se presenta</em>.</p>
+            <p>CSS no se ejecuta: el navegador lo lee y lo aplica. Y funciona
+                por <strong>reglas</strong>: cada regla elige qué elementos
+                pintar (el <em>selector</em>) y con qué estilo
+                (propiedades y valores).</p>
+            <pre><code>/* Anatomía de una regla CSS */
+selector {
+    propiedad: valor;
+}</code></pre>
+            <p>Ejemplo real:</p>
+            <pre><code>p {
+    color: #2e7d32;   /* el texto de todos los &lt;p&gt; será verde */
+    font-size: 1.1rem;
+}</code></pre>
+            <p>El selector <code>p</code> elige todos los párrafos; la pareja
+                <code>propiedad: valor</code> es una <strong>declaración</strong>;
+                el conjunto de declaraciones entre llaves es el
+                <strong>bloque</strong>.</p>
+        </section>
+
+        <section>
+            <h2>2. Tres formas de aplicar CSS</h2>
+            <h3>a) Estilo en línea (atributo <code>style</code>)</h3>
+            <p>Se escribe directamente en la etiqueta:</p>
+            <pre><code>&lt;p style="color: #b5332e; font-weight: bold;"&gt;
+    Este párrafo va en rojo y negrita.
+&lt;/p&gt;</code></pre>
+            <p style="color: #b5332e; font-weight: bold;">
+                Este párrafo va en rojo y negrita.
+            </p>
+            <p>Es lo más directo, pero mezcla presentación con contenido y no
+                se reutiliza: solo vale para esa etiqueta.</p>
+
+            <h3>b) Bloque <code>&lt;style&gt;</code> en el <code>head</code></h3>
+            <p>Agrupa varias reglas dentro de la propia página:</p>
+            <pre><code>&lt;style&gt;
+    .demo-style p {
+        color: #2e7d32;
+        font-weight: bold;
+    }
+&lt;/style&gt;</code></pre>
+            <p>Está en el <code>head</code> de esta página (con un comentario
+                de demostración). Resultado:</p>
+            <div class="demo-style">
+                <p>Este párrafo lo pinta el bloque style: verde y negrita.</p>
+            </div>
+            <p>Sirve para páginas sueltas, pero los estilos no se comparten
+                entre páginas.</p>
+
+            <h3>c) Hoja externa con <code>&lt;link&gt;</code></h3>
+            <pre><code>&lt;link rel="stylesheet" href="ejemplos/01-introduccion-css.css"&gt;</code></pre>
+            <p>Las reglas viven en un archivo <code>.css</code> aparte y se
+                enlazan desde el <code>head</code>. Esta página ya lo hace:
+                la zona de abajo la pinta la hoja externa.</p>
+            <div class="demo-externa">
+                <p>Párrafo coloreado por la hoja externa: azul y con borde
+                    izquierdo.</p>
+                <p>Otro párrafo: la regla <code>.demo-externa p</code> los
+                    elige a todos.</p>
+                <p class="destacado">Este lleva la clase «destacado»: la hoja
+                    le añade fondo y negrita.</p>
+                <p>Un <a href="../index.html">enlace a la portada del curso</a>
+                    también lo pinta la hoja externa (color burdeos).</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Por qué conviene la hoja externa</h2>
+            <ul>
+                <li><strong>Separación de responsabilidades:</strong> el HTML
+                    queda limpio de estilos; si mañana cambias el diseño, tocas
+                    solo el <code>.css</code>.</li>
+                <li><strong>Reutilización:</strong> el mismo archivo se enlaza
+                    desde todas las páginas; el diseño es uniforme.</li>
+                <li><strong>Mantenimiento:</strong> una sola fuente de verdad;
+                    no hay que buscar estilos esparcidos por 20 páginas.</li>
+                <li><strong>Rendimiento:</strong> el navegador descarga la hoja
+                    una vez y la reutiliza (caché) en lugar de repetir estilos
+                    en cada documento.</li>
+            </ul>
+            <p>El estilo en línea queda reservado a cosas puntualísimas (y
+                suele ser señal de que conviene una clase); el bloque
+                <code>style</code>, a ejercicios o prototipos sueltos.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Confundir el orden de propiedad y valor:</strong>
+                    siempre <code>propiedad: valor</code> con dos puntos y
+                    punto y coma al final de cada declaración.</li>
+                <li><strong>Olvidar las llaves o el punto y coma:</strong> la
+                    regla se rompe. Pon <code>}</code> al final y un
+                    <code>;</code> tras cada declaración.</li>
+                <li><strong>Escribir el CSS en el <code>body</code>:</strong>
+                    los <code>&lt;style&gt;</code> van en el
+                    <code>head</code>, y las hojas se enlazan también ahí.</li>
+                <li><strong>Ruta del <code>link</code> rota:</strong> el
+                    navegador no muestra la hoja. Comprueba que la ruta
+                    relativa hacia el <code>.css</code> es correcta (aquí:
+                    <code>ejemplos/01-introduccion-css.css</code>).</li>
+                <li><strong>Estilos en línea por todas partes:</strong>
+                    funciona pero no escala. Aprende a usar clases desde ya.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Crea <code>mi-primer-css.html</code> con estructura HTML válida
+                (recuerda la de la lección 0 del curso).</p>
+            <ol>
+                <li><strong>Fácil — en línea:</strong> un párrafo con
+                    <code>style="color: #d97706; font-size: 1.3rem;"</code>.
+                    Ábrelo: el texto debe verse naranja y más grande.</li>
+                <li><strong>Medio — bloque style:</strong> añade un
+                    <code>&lt;style&gt;</code> en el <code>head</code> con una
+                    regla <code>p</code> que ponga color a los párrafos y otra
+                    a un encabezado <code>h1</code>.</li>
+                <li><strong>Difícil — hoja externa:</strong> crea
+                    <code>mis-estilos.css</code> al lado de la página, escribe
+                    una regla <code>body</code> (fondo claro y tipografía
+                    sans-serif) y enlázala con <code>&lt;link&gt;</code> desde
+                    el <code>head</code>. Comprueba que se aplica.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>&lt;p style="color: #d97706; font-size: 1.3rem;"&gt;
+    Hola con estilo en línea.
+&lt;/p&gt;</code></pre>
+            <h3>Ejercicio 2</h3>
+            <pre><code>&lt;style&gt;
+    h1 { color: #1f4e79; }
+    p  { color: #37474f; }
+&lt;/style&gt;</code></pre>
+            <p>Las reglas van en el <code>head</code>, antes del
+                <code>body</code>.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>&lt;link rel="stylesheet" href="mis-estilos.css"&gt;</code></pre>
+            <p>Y en <code>mis-estilos.css</code>:</p>
+            <pre><code>body {
+    background-color: #fafafa;
+    font-family: sans-serif;
+}</code></pre>
+            <p>La hoja vive en la misma carpeta que la página: la ruta es solo
+                el nombre del archivo.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>CSS pinta el contenido de HTML mediante reglas
+                (selector + propiedades). Puede aplicarse en línea, en bloque
+                <code>style</code> o en hoja externa enlazada; la hoja externa
+                es la recomendada porque separa, reutiliza y facilita el
+                mantenimiento.</p>
+            <ul>
+                <li>[ ] Escribo una regla CSS correcta de memoria.</li>
+                <li>[ ] Aplico CSS por los tres métodos y sé cuándo usar cada
+                    uno.</li>
+                <li>[ ] Enlazo una hoja externa con <code>link</code>.</li>
+            </ul>
+            <p>Siguiente: <a href="02-selectores.html">Selectores</a>. Vuelve
+                al <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="02-selectores.html">Siguiente: Selectores →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

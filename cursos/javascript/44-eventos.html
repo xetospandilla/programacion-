@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lección 44 - Eventos y lista de tareas</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      line-height: 1.5;
+      max-width: 42rem;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    section { border: 1px solid #ccc; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    .resaltada { background: #dbeafe; border-left: 4px solid #2563eb; padding: 0.4rem; }
+    .completada { text-decoration: line-through; color: #888; }
+    .oculto { display: none; }
+    .resultado { color: #555; font-size: 0.9rem; }
+    #mensaje-error { color: #b91c1c; font-weight: bold; }
+    code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+    li { margin-bottom: 0.4rem; }
+    li button { margin-left: 0.4rem; }
+  </style>
+  <!-- defer: el script se ejecuta cuando el DOM ya está construido -->
+  <script src="44-eventos.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Lección 44: Eventos</h1>
+    <p>
+      La <strong>teoría</strong> está en los comentarios de
+      <a href="44-eventos.js">44-eventos.js</a>; esta página es la
+      <strong>práctica interativa</strong>. La sección 3 es la estrella:
+      una lista de tareas funcional.
+    </p>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. Eventos de ratón</h2>
+      <p id="zona-raton">Pasa el ratón por encima de este recuadro.</p>
+      <p class="resultado">Resultado esperado: al entrar, el recuadro se
+        resalta (clase <code>resaltada</code>); al salir, se quita. Se usan
+        los eventos <code>mouseenter</code> y <code>mouseleave</code>.</p>
+    </section>
+
+    <section>
+      <h2>2. Eventos de teclado</h2>
+      <label for="campo-teclado">Escribe algo:</label>
+      <input type="text" id="campo-teclado" placeholder="Pulsa cualquier tecla">
+      <p id="resultado-teclado" class="resultado">Aquí aparecerá la última
+        tecla pulsada (evento <code>keydown</code>).</p>
+    </section>
+
+    <section>
+      <h2>3. Formulario y validación: la lista de tareas</h2>
+      <form id="formulario-tarea" novalidate>
+        <label for="entrada-tarea">Nueva tarea:</label>
+        <input type="text" id="entrada-tarea" placeholder="Ej: repasar promesas">
+        <button type="submit" id="boton-anadir-tarea">Añadir</button>
+      </form>
+      <p id="mensaje-error" class="oculto">La tarea no puede estar vacía.</p>
+      <p class="resultado">Resultado esperado: escribir una tarea y pulsar
+        Enter o "Añadir" la inserta en la lista; una entrada vacía muestra
+        el mensaje de error; cada tarea tiene botones para completarla
+        (tachada) y eliminarla.</p>
+      <ul id="lista-tareas"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="INDEX.md">Volver al índice del curso</a></p>
+  </footer>
+</body>
+</html>

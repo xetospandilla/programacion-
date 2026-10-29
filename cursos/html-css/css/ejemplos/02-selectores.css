@@ -1,0 +1,42 @@
+/* Hoja externa de demostración de la lección 02-selectores.html.
+   Cada regla demuestra un selector. Todas van acotadas a #zoo-demo
+   (salvo las de clase e ID, que son únicas) para no estropear el resto
+   de la lección. */
+.ave {
+    color: #1565c0;
+    font-weight: bold;
+}
+
+#mascota {
+    border: 2px dashed #2e7d32;
+    padding: 0.2rem 0.5rem;
+}
+
+#zoo-demo p {
+    margin: 0.2rem 0;
+}
+
+#zoo-demo div > p {
+    background-color: #f3f8f3;
+}
+
+#zoo-demo h3 + p {
+    color: #6a1b9a;
+}
+
+/* Selectores de atributo: el primer enlace que empiece por "02-" */
+a[href^="02-"] {
+    background-color: #fff8dc;
+}
+
+input[type="text"] {
+    border: 2px solid #b0bec5;
+    padding: 0.2rem;
+}
+
+/* Agrupación: mismas reglas para dos selectores */
+#zoo-demo h2,
+#zoo-demo h3 {
+    color: #37474f;
+    font-family: Georgia, serif;
+}

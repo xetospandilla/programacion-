@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables CSS</title>
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+
+        /* --- Variables del "tema" de la lección --- */
+        :root {
+            --color-primario: #1f4e79;
+            --color-acento: #b5332e;
+            --color-fondo-suave: #f0f4f8;
+            --radio: 6px;
+            --espacio: 0.6rem;
+        }
+
+        /* --- Demostraciones: todo usa las variables --- */
+        .v-boton {
+            background: var(--color-primario);
+            color: #fff;
+            border: 0;
+            border-radius: var(--radio);
+            padding: var(--espacio) calc(var(--espacio) * 2);
+            font: inherit;
+        }
+        .v-tarjeta {
+            border: 1px solid var(--color-primario);
+            border-radius: var(--radio);
+            background: var(--color-fondo-suave);
+            padding: var(--espacio);
+            margin: var(--espacio) 0;
+        }
+        .v-tarjeta h3 { color: var(--color-acento); margin: 0 0 var(--espacio); }
+        /* Reasignar una variable en un bloque la cambia SOLO para ese bloque */
+        .v-zona-especial { --color-acento: #2e7d32; }
+        .v-zona-especial h3 { color: var(--color-acento); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 24: Variables CSS</h1>
+        <p>Guardar valores con nombre (colores, espacios, radios) y usarlos
+            con <code>var()</code>: cambiar el tema de todo el sitio tocando
+            solo la definición.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Definir propiedades personalizadas en <code>:root</code>.</li>
+                <li>Usarlas con <code>var()</code>, con valor por defecto.</li>
+                <li>Entender su herencia y reasignación local.</li>
+                <li>Mantener colores y espacios coherentes sin repetirlos.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>Selectores (<a href="02-selectores.html">02</a>) y cascada
+                (<a href="03-cascada-especificidad.html">03</a>): las
+                variables se heredan y se reasignan como el resto de
+                propiedades.</p>
+        </section>
+
+        <section>
+            <h2>1. Definir y usar</h2>
+            <p>Una variable CSS se escribe con dos guiones y un nombre
+                (<code>--color-primario</code>), y se define en un selector
+                normal. En <code>:root</code> queda disponible para toda la
+                página:</p>
+            <pre><code>:root {
+    --color-primario: #1f4e79;
+    --color-acento: #b5332e;
+    --radio: 6px;
+    --espacio: 0.6rem;
+}
+
+.boton {
+    background: var(--color-primario);
+    border-radius: var(--radio);
+    padding: var(--espacio) calc(var(--espacio) * 2);
+}</code></pre>
+            <p>Con <code>var()</code> se lee el valor; el segundo argumento
+                es el valor por defecto si la variable no existe:
+                <code>var(--color-primario, #333)</code>.</p>
+        </section>
+
+        <section>
+            <h2>2. Demostración en vivo</h2>
+            <div class="demo">
+                <div class="v-tarjeta">
+                    <h3>Tarjeta con variables</h3>
+                    <p>Fondo, borde, radio y margen vienen de
+                        <code>:root</code>. El título usa
+                        <code>--color-acento</code>.</p>
+                    <button class="v-boton" type="button">Botón con el color
+                        primario</button>
+                </div>
+                <div class="v-tarjeta v-zona-especial">
+                    <h3>Zona especial</h3>
+                    <p>Aquí se reasigna
+                        <code>--color-acento: #2e7d32</code> en el bloque: el
+                        título de ESTA tarjeta cambia, el de la otra no.</p>
+                </div>
+            </div>
+            <p>Cambia <code>--color-primario</code> en <code>:root</code> de
+                esta página y observa que el botón y los bordes cambian a la
+                vez: eso es la coherencia sin repetir valores.</p>
+        </section>
+
+        <section>
+            <h2>3. Herencia y reasignación</h2>
+            <p>Las variables <strong>se heredan</strong> como cualquier
+                propiedad: un valor definido en <code>:root</code> llega a
+                todos los descendientes; redefinirlo en un bloque afecta solo
+                a ese bloque y a sus hijos.</p>
+            <pre><code>.zona-especial { --color-acento: #2e7d32; }</code></pre>
+            <p>Esta característica es la base de los <strong>temas</strong>
+                (claro/oscuro): se redefine un puñado de variables en una
+                clase (o en un media query de
+                <code>prefers-color-scheme</code>) y todo el sitio cambia.</p>
+            <div class="aviso">
+                <p><strong>Nombres con sentido:</strong> llama a las variables
+                    por SU FUNCIÓN (<code>--color-primario</code>,
+                    <code>--espacio</code>), no por su valor
+                    (<code>--azul-1f4e79</code>). Así el tema se puede
+                    cambiar sin tocar nombres.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Nombre sin guiones dobles:</strong>
+                    <code>color-primario</code> no es una variable;
+                    <code>--color-primario</code> sí.</li>
+                <li><strong>Olvidar el paréntesis de var():</strong>
+                    <code>var(--x</code> sin cerrar invalida la
+                    declaración. <code>var(--x, #000)</code>.</li>
+                <li><strong>Definir la variable en un selector que no cubre
+                    al elemento:</strong> si el elemento no es descendiente,
+                    no la recibirá como propia; usa <code>:root</code> para
+                    lo global.</li>
+                <li><strong>Usar la variable como si fuera valor de la
+                    propiedad en que se usa:</strong> una variable guarda
+                    VALORES, no declaraciones: <code>--borde: border:...;</code>
+                    no funciona como propiedad.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-tema.html</code>.</p>
+            <ol>
+                <li><strong>Fácil — tres variables:</strong> define en
+                    <code>:root</code> un color de fondo, uno de texto y un
+                    radio; aplícalos a un <code>body</code> y una tarjeta.</li>
+                <li><strong>Medio — valor por defecto:</strong> usa
+                    <code>var(--color-que-no-existe, #123456)</code> en un
+                    elemento y comprueba que usa el respaldo.</li>
+                <li><strong>Difícil — reasignación local:</strong> una clase
+                    que cambie <code>--color-primario</code> solo dentro de
+                    un bloque, y explica con un comentario por qué la otra
+                    tarjeta no cambia.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>:root { --fondo: #fafafa; --texto: #222; --radio: 6px; }
+body { background: var(--fondo); color: var(--texto); }
+.tarjeta { border-radius: var(--radio); }</code></pre>
+            <h3>Ejercicio 2</h3>
+            <pre><code>.respaldo { color: var(--color-que-no-existe, #123456); }</code></pre>
+            <p>El navegador usa <code>#123456</code> porque la variable no
+                está definida en ningún ancestro.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>.especial { --color-primario: #2e7d32; }
+/* Solo este bloque y sus hijos leen el nuevo valor: la herencia
+   empieza aquí y no "sube" al resto de la página. */</code></pre>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Las propiedades personalizadas (<code>--nombre</code>) se
+                definen normalmente, se heredan y se leen con
+                <code>var()</code>. Definidas en <code>:root</code> son
+                globales; reasignadas en un bloque, locales. Son la base de
+                los temas y de la coherencia visual.</p>
+            <ul>
+                <li>[ ] Defino variables con nombre funcional.</li>
+                <li>[ ] Las leo con var() y con respaldo.</li>
+                <li>[ ] Hago una reasignación local razonada.</li>
+            </ul>
+            <p>Siguiente: <a href="15-accesibilidad-depuracion.html">Accesibilidad
+                y depuración</a>. Vuelve al <a href="../index.html">índice
+                del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="13-pseudoclases-elementos.html">Anterior: Pseudo-clases</a> |
+                <a href="15-accesibilidad-depuracion.html">Siguiente: Accesibilidad →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

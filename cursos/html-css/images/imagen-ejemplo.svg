@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Paisaje ilustrado de montañas con sol y río">
+  <!-- Cielo -->
+  <rect x="0" y="0" width="400" height="300" fill="#aee3f7"/>
+
+  <!-- Sol -->
+  <circle cx="330" cy="60" r="35" fill="#ffd166"/>
+
+  <!-- Montañas del fondo -->
+  <polygon points="0,300 120,120 240,300" fill="#7fb3a3"/>
+  <polygon points="160,300 280,90 400,300" fill="#5d9c85"/>
+
+  <!-- Montaña del frente -->
+  <polygon points="60,300 200,160 340,300" fill="#3f7d63"/>
+
+  <!-- Río -->
+  <path d="M0,240 C 80,230 140,260 200,255 C 270,250 330,270 400,262 L400,300 L0,300 Z" fill="#4aa8d8"/>
+
+  <!-- Árboles sencillos -->
+  <circle cx="75" cy="215" r="16" fill="#2d6a4f"/>
+  <rect x="72" y="228" width="6" height="18" fill="#7b4b2a"/>
+  <circle cx="345" cy="230" r="14" fill="#2d6a4f"/>
+  <rect x="342" y="241" width="6" height="16" fill="#7b4b2a"/>
+</svg>

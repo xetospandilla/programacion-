@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios</title>
+    <style>
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        form.demo { border: 1px solid #bbb; padding: 0.8rem; margin: 0.5rem 0; }
+        form.demo label { display: block; margin-top: 0.5rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 08: Formularios</h1>
+        <p>Los formularios recogen datos de quien visita la página: textos,
+            contraseñas, fechas, elecciones... Aquí veremos cada elemento, sus
+            atributos y un formulario demostrativo que funciona sin backend.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Identificar las partes de un formulario:
+                    <code>form</code>, <code>label</code>, <code>input</code>,
+                    <code>textarea</code>, <code>select</code>,
+                    <code>button</code>.</li>
+                <li>Dominar los atributos <code>name</code>, <code>value</code>
+                    y <code>required</code>, y los tipos de <code>input</code>.</li>
+                <li>Agrupar campos con <code>fieldset</code> y
+                    <code>legend</code>.</li>
+                <li>Usar la validación nativa del navegador.</li>
+                <li>Entender qué pasa al enviar un formulario sin backend.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>Las lecciones de <a href="07-semantica.html">semántica</a> y
+                <a href="01-encabezados-parrafos.html">encabezados</a>. Los formularios
+                funcionan con HTML puro; el procesado del servidor sale del
+                alcance de este bloque.</p>
+        </section>
+
+        <section>
+            <h2>1. ¿Qué le ocurre al formulario al enviarlo?</h2>
+            <p>Un formulario <strong>sin backend</strong> (sin un programa en
+                el servidor que reciba los datos) hace esto: el navegador
+                primero valida los campos y, si todo es correcto, recarga la
+                página llevando los datos en la barra de direcciones cuando
+                <code>method="get"</code>. Por ejemplo, al enviar el campo
+                <code>name="usuario"</code> con el valor "ana", la URL acaba
+                en <code>?usuario=ana</code>. Así puedes ver qué se envía, sin
+                necesitar ningún servidor.</p>
+            <p>Con <code>method="post"</code> los datos viajarían "dentro" de la
+                petición, invisibles en la URL; pero sin un servidor que la
+                procese no verás nada. Por eso, en esta lección todos los
+                ejemplos funcionales usan <code>get</code>.</p>
+        </section>
+
+        <section>
+            <h2>2. La etiqueta <code>form</code></h2>
+            <pre><code>&lt;form action="" method="get"&gt;
+    ...
+&lt;/form&gt;</code></pre>
+            <ul>
+                <li><code>action</code>: a qué dirección se envían los datos.
+                    Vacío significa "esta misma página".</li>
+                <li><code>method</code>: <code>get</code> (datos visibles en la
+                    URL) o <code>post</code> (ocultos, para datos sensibles o
+                    largos).</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>3. <code>label</code>: la etiqueta del campo</h2>
+            <p>Cada campo debe tener su <code>&lt;label&gt;</code> asociado con
+                <code>for</code>, y el campo el mismo valor en <code>id</code>.
+                Al hacer clic en el texto de la etiqueta, el cursor salta al
+                campo; los lectores de pantalla anuncian el nombre del campo.</p>
+            <pre><code>&lt;label for="nombre"&gt;Nombre&lt;/label&gt;
+&lt;input type="text" id="nombre" name="nombre"&gt;</code></pre>
+            <p>Esto se ve así:</p>
+            <p><label for="nombre-ejemplo">Nombre</label>
+                <input type="text" id="nombre-ejemplo" name="nombre-ejemplo"></p>
+        </section>
+
+        <section>
+            <h2>4. <code>input</code>: los tipos y sus atributos</h2>
+            <p><code>&lt;input&gt;</code> es la etiqueta vacía más versátil del
+                formulario. El atributo clave es <code>type</code>:</p>
+            <ul>
+                <li><code>text</code>: texto libre de una línea.</li>
+                <li><code>email</code>: texto que, además, debe tener formato de
+                    correo.</li>
+                <li><code>password</code>: como text pero con los caracteres
+                    ocultos.</li>
+                <li><code>number</code>: solo números (con
+                    <code>min</code>/<code>max</code> opcionales).</li>
+                <li><code>date</code>: fecha con selector del navegador.</li>
+                <li><code>checkbox</code>: casilla de marcar (por ejemplo,
+                    aceptar condiciones).</li>
+                <li><code>radio</code>: elegir una opción entre varias.</li>
+                <li><code>file</code>: seleccionar un archivo local.</li>
+                <li><code>submit</code>: botón que envía el formulario.</li>
+                <li><code>reset</code>: botón que limpia los campos.</li>
+            </ul>
+            <p>Y los atributos más usados:</p>
+            <ul>
+                <li><code>name</code>: nombre lógico del campo. <strong>Es el
+                    identificador que recibe el servidor</strong> (o el que ves
+                    en la URL); sin <code>name</code>, el valor no se envía.</li>
+                <li><code>value</code>: valor por defecto (o el que viaja,
+                    para radio y checkbox).</li>
+                <li><code>required</code>: campo obligatorio; el navegador no
+                    envía si está vacío.</li>
+                <li><code>placeholder</code>: texto de ejemplo que desaparece al
+                    escribir. No sustituye al <code>label</code>.</li>
+                <li><code>readonly</code>: se ve pero no se edita (sí se envía).</li>
+                <li><code>disabled</code>: desactivado y no se envía.</li>
+            </ul>
+            <p>Ejemplo vivo con varios tipos:</p>
+            <pre><code>&lt;form action="" method="get"&gt;
+    &lt;p&gt;&lt;label&gt;Correo: &lt;input type="email" name="correo" required
+                 placeholder="tunombre@ejemplo.com"&gt;&lt;/label&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;label&gt;Contraseña: &lt;input type="password" name="clave"&gt;&lt;/label&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;label&gt;Edad: &lt;input type="number" name="edad" min="0" max="120"&gt;&lt;/label&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;input type="checkbox" id="aviso" name="aviso"&gt;
+        &lt;label for="aviso"&gt;Acepto el aviso legal&lt;/label&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;input type="submit" value="Enviar"&gt;&lt;/p&gt;
+&lt;/form&gt;</code></pre>
+            <form action="" method="get">
+                <p><label>Correo: <input type="email" name="correo" required
+                    placeholder="tunombre@ejemplo.com"></label></p>
+                <p><label>Contraseña: <input type="password" name="clave"></label></p>
+                <p><label>Edad: <input type="number" name="edad" min="0" max="120"></label></p>
+                <p><input type="checkbox" id="aviso" name="aviso">
+                    <label for="aviso">Acepto el aviso legal</label></p>
+                <p><input type="submit" value="Enviar"></p>
+            </form>
+            <p>Prueba a enviarlo sin correo: el navegador bloquea el envío y
+                muestra el mensaje de validación nativa.</p>
+        </section>
+
+        <section>
+            <h2>5. <code>textarea</code> y <code>select</code></h2>
+            <p><code>&lt;textarea&gt;</code> es el campo multilínea. No es
+                vacía: el contenido por defecto va entre las etiquetas.</p>
+            <pre><code>&lt;label for="mensaje"&gt;Mensaje:&lt;/label&gt;
+&lt;textarea id="mensaje" name="mensaje" rows="4" cols="40"&gt;
+Texto inicial opcional
+&lt;/textarea&gt;</code></pre>
+            <p><code>&lt;select&gt;</code> es la lista desplegable; cada opción
+                va en <code>&lt;option&gt;</code> (el atributo de cada opción
+                es su <code>value</code>; el texto visible va dentro).</p>
+            <pre><code>&lt;label for="pais"&gt;País:&lt;/label&gt;
+&lt;select id="pais" name="pais"&gt;
+    &lt;option value="es"&gt;España&lt;/option&gt;
+    &lt;option value="ar"&gt;Argentina&lt;/option&gt;
+    &lt;option value="mx"&gt;México&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+            <p><label for="pais-ejemplo">País:</label>
+                <select id="pais-ejemplo" name="pais-ejemplo">
+                    <option value="es">España</option>
+                    <option value="ar">Argentina</option>
+                    <option value="mx">México</option>
+                </select></p>
+        </section>
+
+        <section>
+            <h2>6. <code>button</code>: submit, reset y button</h2>
+            <p>El elemento <code>&lt;button&gt;</code> admite contenido propio
+                (texto, iconos) y su atributo <code>type</code> decide su
+                papel:</p>
+            <ul>
+                <li><code>type="submit"</code> (por defecto): envía el
+                    formulario.</li>
+                <li><code>type="reset"</code>: vuelve los campos a su valor
+                    inicial.</li>
+                <li><code>type="button"</code>: no hace nada solo; se usa con
+                    JavaScript (como en los ejercicios del curso de
+                    JavaScript).</li>
+            </ul>
+            <pre><code>&lt;button type="submit"&gt;Enviar ahora&lt;/button&gt;
+&lt;button type="reset"&gt;Borrar&lt;/button&gt;</code></pre>
+        </section>
+
+        <section>
+            <h2>7. Agrupar con <code>fieldset</code> y <code>legend</code></h2>
+            <p>Para formularios largos, <code>&lt;fieldset&gt;</code> agrupa
+                campos y <code>&lt;legend&gt;</code> pone el título del grupo.
+                Mejoran el orden visual y la accesibilidad (el lector de
+                pantalla anuncia el grupo al entrar en él).</p>
+            <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Datos personales&lt;/legend&gt;
+    &lt;label for="nombrefs"&gt;Nombre:&lt;/label&gt;
+    &lt;input type="text" id="nombrefs" name="nombre"&gt;
+    &lt;label for="emailfs"&gt;Correo:&lt;/label&gt;
+    &lt;input type="email" id="emailfs" name="correo"&gt;
+&lt;/fieldset&gt;</code></pre>
+        </section>
+
+        <section>
+            <h2>8. Validación nativa y accesibilidad</h2>
+            <p>Sin escribir JavaScript, el navegador ya valida si usas los
+                atributos correctos:</p>
+            <ul>
+                <li><code>required</code>: campo obligatorio.</li>
+                <li><code>type="email"</code>: formato de correo.</li>
+                <li><code>min</code>/<code>max</code> (en
+                    <code>number</code> o <code>date</code>): límites.</li>
+                <li><code>minlength</code>/<code>maxlength</code>: longitud del
+                    texto.</li>
+                <li><code>pattern</code>: una expresión regular, por ejemplo
+                    <code>pattern="[0-9]{5}"</code> para un código postal de
+                    cinco cifras.</li>
+            </ul>
+            <p>Para que todo el mundo pueda rellenar el formulario:</p>
+            <ul>
+                <li>Cada campo con su <code>label</code> asociado (nunca solo
+                    <code>placeholder</code> como etiqueta).</li>
+                <li>Grupos de radio/checkbox con <code>fieldset</code> y
+                    <code>legend</code> cuando tengan un título común.</li>
+                <li>No uses el color como única señal de error; el navegador
+                    también muestra texto.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>9. Formulario demostrativo sin backend</h2>
+            <p>Este es el formulario de ejemplo (el mismo de siempre, ampliado
+                con <code>label</code>, <code>select</code> y
+                <code>fieldset</code>). Al pulsar "Enviar", el navegador valida
+                primero; si todo es correcto, recarga esta página y los datos
+                aparecen en la URL (porque <code>method="get"</code> y no hay
+                servidor que los recoja).</p>
+            <form class="demo" action="" method="get">
+                <fieldset>
+                    <legend>Datos personales</legend>
+                    <label for="username">Nombre de usuario
+                        <em>(obligatorio)</em>:</label>
+                    <input type="text" id="username" name="username" required
+                        placeholder="ej. alvaro">
+                    <!-- required hace que el campo sea obligatorio -->
+                    <label for="useremail">Correo electrónico:</label>
+                    <input type="email" id="useremail" name="useremail"
+                        placeholder="tu@correo.com">
+                    <!-- type="email" solo deja enviar si contiene un email.
+                         name="" identifica el campo ante el servidor. -->
+                    <label for="clave2">Contraseña:</label>
+                    <input type="password" id="clave2" name="contraseña"
+                        placeholder="····" minlength="4">
+                    <label for="pais2">País:</label>
+                    <select id="pais2" name="pais">
+                        <option value="es">España</option>
+                        <option value="ar">Argentina</option>
+                        <option value="mx">México</option>
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <legend>Condiciones y preferencias</legend>
+                    <p><input type="checkbox" id="terminos" name="terminos" required>
+                        <label for="terminos">Acepto los términos y
+                        condiciones</label></p>
+                    <p><label for="notificaciones">Recibir avisos por
+                        correo:</label>
+                        <input type="radio" id="notif-si" name="avisos" value="si">
+                        <label for="notif-si">Sí</label>
+                        <input type="radio" id="notif-no" name="avisos" value="no">
+                        <label for="notif-no">No</label></p>
+                </fieldset>
+                <p><label for="fecha">Fecha preferida:</label>
+                    <input type="date" id="fecha" name="fecha"></p>
+                <p><label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" rows="3" cols="40"></textarea></p>
+                <p><label for="documento">Curriculum (archivo):</label>
+                    <input type="file" id="documento" name="documento"></p>
+                <p><button type="submit">Enviar</button>
+                    <button type="reset">Borrar</button></p>
+            </form>
+            <div class="aviso">
+                <p><strong>Prueba guiada:</strong> deja el correo vacío y pulsa
+                    "Enviar": el navegador marca el campo obligatorio. Rellena
+                    el correo con texto sin @ y vuelve a enviar: ahora avisa
+                    del formato. Cuando todo sea válido, observa la barra de
+                    direcciones: verás <code>?username=...&amp;useremail=...</code>.
+                    Eso es lo que viajaría a un servidor real.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Campo sin <code>name</code>:</strong> su valor no
+                    se envía. Revisa que todos los campos que quieres enviar
+                    tengan <code>name</code>.</li>
+                <li><strong><code>label</code> sin <code>for</code> o
+                    <code>id</code> distinto:</strong> el clic no activa el
+                    campo y la accesibilidad se rompe. Haz coincidir
+                    <code>for</code> del label con <code>id</code> del input.</li>
+                <li><strong>Varios <code>radio</code> incompatibles:</strong>
+                    para que elegir una opción desmarque las demás, todos deben
+                    tener el MISMO <code>name</code>.</li>
+                <li><strong>Botón <code>&lt;a&gt;</code> dentro de
+                    <code>&lt;button&gt;</code>:</strong> un botón de enlace se
+                    escribe con <code>&lt;a&gt;</code> (o
+                    <code>&lt;button type="button"&gt;</code> + JS), no
+                    anidando un enlace dentro de un submit.</li>
+                <li><strong>Depender solo de <code>placeholder</code>:</strong>
+                    el texto de ejemplo desaparece al escribir y no sirve como
+                    etiqueta accesible. Usa <code>label</code>.</li>
+                <li><strong>Validar solo con JavaScript:</strong> la validación
+                    nativa cubre los casos comunes sin código. Combínala con
+                    las reglas del servidor, no con scripts innecesarios.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Crea <code>mi-formulario.html</code>.</p>
+            <ol>
+                <li><strong>Fácil — registro:</strong> formulario con nombre
+                    (text, obligatorio), correo (email, obligatorio) y botón
+                    submit. Cada campo con su <code>label</code> y
+                    <code>name</code>.</li>
+                <li><strong>Medio — agrupar y elegir:</strong> añade un
+                    <code>fieldset</code> "Preferencias" con una lista
+                    desplegable (<code>select</code> de tres colores) y dos
+                    radios del mismo <code>name</code> ("Sí"/"No").</li>
+                <li><strong>Difícil — validación completa:</strong> añade un
+                    campo de comentarios (<code>textarea</code>) con
+                    <code>maxlength="200"</code>, un número con
+                    <code>min</code>/<code>max</code>, y comprueba en el
+                    navegador todos los mensajes de validación nativa.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>&lt;form action="" method="get"&gt;
+    &lt;label for="nombre"&gt;Nombre:&lt;/label&gt;
+    &lt;input type="text" id="nombre" name="nombre" required&gt;
+    &lt;label for="correo"&gt;Correo:&lt;/label&gt;
+    &lt;input type="email" id="correo" name="correo" required&gt;
+    &lt;button type="submit"&gt;Registrarme&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            <p>El <code>for</code> del label coincide con el <code>id</code>
+                del input; <code>name</code> está en cada campo.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Preferencias&lt;/legend&gt;
+    &lt;label for="color"&gt;Color favorito:&lt;/label&gt;
+    &lt;select id="color" name="color"&gt;
+        &lt;option value="azul"&gt;Azul&lt;/option&gt;
+        &lt;option value="verde"&gt;Verde&lt;/option&gt;
+        &lt;option value="rojo"&gt;Rojo&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;p&gt;&lt;input type="radio" id="si" name="boletin" value="si"&gt;
+        &lt;label for="si"&gt;Sí&lt;/label&gt;
+        &lt;input type="radio" id="no" name="boletin" value="no"&gt;
+        &lt;label for="no"&gt;No&lt;/label&gt;&lt;/p&gt;
+&lt;/fieldset&gt;</code></pre>
+            <p>Los radios comparten <code>name="boletin"</code>: por eso
+                elegir uno desmarca el otro.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>&lt;label for="comentario"&gt;Comentarios:&lt;/label&gt;
+&lt;textarea id="comentario" name="comentario" rows="4" maxlength="200"&gt;&lt;/textarea&gt;
+
+&lt;label for="edad2"&gt;Edad:&lt;/label&gt;
+&lt;input type="number" id="edad2" name="edad" min="0" max="120"&gt;</code></pre>
+            <p>Prueba a superar 200 caracteres o poner 130 años: el navegador
+                mostrará su mensaje antes de enviar.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Un formulario se compone de <code>form</code> (con
+                <code>action</code> y <code>method</code>), campos
+                (<code>input</code> de muchos <code>type</code>,
+                <code>textarea</code>, <code>select</code>), etiquetas
+                <code>label</code> asociadas, botones <code>button</code> y
+                grupos <code>fieldset</code>/<code>legend</code>. Los atributos
+                <code>name</code>, <code>value</code> y <code>required</code>
+                definen qué se envía y qué se exige; la validación nativa evita
+                envíos incorrectos sin JavaScript. Sin backend, con
+                <code>method="get"</code>, los datos aparecen en la URL.</p>
+            <ul>
+                <li>[ ] Asocio cada campo con su label (for/id).</li>
+                <li>[ ] Explico qué hace <code>name</code> y por qué es
+                    obligatorio.</li>
+                <li>[ ] Uso required, type=email y min/max para validar.</li>
+                <li>[ ] Agrupo campos con fieldset y legend.</li>
+                <li>[ ] Explico qué ocurre al enviar sin backend.</li>
+            </ul>
+            <p>Siguiente: <a href="09-multimedia.html">Multimedia</a>. O vuelve al
+                <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="07-semantica.html">Anterior: Semántica</a> |
+                <a href="09-multimedia.html">Siguiente: Multimedia →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

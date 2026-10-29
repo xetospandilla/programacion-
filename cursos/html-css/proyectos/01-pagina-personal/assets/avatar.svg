@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="titulo desc">
+    <title id="titulo">Retrato ficticio de Ana</title>
+    <desc id="desc">Ilustración simple de un retrato de ejemplo: cabeza, hombros y fondo circular en tonos azules.</desc>
+    <circle cx="100" cy="100" r="96" fill="#e8f0fe" />
+    <circle cx="100" cy="74" r="30" fill="#1f4e79" />
+    <ellipse cx="100" cy="152" rx="46" ry="34" fill="#1f4e79" />
+</svg>

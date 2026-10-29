@@ -1,0 +1,53 @@
+/*
+  variables.css
+  Hoja de estilos externa del ejemplo "integrarCSS".
+
+  IMPORTANTE: aunque el nombre del archivo sea "variables.css", esta
+  demostración NO trata las variables CSS como tema principal (eso se
+  verá en una lección posterior). Aquí practicamos la base: qué es CSS,
+  cómo se escribe una regla y cómo se conecta una hoja externa.
+  El nombre del archivo se conserva porque así estaba en el curso.
+*/
+
+/*
+  Una regla CSS tiene tres partes:
+  - SELECTOR: dice a qué elementos se aplica (aquí: "body", "h1", etc.).
+  - PROPIEDAD: qué aspecto se cambia (color, font-size, margin...).
+  - VALOR: cómo cambia (blue, 2rem, 20px...).
+  Sintaxis: selector { propiedad: valor; }
+*/
+
+/* Cuerpo de la página: fondo y tipografía */
+body {
+    background-color: #eaf2f8;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #2c3e50;
+    margin: 2rem;
+}
+
+/* Título principal */
+h1 {
+    color: #1a5276;
+    /* caja con borde y relleno para que el cambio sea bien visible */
+    border-bottom: 3px solid #2980b9;
+    padding-bottom: 0.3rem;
+}
+
+/* Subtítulos */
+h2 {
+    color: #21618c;
+}
+
+/* Las cajas de ejemplo */
+.caja {
+    border: 2px dashed #2980b9;
+    background-color: #ffffff;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+/* Una clase para resaltar texto */
+.resaltado {
+    background-color: #f9e79f;
+    font-weight: bold;
+}

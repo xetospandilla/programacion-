@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multimedia: audio y vídeo</title>
+    <style>
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 09: Multimedia</h1>
+        <p>Audio y vídeo con <code>audio</code>, <code>video</code>, fuentes
+            alternativas y subtítulos. Todo con recursos locales, sin depender
+            de internet.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Insertar audio con <code>&lt;audio&gt;</code> y
+                    <code>controls</code>.</li>
+                <li>Insertar vídeo con <code>&lt;video&gt;</code> y atributos
+                    útiles (<code>controls</code>, <code>poster</code>,
+                    <code>width</code>, <code>preload</code>).</li>
+                <li>Ofrecer fuentes alternativas con <code>&lt;source&gt;</code>.</li>
+                <li>Añadir subtítulos con <code>&lt;track&gt;</code>.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>La lección de <a href="05-rutas.html">rutas relativas</a>: aquí
+                referenciaremos archivos de la carpeta <code>media/</code> que
+                está un nivel por encima de <code>html/</code>.</p>
+        </section>
+
+        <section>
+            <h2>1. Audio con <code>&lt;audio&gt;</code></h2>
+            <p>El ejemplo usa un archivo local incluido con el curso:
+                <code>media/tono-ejemplo.wav</code> (un tono generado para
+                poder practicar sin depender de internet).</p>
+            <pre><code>&lt;audio controls src="../media/tono-ejemplo.wav"&gt;
+    Tu navegador no soporta el elemento &amp;lt;audio&amp;gt;.
+&lt;/audio&gt;</code></pre>
+            <p>Así se ve en el navegador (pulsa el botón de reproducir):</p>
+            <audio controls src="../media/tono-ejemplo.wav">
+                Tu navegador no soporta el elemento &lt;audio&gt;.
+            </audio>
+            <p>El texto entre las etiquetas solo aparece si el navegador no
+                soporta audio: es el <strong>contenido alternativo</strong>.
+                El atributo <code>controls</code> muestra la barra de
+                reproducción (play, pausa, volumen).</p>
+            <p>Otros atributos habituales:</p>
+            <ul>
+                <li><code>loop</code>: reproduce en bucle.</li>
+                <li><code>muted</code>: empieza silenciado.</li>
+                <li><code>preload="none"</code>: no cargar el archivo hasta que
+                    el usuario lo pida (ahorra datos móviles).</li>
+                <li><code>volume</code> no es un atributo: se controla desde la
+                    barra del navegador o con JavaScript.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>2. Fuentes alternativas con <code>&lt;source&gt;</code></h2>
+            <p>Los navegadores no soportan todos los mismos formatos. La forma
+                correcta de ofrecer varias versiones del mismo archivo es usar
+                varios <code>&lt;source&gt;</code>: el navegador prueba cada
+                uno y usa el primero que pueda reproducir.</p>
+            <pre><code>&lt;!-- El navegador elige la primera fuente que soporte --&gt;
+&lt;audio controls&gt;
+    &lt;source src="../media/cancion.mp3" type="audio/mpeg"&gt;
+    &lt;source src="../media/cancion.ogg" type="audio/ogg"&gt;
+    Tu navegador no soporta audio.
+&lt;/audio&gt;</code></pre>
+            <div class="aviso">
+                <p><strong>Principio importante:</strong> los archivos
+                    referenciados deben existir. En este curso el audio real se
+                    llama <code>tono-ejemplo.wav</code> (un solo formato
+                    suficiente), así que el ejemplo de arriba con dos fuentes
+                    es solo plantilla: sustituye las rutas por tus propios
+                    archivos cuando tengas varios formatos.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Vídeo con <code>&lt;video&gt;</code></h2>
+            <p>Un clip de vídeo real no se incluye en estos materiales por
+                tamaño, pero puedes ver el funcionamiento completo: se muestra
+                aquí con su <strong>póster</strong> (la imagen SVG del curso) y
+                los controles.</p>
+            <pre><code>&lt;!-- El navegador solo podrá reproducir si existe un
+     &lt;source&gt; válido; hasta entonces muestra el póster. --&gt;
+&lt;video controls width="320"
+       poster="../images/imagen-ejemplo.svg"&gt;
+    &lt;source src="../media/presentacion.mp4" type="video/mp4"&gt;
+    &lt;source src="../media/presentacion.webm" type="video/webm"&gt;
+    &lt;track kind="subtitles" src="../media/subtitulos-ejemplo.vtt"
+           srclang="es" label="Español"&gt;
+    Tu navegador no soporta el elemento &amp;lt;video&amp;gt;.
+&lt;/video&gt;</code></pre>
+            <p>Con los archivos de ejemplo que <strong>sí existen</strong>
+                (póster + subtítulos locales):</p>
+            <video controls width="320" poster="../images/imagen-ejemplo.svg">
+                <source src="../media/presentacion.mp4" type="video/mp4">
+                <source src="../media/presentacion.webm" type="video/webm">
+                <track kind="subtitles" src="../media/subtitulos-ejemplo.vtt"
+                       srclang="es" label="Español">
+                Tu navegador no soporta el elemento &lt;video&gt;.
+            </video>
+            <p>Observa el póster: es la imagen del curso. Los controles están
+                disponibles; al pulsar reproducir, el navegador intentará los
+                <code>source</code> y, como ese clip no existe en el curso, no
+                avanzará. Es la señal de que el código está bien escrito y solo
+                falta <em>tu</em> archivo de vídeo.</p>
+            <p>Atributos útiles: <code>preload="none"</code> (no bajar datos de
+                más), <code>muted</code>, <code>loop</code> y
+                <code>width</code>/<code>height</code> (escala el reproductor,
+                no la calidad del archivo).</p>
+        </section>
+
+        <section>
+            <h2>4. Subtítulos con <code>&lt;track&gt;</code></h2>
+            <p>El subtítulo se escribe en un archivo de texto aparte en formato
+                <strong>WebVTT</strong> (extensión <code>.vtt</code>). El curso
+                incluye <code>media/subtitulos-ejemplo.vtt</code>:</p>
+            <pre><code>WEBVTT
+
+00:00.000 --&gt; 00:01.500
+(Aquí suena un tono de ejemplo generado para la lección de multimedia)</code></pre>
+            <p>El elemento <code>&lt;track&gt;</code> lo asocia al vídeo con su
+                idioma (<code>srclang="es"</code>) y su etiqueta visible
+                (<code>label="Español"</code>). Con
+                <code>kind="captions"</code> en lugar de
+                <code>subtitles</code> se enfatiza que incluye también sonidos
+                (ideal para accesibilidad). El usuario activa el subtítulo
+                desde el propio reproductor.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Ruta rota:</strong> el archivo no se reproduce.
+                    Comprueba la ruta relativa (¿está <code>../</code> cuando el
+                    archivo está en otra carpeta?) y que el nombre y extensión
+                    coinciden exactamente.</li>
+                <li><strong>Formato no soportado:</strong> un solo formato
+                    viejo puede no abrirse en algún navegador. Ofrece
+                    alternativas con varios <code>&lt;source&gt;</code>.</li>
+                <li><strong>Olvidar <code>controls</code>:</strong> sin él, el
+                    audio/vídeo existe en la página pero no hay manera de
+                    reproducirlo (a menos que controles con JavaScript).</li>
+                <li><strong><code>autoplay</code> sin <code>muted</code>:</strong>
+                    los navegadores bloquean el autoplay con sonido. Si usas
+                    autoplay, combínalo con <code>muted</code>.</li>
+                <li><strong>Enlazar recursos de otras webs:</strong> funciona,
+                    pero depende de que esa web siga viva y permite rastreo de
+                    tu actividad. En este curso usamos recursos locales.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <ol>
+                <li><strong>Fácil — reproducir el tono:</strong> crea
+                    <code>mi-audio.html</code> con un <code>audio</code> que
+                    reproduzca <code>../media/tono-ejemplo.wav</code> y
+                    controles. Ábrelo y pulsa play: debe sonar un tono.</li>
+                <li><strong>Medio — póster y controles:</strong> crea
+                    <code>mi-video.html</code> con un <code>video</code> de
+                    320 de ancho, con controles, póster
+                    <code>../images/imagen-ejemplo.svg</code> y el subtítulo
+                    <code>../media/subtitulos-ejemplo.vtt</code> asociado.</li>
+                <li><strong>Difícil — plantilla preparada:</strong> escribe el
+                    código completo de un reproductor de vídeo con dos fuentes
+                    alternativas (mp4 y webm), subtítulos en español y mensaje
+                    alternativo para navegadores antiguos. Las rutas pueden
+                    ser hipotéticas; añade un comentario que recuerde qué
+                    archivos deberías crear para que funcione.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>&lt;audio controls src="../media/tono-ejemplo.wav"&gt;
+    Tu navegador no soporta el elemento &amp;lt;audio&amp;gt;.
+&lt;/audio&gt;</code></pre>
+            <p>La ruta sube un nivel con <code>../</code> porque el archivo
+                está en <code>media/</code> y nuestra página en
+                <code>html/</code>.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>&lt;video controls width="320"
+       poster="../images/imagen-ejemplo.svg"&gt;
+    &lt;track kind="subtitles" src="../media/subtitulos-ejemplo.vtt"
+           srclang="es" label="Español"&gt;
+    Tu navegador no soporta el elemento &amp;lt;video&amp;gt;.
+&lt;/video&gt;</code></pre>
+            <h3>Ejercicio 3</h3>
+            <pre><code>&lt;video controls width="320"&gt;
+    &lt;source src="mi-pelicula.mp4" type="video/mp4"&gt;
+    &lt;source src="mi-pelicula.webm" type="video/webm"&gt;
+    &lt;track kind="subtitles" src="mi-pelicula.es.vtt"
+           srclang="es" label="Español"&gt;
+    Tu navegador no soporta el elemento &amp;lt;video&amp;gt;.
+&lt;/video&gt;
+&lt;!-- Para que funcione de verdad, crea mi-pelicula.mp4 (o .webm)
+     y mi-pelicula.es.vtt junto a esta página. --&gt;</code></pre>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>El audio se inserta con <code>&lt;audio&gt;</code>, el vídeo con
+                <code>&lt;video&gt;</code>; ambos con <code>controls</code>.
+                Los <code>&lt;source&gt;</code> ofrecen formatos alternativos y
+                <code>&lt;track&gt;</code> añade subtítulos desde un archivo
+                WebVTT. Los recursos deben existir y usar rutas relativas
+                correctas; este curso usa solo archivos locales.</p>
+            <ul>
+                <li>[ ] Inserto audio y vídeo con controles.</li>
+                <li>[ ] Ofrezco varias fuentes con <code>source</code>.</li>
+                <li>[ ] Asocio subtítulos con <code>track</code>.</li>
+                <li>[ ] Compruebo que las rutas de mis recursos existen.</li>
+            </ul>
+            <p>Vuelve al <a href="../index.html">índice del curso</a> y repasa
+                la lección de <a href="08-formularios.html">formularios</a> si no la
+                has completado.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="08-formularios.html">Anterior: Formularios</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

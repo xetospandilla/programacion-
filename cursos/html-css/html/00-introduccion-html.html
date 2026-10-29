@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a HTML</title>
+    <style>
+        /* Un poco de CSS mínimo para que la lección sea legible.
+           El bloque completo de CSS se estudia más adelante. */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 45rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 00: Introducción a HTML</h1>
+        <p>El primer paso: entender qué es HTML y cómo se escribe la estructura
+            de una página web.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos de esta lección</h2>
+            <ul>
+                <li>Explicar qué es HTML y para qué sirve.</li>
+                <li>Escribir la estructura mínima de un documento HTML.</li>
+                <li>Distinguir etiqueta, elemento y atributo.</li>
+                <li>Entender cómo se anidan los elementos (el "árbol" de la página).</li>
+                <li>Diferenciar el papel de HTML, CSS y JavaScript.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>Ninguno. Esta es la primera lección del bloque HTML. Solo necesitas
+                saber abrir un archivo en tu navegador (doble clic) y editar un
+                archivo de texto (Bloc de notas, VS Code o cualquier editor).</p>
+        </section>
+
+        <section>
+            <h2>1. ¿Qué es HTML?</h2>
+            <p><strong>HTML</strong> son las siglas de <em>HyperText Markup
+                Language</em> (Lenguaje de Marcado de Hipertexto). Es el lenguaje
+                que describe <strong>qué contenido hay</strong> en una página web:
+                títulos, párrafos, listas, imágenes, enlaces, tablas...</p>
+            <p>Los navegadores (Chrome, Firefox, Edge...) leen un archivo HTML y
+                lo convierten en la página que ves. HTML <strong>no se ejecuta</strong>
+                como un programa: es un <strong>documento</strong> que se interpreta
+                y se pinta.</p>
+            <p>Puedes ver el HTML de cualquier página con el menú del navegador:
+                normalmente "Ver código fuente" o la tecla <code>Ctrl+U</code>.</p>
+        </section>
+
+        <section>
+            <h2>2. Estructura mínima de un documento</h2>
+            <p>Todo documento HTML serio empieza con estas líneas:</p>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Título de la página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;¡Hola, mundo!&lt;/h1&gt;
+    &lt;p&gt;Este es mi primer documento HTML.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            <p>Pieza a pieza:</p>
+            <ul>
+                <li><code>&lt;!DOCTYPE html&gt;</code>: le dice al navegador que
+                    está leyendo HTML moderno (la versión 5). Va siempre primero.</li>
+                <li><code>&lt;html lang="es"&gt;</code>: la raíz del documento.
+                    El atributo <code>lang="es"</code> indica que el contenido está
+                    en español; lo usan los lectores de pantalla y los buscadores.</li>
+                <li><code>&lt;head&gt;</code>: la "cabecera" invisible. Aquí viven
+                    los metadatos (información sobre la página), no el contenido
+                    visible.</li>
+                <li><code>&lt;meta charset="UTF-8"&gt;</code>: define la codificación
+                    de caracteres. Sin él, las tildes y la letra ñ pueden verse mal.</li>
+                <li><code>&lt;meta name="viewport" ...&gt;</code>: ayuda a que la
+                    página se vea bien en pantallas pequeñas (móviles).</li>
+                <li><code>&lt;title&gt;</code>: el texto que aparece en la pestaña
+                    del navegador.</li>
+                <li><code>&lt;body&gt;</code>: el "cuerpo" visible. Todo lo que se
+                    ve en la página va aquí.</li>
+            </ul>
+            <p>Verás el resultado en el navegador: un título grande y un párrafo.</p>
+        </section>
+
+        <section>
+            <h2>3. Etiquetas, elementos y atributos</h2>
+            <p>Estos tres términos se confunden; conviene separarlos:</p>
+            <ul>
+                <li><strong>Etiqueta</strong>: el texto entre <code>&lt;</code> y
+                    <code>&gt;</code>, por ejemplo <code>&lt;p&gt;</code>. Casi
+                    siempre hay dos: apertura y cierre
+                    (<code>&lt;/p&gt;</code> con barra).</li>
+                <li><strong>Elemento</strong>: la etiqueta de apertura + su
+                    contenido + la etiqueta de cierre. Es decir, la "pieza"
+                    completa.</li>
+                <li><strong>Atributo</strong>: información extra que se escribe
+                    dentro de la etiqueta de apertura, con forma
+                    <code>nombre="valor"</code>. Por ejemplo:
+                    <code>&lt;a href="https://nodejs.org"&gt;Enlace&lt;/a&gt;</code>
+                    tiene el atributo <code>href</code> con la dirección.</li>
+            </ul>
+            <pre><code>&lt;!-- Un elemento con tres atributos: --&gt;
+&lt;img src="../images/imagen-ejemplo.svg" alt="Descripción" width="200"&gt;</code></pre>
+            <p>Las etiquetas sin cierre (como <code>&lt;img&gt;</code> o
+                <code>&lt;br&gt;</code>) se llaman <strong>vacías</strong>: no
+                envuelven contenido.</p>
+        </section>
+
+        <section>
+            <h2>4. Anidamiento: la página es un árbol</h2>
+            <p>Los elementos se colocan <strong>dentro</strong> de otros. Al
+                anidar se forma un "árbol" con un padre y varios hijos.</p>
+            <pre><code>&lt;ul&gt;
+    &lt;li&gt;Primer punto&lt;/li&gt;
+    &lt;li&gt;Segundo punto&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+            <p>Aquí <code>&lt;ul&gt;</code> es el padre y los dos
+                <code>&lt;li&gt;</code> son sus hijos. Regla de oro para no
+                romper nada: <strong>lo que se abre se cierra, y se cierra en
+                orden inverso</strong>.</p>
+            <div class="aviso">
+                <p><strong>Error típico:</strong> olvidar la barra de cierre o
+                    cruzar las etiquetas. ¿Ves el problema aquí?</p>
+                <pre><code>&lt;p&gt;Texto &lt;strong&gt;importante&lt;/p&gt;&lt;/strong&gt;</code></pre>
+                <p>El <code>&lt;strong&gt;</code> se abre dentro del
+                    <code>&lt;p&gt;</code>, así que debe cerrarse antes que él:
+                    <code>&lt;p&gt;Texto &lt;strong&gt;importante&lt;/strong&gt;&lt;/p&gt;</code>.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>5. HTML, CSS y JavaScript: cada uno su papel</h2>
+            <ul>
+                <li><strong>HTML</strong> = la estructura y el contenido
+                    (qué hay: un título, un párrafo, una lista...).</li>
+                <li><strong>CSS</strong> = la presentación (cómo se ve: colores,
+                    tamaños, márgenes...).</li>
+                <li><strong>JavaScript</strong> = el comportamiento (qué hace la
+                    página al interactuar: abrir un menú, validar un formulario...).</li>
+            </ul>
+            <p>Es una comparación clásica: HTML es el esqueleto, CSS la ropa y
+                JavaScript los músculos. Una página puede funcionar solo con
+                HTML; sin CSS se ve "en bruto" y sin JavaScript no reacciona,
+                pero la estructura siempre la pone HTML.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Tildes o ñ que se ven raras:</strong> falta
+                    <code>&lt;meta charset="UTF-8"&gt;</code>. Añádelo en el
+                    <code>&lt;head&gt;</code>.</li>
+                <li><strong>Todo el texto sale seguido</strong> (sin párrafos):
+                    falta envolver el contenido en etiquetas como
+                    <code>&lt;p&gt;</code>. Los saltos de línea del editor no
+                    cuentan en el navegador.</li>
+                <li><strong>La etiqueta no hace nada</strong>: quizá olvidaste la
+                    barra en el cierre (<code>&lt;/p&gt;</code>, no <code>&lt;p&gt;</code>)
+                    o escribiste mal el nombre.</li>
+                <li><strong>Ver el HTML "tal cual" en pantalla</strong>: si el
+                    navegador muestra <code>&lt;p&gt;</code> como texto, es que
+                    algo lo está interpretando mal (por ejemplo, dentro de un
+                    comentario o con el carácter &lt; escapado dos veces).</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Trabaja sobre un archivo <code>mi-primera-pagina.html</code> nuevo.</p>
+            <ol>
+                <li><strong>Fácil — estructura mínima:</strong> copia el documento
+                    del apartado 2 y añade un segundo párrafo y una lista con dos
+                    elementos. Ábrelo en el navegador.</li>
+                <li><strong>Medio — etiquetas y atributos:</strong> añade un
+                    enlace con el atributo <code>href</code> a esta misma lección
+                    (archivo <code>00-introduccion-html.html</code>) y una imagen cuyo
+                    <code>src</code> apunte a <code>../images/imagen-ejemplo.svg</code>
+                    con un <code>alt</code> descriptivo.</li>
+                <li><strong>Difícil — anidar con orden:</strong> escribe el
+                    siguiente contenido bien anidado: un <code>&lt;p&gt;</code>
+                    que contenga una palabra en <code>&lt;strong&gt;</code> y
+                    dentro de la misma palabra una parte en
+                    <code>&lt;em&gt;</code>.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Procura intentar los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>&lt;p&gt;Este es mi primer documento HTML.&lt;/p&gt;
+&lt;p&gt;Ya tengo un segundo párrafo.&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Primer elemento de la lista&lt;/li&gt;
+    &lt;li&gt;Segundo elemento de la lista&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+            <p>Los dos <code>&lt;p&gt;</code> son hermanos (no anidados) y la
+                lista va después. Todo dentro del <code>&lt;body&gt;</code>.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>&lt;a href="00-introduccion-html.html"&gt;Ir a la introducción&lt;/a&gt;
+&lt;img src="../images/imagen-ejemplo.svg"
+     alt="Paisaje ilustrado de montañas con un sol y un río"&gt;</code></pre>
+            <p>El enlace usa una <strong>ruta relativa</strong>: como tu página
+                estará en la carpeta <code>html/</code> (a la par de
+                <code>00-introduccion-html.html</code>), basta el nombre del archivo. La
+                imagen está una carpeta más arriba, por eso sube con
+                <code>../</code>.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>&lt;p&gt;Una &lt;strong&gt;palabra &lt;em&gt;importante&lt;/em&gt;&lt;/strong&gt; en el texto.&lt;/p&gt;</code></pre>
+            <p>El orden de cierre es inverso al de apertura: se abre
+                <code>strong</code>, luego <code>em</code>, y se cierra
+                <code>em</code> antes que <code>strong</code>.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>HTML describe el contenido de una página con etiquetas que se
+                anidan formando un árbol. La estructura mínima incluye
+                <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;html&gt;</code>,
+                <code>&lt;head&gt;</code> (metadatos) y <code>&lt;body&gt;</code>
+                (contenido visible). Los atributos añaden información a las
+                etiquetas. CSS pinta y JavaScript da comportamiento; HTML pone
+                la base.</p>
+            <p>Comprueba que puedes...</p>
+            <ul>
+                <li>[ ] Explicar qué es HTML con tus palabras.</li>
+                <li>[ ] Escribir la estructura mínima de memoria.</li>
+                <li>[ ] Diferenciar etiqueta, elemento y atributo.</li>
+                <li>[ ] Corregir el cierre cruzado de dos etiquetas.</li>
+                <li>[ ] Decir qué parte de la página corresponde a HTML, CSS y JS.</li>
+            </ul>
+            <p>Siguiente lección: <a href="01-encabezados-parrafos.html">Encabezados y párrafos</a>.
+                Vuelve al <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice del curso</a> |
+                <a href="01-encabezados-parrafos.html">Siguiente: Encabezados y párrafos →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

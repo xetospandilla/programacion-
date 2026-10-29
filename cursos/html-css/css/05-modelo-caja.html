@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El modelo de caja</title>
+    <!-- Hoja externa de demostración -->
+    <link rel="stylesheet" href="ejemplos/05-modelo-caja.css">
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .demo-caja { border: 1px solid #bbb; padding: 0.6rem 0.8rem; margin: 0.5rem 0; background: #fff; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 15: El modelo de caja</h1>
+        <p>Todo elemento HTML es una caja: contenido, relleno, borde y
+            margen. Entender esta «matrioska» explica la mitad de los
+            problemas de maquetación.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Identificar las cuatro zonas de la caja: contenido,
+                    <code>padding</code>, <code>border</code> y
+                    <code>margin</code>.</li>
+                <li>Calcular cuánto mide de verdad un elemento.</li>
+                <li>Usar <code>box-sizing</code> para que la anchura incluya
+                    relleno y borde.</li>
+                <li>Controlar el desbordamiento con <code>overflow</code>.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>Las lecciones de <a href="01-introduccion-css.html">introducción</a>
+                y <a href="04-colores-unidades-tipografia.html">unidades</a>:
+                aquí se usan <code>px</code> para que las cuentas sean
+                evidentes.</p>
+        </section>
+
+        <section>
+            <h2>1. Las cuatro zonas</h2>
+            <p>De dentro a fuera: el <strong>contenido</strong> (texto,
+                imagen...), el <strong>padding</strong> o relleno (espacio
+                entre contenido y borde, fondo incluido), el
+                <strong>border</strong> (borde visible o invisible) y el
+                <strong>margin</strong> (espacio exterior, transparente, que
+                separa de otras cajas).</p>
+            <pre><code>/* diagrama conceptual, sin código */
+┌────────── margin ──────────┐
+│ ┌──────── border ────────┐ │
+│ │ ┌────── padding ──────┐ │ │
+│ │ │ contenido            │ │ │
+│ │ └──────────────────────┘ │ │
+│ └──────────────────────────┘ │
+└──────────────────────────────┘</code></pre>
+            <p>La caja de la demo (hoja externa) lo muestra con números:</p>
+            <pre><code>.demo-caja .caja {
+    width: 220px;
+    padding: 20px;
+    border: 5px solid #b5332e;
+    margin: 10px;
+}</code></pre>
+            <div class="demo-caja">
+                <div class="caja">
+                    <div class="interior">Contenido (220px de ancho)</div>
+                </div>
+                <p>El padding (20px) es parte del fondo rosa; el borde (5px)
+                    lo rodea; el margen (10px) le separa de este párrafo.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. ¿Cuánto mide de verdad?</h2>
+            <p>Con el modelo clásico (<code>content-box</code>, el de por
+                defecto), la <code>width</code> se aplica al CONTENIDO. El
+                ancho total es:</p>
+            <pre><code>ancho total = width + padding(izq+der) + border(izq+der) + margin(izq+der)</code></pre>
+            <p>Con los números de la demo: 220 + 40 (padding) + 10 (borde) +
+                20 (margen) = <strong>290px</strong> ocupa en pantalla, no
+                220. Este «desfase» es la causa número uno de cajas que se
+                salen del contenedor.</p>
+            <p>Contra el margen se aplica además un fenómeno aparte: los
+                márgenes verticales de dos cajas vecinas se <strong>colapsan</strong>
+                (gana el mayor, no se suman).</p>
+        </section>
+
+        <section>
+            <h2>3. <code>box-sizing</code>: incluir relleno y borde</h2>
+            <p>Con <code>box-sizing: border-box</code>, la <code>width</code>
+                prometida se cumple: padding y borde se restan por dentro en
+                lugar de sumarse fuera. Compara las dos cajas:</p>
+            <pre><code>.demo-caja .caja {         /* content-box (defecto): 220 + 40 + 10 */
+    width: 220px; padding: 20px; border: 5px solid #b5332e; }
+.demo-caja .box-border {   /* border-box: TODO en 220px reales */
+    box-sizing: border-box;
+    width: 220px; padding: 20px; border: 5px solid #2e7d32; }</code></pre>
+            <div class="demo-caja">
+                <div class="caja"><div class="interior">content-box</div></div>
+                <div class="box-border"><div style="background:#fff; text-align:center; padding:2px 0;">border-box</div></div>
+            </div>
+            <p>Las dos declaran <code>width: 220px</code>; la primera ocupa
+                270px reales (sin contar margen) y la segunda, 220. La
+                práctica habitual en proyectos es un reset global:</p>
+            <pre><code>* { box-sizing: border-box; }</code></pre>
+            <p>Así «220px» siempre significa 220px, y los cálculos se vuelven
+                predecibles.</p>
+        </section>
+
+        <section>
+            <h2>4. Desbordamiento: <code>overflow</code></h2>
+            <p>Si el contenido no cabe en la caja (texto largo, ancho
+                reducido), desborda. Con <code>overflow</code> se decide qué
+                hacer:</p>
+            <ul>
+                <li><code>visible</code> (defecto): el contenido se sale y se
+                    ve.</li>
+                <li><code>hidden</code>: se recorta lo que no cabe.</li>
+                <li><code>auto</code>: aparece barra de desplazamiento solo si
+                    hace falta.</li>
+                <li><code>scroll</code>: siempre con barra.</li>
+            </ul>
+            <div class="demo-caja">
+                <div class="contenido-strecho">Texto que desborda la caja
+                    porque no cabe en 160x40px.</div>
+                <div class="desborda-oculto">Texto largo recortado por
+                    overflow hidden: lo que no cabe, no se ve.</div>
+                <div class="desborda-scroll">Texto largo con overflow auto:
+                    puedes desplazarte para leerlo.</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>«Mi caja mide más de lo que puse»:</strong> es el
+                    modelo content-box sumando padding y borde. Usa
+                    <code>box-sizing: border-box</code>.</li>
+                <li><strong>Margenes que «se comen» entre sí:</strong> es el
+                    colapso vertical: dos márgenes se funden en el mayor. Si
+                    lo sorprende, separa con padding en el contenedor o
+                    márgenes en un solo lado.</li>
+                <li><strong>Contenido cortado de repente:</strong> revisa
+                    <code>overflow: hidden</code> heredado o una altura fija
+                    (<code>height</code>) demasiado justa.</li>
+                <li><strong>Centrar con margin y que no funcione:</strong>
+                    <code>margin: 0 auto</code> centra solo cajas con ancho
+                    definido y <code>display: block</code>.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-caja.html</code> con su hoja
+                <code>mi-caja.css</code> enlazada.</p>
+            <ol>
+                <li><strong>Fácil — las cuatro zonas:</strong> una caja de
+                    200px de ancho con padding 15px, borde 3px y margen 8px.
+                    Calcula a mano el ancho total y compruébalo.</li>
+                <li><strong>Medio — border-box:</strong> repite el ejercicio
+                    con <code>box-sizing: border-box</code> y anota la
+                    diferencia. Haz la cuenta antes de abrir.</li>
+                <li><strong>Difícil — desbordamiento:</strong> una caja de
+                    120x50px con un texto largo y <code>overflow: auto</code>.
+                    Explica con un comentario por qué conviene auto y no
+                    scroll.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>.caja {
+    width: 200px; padding: 15px; border: 3px solid #333; margin: 8px;
+}
+/* total = 200 + 30 (padding) + 6 (borde) + 16 (margen) = 252px */</code></pre>
+            <h3>Ejercicio 2</h3>
+            <pre><code>.caja {
+    box-sizing: border-box;
+    width: 200px; padding: 15px; border: 3px solid #333; margin: 8px;
+}
+/* total = 200 + 16 (margen) = 216px; padding y borde van dentro */</code></pre>
+            <p>Con border-box, la «promesa» de width se cumple siempre.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>.nota {
+    width: 120px; height: 50px; overflow: auto;
+    /* auto: barra solo si el texto no cabe, mantiene la caja limpia;
+       scroll forzaría la barra siempre, aunque no hiciera falta. */
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Toda caja tiene contenido, padding (por dentro de la caja),
+                borde y margen (por fuera). En <code>content-box</code> la
+                anchura declarada es solo el contenido; con
+                <code>box-sizing: border-box</code> incluye relleno y borde.
+                El contenido que no cabe se controla con <code>overflow</code>.</p>
+            <ul>
+                <li>[ ] Nombro las cuatro zonas y su orden.</li>
+                <li>[ ] Calculo el ancho real en ambos modelos de caja.</li>
+                <li>[ ] Elijo overflow según el caso.</li>
+            </ul>
+            <p>Vuelve al <a href="../index.html">índice del curso</a>. Para
+                seguir: <a href="02-selectores.html">selectores</a>,
+                <a href="08-flexbox.html">Flexbox</a> (con su
+                <a href="09-flexbox-practica.html">práctica</a>) y
+                <a href="10-grid.html">Grid</a> permiten maquetar sin cajas
+                «a ojo».</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="04-colores-unidades-tipografia.html">Anterior: Colores
+                y tipografía</a> |
+                <a href="06-display-flujo.html">Siguiente: Display y flujo →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesibilidad y depuración</title>
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+
+        /* --- Demostraciones de la lección --- */
+
+        /* Contraste: texto oscuro sobre fondo claro (ratio alto, legible) */
+        .bien-contraste { background: #fff; color: #1a1a1a; padding: 0.4rem; }
+        .bien-contraste strong { color: #1f4e79; }
+
+        /* Explicación de foco: retomamos :focus-visible con anillo */
+        .f-boton {
+            background: #e3f2fd; border: 1px solid #1565c0;
+            padding: 0.35rem 0.8rem; border-radius: 4px; font: inherit;
+        }
+        .f-boton:focus-visible { outline: 3px solid #b5332e; outline-offset: 2px; }
+
+        /* Animación de ejemplo + respeto a prefers-reduced-motion */
+        .pulso { display: inline-block; animation: pulsar 1.6s ease-in-out infinite; }
+        @keyframes pulsar {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.06); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .pulso { animation: none; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 25: Accesibilidad y depuración</h1>
+        <p>La última lección de CSS del curso: hacer que las páginas se
+            puedan usar por todo el mundo (contraste, foco, movimiento) y el
+            método para encontrar por qué «un estilo no funciona».</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Aplicar contraste suficiente y no usar solo el color.</li>
+                <li>Mantener el foco visible y respetar
+                    <code>prefers-reduced-motion</code>.</li>
+                <li>Usar las herramientas de desarrollo del navegador.</li>
+                <li>Depurar CSS con un método, no por prueba y error.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>Las lecciones de <a href="03-cascada-especificidad.html">cascada
+                y especificidad</a>, <a href="13-pseudoclases-elementos.html">estados
+                y foco</a> y <a href="14-variables-css.html">variables</a>:
+                aquí se aplican a casos reales.</p>
+        </section>
+
+        <section>
+            <h2>1. Contraste y «no solo color»</h2>
+            <p>Las pautas WCAG (AA) piden un contraste de al menos
+                <strong>4,5:1</strong> para texto normal (3:1 para texto muy
+                grande). Texto claro sobre fondo claro o gris sobre gris es
+                ilegible para mucha gente, incluso sin discapacidad visual.</p>
+            <p>Bien (contraste alto):</p>
+            <div class="demo">
+                <p class="bien-contraste">Texto <strong>casi negro sobre
+                    blanco</strong>: ratio alto, legible.</p>
+            </div>
+            <p>Mal (solo como ejemplo mental, no lo reproduzcas): gris claro
+                sobre gris claro casi no se ve. Recuerda también la regla de
+                la lección de estados: la información nunca se comunica
+                UNICAMENTE con color (añade texto, icono o forma).</p>
+            <p>Para medir el contraste puedes usar el selector de color de
+                DevTools, que muestra el ratio y si cumple WCAG.</p>
+        </section>
+
+        <section>
+            <h2>2. Foco visible y movimiento reducido</h2>
+            <p><strong>Foco:</strong> quien navega con teclado necesita ver
+                dónde está. Estilo un anillo en
+                <code>:focus-visible</code> y no elimines el
+                <code>outline</code> sin alternativa:</p>
+            <div class="demo">
+                <button class="f-boton" type="button">Pruébame con Tab y con
+                    clic: el anillo aparece solo con teclado</button>
+            </div>
+            <p><strong>Movimiento reducido:</strong> mucha gente (con
+                vértigo, epilepsia o sensibilidad al movimiento) prefiere que
+                no haya animaciones. El navegador lo comunica con
+                <code>prefers-reduced-motion</code>. Mira el pulso de abajo:
+                si tu sistema tiene «reducir movimiento» activado, el pulso
+                se desactiva por el media query:</p>
+            <div class="demo">
+                <p><span class="pulso">Este texto pulsa suavemente</span> —
+                    y no pulsa si tu sistema pide movimiento reducido.</p>
+            </div>
+            <pre><code>@media (prefers-reduced-motion: reduce) {
+    .pulso { animation: none; }
+    /* patrón general: * { animation: none; transition: none; } */
+}</code></pre>
+        </section>
+
+        <section>
+            <h2>3. Las herramientas de desarrollo del navegador</h2>
+            <p>En cualquier navegador, clic derecho sobre un elemento →
+                «Inspeccionar» (F12 / Ctrl+Shift+I abre las DevTools). Lo
+                esencial para CSS:</p>
+            <ul>
+                <li><strong>Inspector/elementos:</strong> muestra el HTML y,
+                en la pestaña «Estilos», cada regla que afecta al elemento,
+                con las que ganan y las tachadas (y por qué orden).</li>
+                <li><strong>Estilos computados:</strong> el valor FINAL de
+                    cada propiedad tras cascada y herencia.</li>
+                <li><strong>Selector de color y contraste:</strong> al editar
+                    un color, muestra la «rueda» y el ratio WCAG.</li>
+                <li><strong>Modo dispositivo:</strong> emula anchos de móvil
+                    sin cambiar de equipo.</li>
+                <li><strong>Probar selectores:</strong> en la consola,
+                    <code>$$('.mi-clase')</code> cuenta los elementos que
+                    coinciden (prueba de que el selector existe).</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>4. Método para encontrar el error de CSS</h2>
+            <p>Cuando «no se aplica», en este orden:</p>
+            <ol>
+                <li><strong>¿Existe el elemento?</strong> Revisa el HTML y
+                    que la clase/id están escritas igual (mayúsculas).</li>
+                <li><strong>¿Está correcta la sintaxis?</strong> Llaves
+                    abiertas/cerradas, <code>propiedad: valor;</code>,
+                    paréntesis de <code>var()</code>.</li>
+                <li><strong>¿Se carga la hoja?</strong> En «Red» o en la
+                    pestaña Estilos, mira si el <code>.css</code> se enlazó
+                    (ruta) y si aparece en «Sources».</li>
+                <li><strong>¿La gana otra regla?</strong> En «Estilos», la
+                    regla tachada explica por qué: más especificidad o
+                    aparece después (cascada).</li>
+                <li><strong>Aísla:</strong> prueba con una sola regla sobre
+                    una clase nueva. Si funciona, el problema era el resto;
+                    ve añadiéndolo.</li>
+            </ol>
+            <p>Este orden evita el «probando colores a lo loco» y convierte
+                la depuración en lectura de evidencias.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Contraste insuficiente:</strong> usa el selector
+                    de color de DevTools y sube el ratio hasta al menos
+                    4,5:1 en texto normal.</li>
+                <li><strong>Animaciones sin respeto a
+                    prefers-reduced-motion:</strong> añade el media query con
+                    <code>animation: none</code> (y transition none si
+                    aplica).</li>
+                <li><strong>Foco eliminado:</strong> nunca
+                    <code>outline: none</code> sin alternativa visible;
+                    estila :focus-visible.</li>
+                <li><strong>Depurar a ciegas:</strong> primero aísla y
+                    confirma sintaxis; después, especificidad; al final,
+                    culpa a la hoja no cargada.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <ol>
+                <li><strong>Fácil — medir contraste:</strong> inspecciona un
+                    párrafo de esta lección y comprueba en DevTools que el
+                    ratio cumple WCAG AA (4,5:1).</li>
+                <li><strong>Medio — movimiento reducido:</strong> crea una
+                    transición en un botón y añade el media query que la
+                    desactive si el usuario pide movimiento reducido.</li>
+                <li><strong>Difícil — depurar lo que no se aplica:</strong>
+                    escribe una clase <code>.error-rojo</code> que «no
+                    funciona» porque otra regla la gana por especificidad, y
+                    corrígela subiendo solo lo necesario. Explica el proceso
+                    con comentarios.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <p>Texto oscuro sobre blanco supera 4,5:1. En DevTools, pon el
+                cursor sobre el color en «Estilos»: aparece la rueda y el
+                ratio. Si falla, oscurece el texto o aclara el fondo.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>button { transition: background 0.3s; }
+@media (prefers-reduced-motion: reduce) {
+    button { transition: none; }
+}</code></pre>
+            <h3>Ejercicio 3</h3>
+            <pre><code>/* 1) p { color: #000 } y .error-rojo { color: #b00 } -> gana la clase.
+   2) Si alguien pone #caja p { color:#000 }, gana por especificidad.
+   3) Corrección sin !important: .caja .error-rojo { color: #b00; }
+      Es más específica y respeta la cascada. */</code></pre>
+            <p>La lección 03 explica por qué; aquí, el método: ver qué regla
+                gana en DevTools y competir limpio con especificidad.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Accesibilidad = contraste (4,5:1), foco visible con teclado,
+                no comunicar solo con color y respetar
+                <code>prefers-reduced-motion</code>. Depuración = verificar
+                sintaxis y carga, leer qué regla gana en DevTools y aislar.
+                Con esto cierras el bloque de CSS del curso.</p>
+            <ul>
+                <li>[ ] Compruebo contraste con DevTools.</li>
+                <li>[ ] Desactivo animaciones con reduces-motion.</li>
+                <li>[ ] Sigo el método de 5 pasos para depurar.</li>
+            </ul>
+            <p>Repasa todo con el <a href="../index.html">índice del curso</a>
+                y haz los proyectos integradores que quedan pendientes.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="14-variables-css.html">Anterior: Variables CSS</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

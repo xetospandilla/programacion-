@@ -1,0 +1,188 @@
+/* ============================================================
+   Proyecto 02 — Landing responsive de «Pluma»
+   Hoja externa del proyecto. Mobile-first (lección 22):
+   primero la base para pantallas pequeñas y luego mejoras
+   con @media (min-width) para escritorio.
+   ============================================================ */
+
+/* --- Tema con variables (lección 24) --- */
+:root {
+    --color-primario: #1f4e79;
+    --color-acento: #b5332e;
+    --color-fondo-claro: #f0f4f8;
+    --color-texto: #222;
+    --radio: 8px;
+    --espacio: 1rem;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--color-texto);
+    background: #fff;
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-acento);
+    outline-offset: 2px;
+}
+
+img { max-width: 100%; height: auto; }
+
+/* --- Cabecera con navegación fija de anclas --- */
+.cabecera {
+    background: var(--color-primario);
+    color: #fff;
+}
+
+.cabecera .interior {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: var(--espacio);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--espacio);
+}
+
+.marca { font-size: 1.2rem; font-weight: bold; margin: 0; }
+
+.navegacion ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.2rem;
+}
+
+.navegacion a {
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.2rem 0;
+}
+
+.navegacion a:hover,
+.navegacion a:focus-visible { border-bottom-color: #fff; }
+
+/* --- Botones (CTA) --- */
+.boton {
+    display: inline-block;
+    background: var(--color-acento);
+    color: #fff;
+    border: 0;
+    border-radius: var(--radio);
+    padding: 0.6rem 1.2rem;
+    font: inherit;
+    text-decoration: none;
+}
+
+.boton:hover,
+.boton:focus-visible {
+    background: #8f2a25;
+}
+
+.boton-claro {
+    background: transparent;
+    border: 2px solid var(--color-primario);
+    color: var(--color-primario);
+}
+
+.boton-claro:hover,
+.boton-claro:focus-visible {
+    background: rgba(31, 78, 121, 0.12);
+}
+
+/* --- Hero / presentación del producto --- */
+.hero {
+    background: var(--color-fondo-claro);
+}
+
+.hero .interior {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 2rem var(--espacio);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espacio);
+    text-align: center;
+}
+
+.hero img { width: 16rem; }
+
+.hero h1 { margin: 0; }
+.hero p { margin: 0.25rem 0; }
+
+.hero .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio);
+    justify-content: center;
+    margin-top: var(--espacio);
+}
+
+/* --- Secciones generales --- */
+.seccion {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 2rem var(--espacio);
+}
+
+/* Tarjetas de características: flexbox que se apila en móvil */
+.tarjetas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio);
+}
+
+.tarjeta {
+    background: var(--color-fondo-claro);
+    border: 1px solid #dde3ea;
+    border-radius: var(--radio);
+    padding: 0 1rem;
+    flex: 1;
+}
+
+/* Sección informativa: texto + lista; la imagen viaja aparte */
+.informativa { background: var(--color-fondo-claro); }
+
+.informativa ul { padding-left: 1.2rem; }
+
+.informativa .ilustracion { text-align: center; }
+
+/* --- Pie de página --- */
+.pie {
+    background: var(--color-primario);
+    color: #fff;
+    text-align: center;
+    padding: var(--espacio);
+}
+
+.pie a { color: #fff; }
+
+/* --- Mejoras para pantallas medianas y anchas --- */
+@media (min-width: 640px) {
+    .tarjetas { flex-direction: row; }
+}
+
+@media (min-width: 760px) {
+    .hero .interior {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .hero .acciones { justify-content: flex-start; }
+
+    .informativa .interior {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+    }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Imágenes</title>
+    </head>
+    <body>
+        <h1>Página con una imagen</h1>
+        <!--
+            La imagen "imagen-ejemplo.svg" es una ilustracion generica creada
+            localmente: no contiene fotografias ni datos personales, por lo que
+            puede usarse libremente como ejemplo del curso.
+        -->
+        <img
+        src="../images/imagen-ejemplo.svg"
+        alt="Paisaje ilustrado de montañas con un sol y un río"
+        title="Ilustración de ejemplo del curso"
+        width="200"
+        ><br> <!--la etiqueta "br" sirve para hacer saltos de línea || También se puede aplicar dentro de párrafos y otras etiquetas-->
+        <!--
+        //  Atributos
+        src="" -> sirve para indicar el archivo a mostrar
+        alt="" -> texto alternativo: se muestra si la imagen no puede cargarse
+                  y lo leen los lectores de pantalla. Debe describir la
+                  INFORMACIÓN que aporta la imagen, no un nombre propio.
+        title="" -> texto emergente que aparece al pasar el ratón por encima
+                    (en navegadores de escritorio). NO lo leen los lectores
+                    de pantalla y no sustituye a alt.
+
+        //  Diferencia entre alt y title
+        - alt es imprescindible para accesibilidad: describe el CONTENIDO.
+        - title es opcional y decorativo: aporta un aviso o contexto extra.
+        Ambos atributos conviven en este ejemplo: si la imagen no carga, se
+        lee el alt; si el ratón se posa encima, se muestra el title.
+
+        Existen otras propiedades como el ancho y el alto, pero es más recomendable modificarlo aplicando CSS
+        -->
+        <h2>Ejercicios</h2>
+        <ol>
+            <li>Crea <code>mi-imagen.html</code> y muestra una imagen con
+                <code>&lt;img&gt;</code> usando una ruta relativa.</li>
+            <li>Escribe un <code>alt</code> que describa lo que se ve (no el
+                nombre del archivo) y comprueba qué aparece si borras la
+                imagen: ese texto debe seguir explicando el contenido.</li>
+            <li>Añade un <code>title</code> distinto del <code>alt</code> y
+                observa el texto emergente al pasar el ratón por encima.</li>
+        </ol>
+        <p><a href="../index.html">Página de Inicio</a> |
+            <a href="03-enlaces/enlaces03.html">Anterior: Enlaces (parte 3)</a> |
+            <a href="05-rutas.html">Siguiente: Rutas relativas y absolutas →</a></p>
+    </body>
+</html>

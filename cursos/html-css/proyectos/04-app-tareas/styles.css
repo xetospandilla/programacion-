@@ -1,0 +1,150 @@
+/* ============================================================
+   Proyecto 04 — App de tareas
+   Hoja de estilos de la aplicación. Mobile-first, sin
+   dependencias. El estado "completada" se marca cambiando la
+   clase de la fila desde app.js; aquí solo se estiliza la
+   clase (no se comunica nada solo con color: al completar la
+   tarea, el checkbox también queda marcado).
+   ============================================================ */
+
+:root {
+    --color-primario: #1f4e79;
+    --color-acento: #b5332e;
+    --color-fondo: #f5f7fa;
+    --color-texto: #222;
+    --radio: 8px;
+    --espacio: 1rem;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--color-texto);
+    background: var(--color-fondo);
+}
+
+:focus-visible {
+    outline: 3px solid var(--color-acento);
+    outline-offset: 2px;
+}
+
+/* --- Cabecera y zona principal --- */
+.cabecera,
+.principal {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: var(--espacio);
+}
+
+.cabecera h1 { margin-bottom: 0.25rem; }
+
+/* --- Formulario para añadir --- */
+.nueva-tarea .fila {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio);
+}
+
+.nueva-tarea input {
+    flex: 1 1 12rem;
+    padding: 0.55rem;
+    border: 1px solid #99a5b3;
+    border-radius: 4px;
+    font: inherit;
+}
+
+.boton {
+    background: var(--color-primario);
+    color: #fff;
+    border: 0;
+    border-radius: var(--radio);
+    padding: 0.55rem 1.2rem;
+    font: inherit;
+}
+
+.boton:hover,
+.boton:focus-visible { background: var(--color-acento); }
+
+/* Mensaje de error al intentar añadir una tarea vacía */
+.error {
+    color: var(--color-acento);
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+
+/* --- Contador y mensaje de lista vacía --- */
+.estado { font-size: 0.95rem; }
+
+.vacio {
+    border: 1px dashed #99a5b3;
+    border-radius: var(--radio);
+    padding: var(--espacio);
+    text-align: center;
+    color: #555;
+}
+
+/* --- Lista de tareas --- */
+.lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista li {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio);
+    background: #fff;
+    border: 1px solid #dde3ea;
+    border-radius: var(--radio);
+    padding: 0.6rem var(--espacio);
+    margin-bottom: 0.5rem;
+}
+
+/* El label envuelve el checkbox y el texto: un clic en cualquier
+   parte de la fila marca o desmarca la tarea. */
+.lista .etiqueta {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.lista input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    accent-color: var(--color-primario);
+}
+
+/* Tarea completada: tachada (además del checkbox marcado) */
+.lista li.completada .texto {
+    text-decoration: line-through;
+    color: #6b6b6b;
+}
+
+/* Botón eliminar */
+.eliminar {
+    background: transparent;
+    color: var(--color-acento);
+    border: 1px solid var(--color-acento);
+    border-radius: var(--radio);
+    padding: 0.3rem 0.7rem;
+    font: inherit;
+}
+
+.eliminar:hover,
+.eliminar:focus-visible {
+    background: var(--color-acento);
+    color: #fff;
+}
+
+/* --- Pie --- */
+.pie {
+    max-width: 40rem;
+    margin: 2rem auto var(--espacio);
+    padding: 0 var(--espacio);
+    font-size: 0.9rem;
+}

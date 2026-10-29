@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+        Cómo se conecta una hoja externa: con la etiqueta <link>.
+        El atributo rel="stylesheet" indica que el archivo enlazado es una
+        hoja de estilos, y href apunta al archivo .css (aquí, el de esta
+        misma carpeta: variables.css).
+    -->
+    <link rel="stylesheet" href="variables.css">
+
+    <title>Integrando CSS</title>
+</head>
+<body>
+    <h1>Integrando CSS en un Archivo HTML</h1>
+
+    <p>
+        Esta página se ve con estilos gracias a una hoja de estilos externa
+        (<code>variables.css</code>). Compara el aspecto de esta página con
+        el de las demás lecciones del curso: aquí el fondo es claro, el
+        título es azul y hay cajas con bordes.
+    </p>
+
+    <h2>Qué es CSS</h2>
+    <p>
+        CSS (Cascading Style Sheets, "hojas de estilo en cascada") es el
+        lenguaje que define el <span class="resaltado">aspecto visual</span>
+        de una página web: colores, tamaños, márgenes, bordes, posiciones...
+        HTML aporta la estructura y CSS aporta el diseño.
+    </p>
+
+    <h2>La estructura de una regla CSS</h2>
+    <div class="caja">
+        <p>Una regla CSS se escribe así:</p>
+        <pre>selector { propiedad: valor; }</pre>
+        <p>
+            Por ejemplo, en <code>variables.css</code>:
+        </p>
+        <pre>h1 { color: #1a5276; border-bottom: 3px solid #2980b9; }</pre>
+        <p>
+            El <strong>selector</strong> (<code>h1</code>) elige a qué
+            elementos se aplica; la <strong>propiedad</strong>
+            (<code>color</code>) indica qué se cambia; el <strong>valor</strong>
+            (<code>#1a5276</code>) decide cómo queda. Cada declaración
+            termina con punto y coma.
+        </p>
+    </div>
+
+    <h2>Tres formas de aplicar estilos</h2>
+    <ul>
+        <li>
+            <strong>Hoja externa</strong> (la que usa esta página): un
+            archivo <code>.css</code> aparte, enlazado con
+            <code>&lt;link&gt;</code>.
+        </li>
+        <li>
+            <strong>Estilos internos</strong>: una etiqueta
+            <code>&lt;style&gt;</code> dentro del propio HTML.
+        </li>
+        <li>
+            <strong>Estilos inline</strong>: un atributo
+            <code>style=""</code> directamente sobre un elemento.
+        </li>
+    </ul>
+
+    <h2>¿Por qué se prefiere una hoja externa?</h2>
+    <div class="caja">
+        <p>
+            En un proyecto organizado, una hoja externa permite separar el
+            <strong>contenido</strong> (HTML) del <strong>diseño</strong>
+            (CSS). Así, un mismo archivo de estilos puede aplicarse a muchas
+            páginas, el código es más fácil de leer y de mantener, y los
+            cambios de apariencia se hacen en un solo lugar.
+        </p>
+    </div>
+
+    <p><a href="../../index.html">Volver a la página de inicio del curso</a></p>
+</body>
+</html>

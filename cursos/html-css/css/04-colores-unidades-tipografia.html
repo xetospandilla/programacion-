@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colores, unidades y tipografía</title>
+    <!-- Hoja externa de demostración -->
+    <link rel="stylesheet" href="ejemplos/04-tipografia.css">
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .demo-tipo { border: 1px solid #bbb; padding: 0.6rem 0.8rem; margin: 0.5rem 0; background: #fff; }
+        .mancha { display: inline-block; width: 3.5rem; height: 1.4rem; border: 1px solid #999; vertical-align: middle; margin-right: 0.3rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 14: Colores, unidades y tipografía</h1>
+        <p>El vocabulario visual de CSS: cómo escribir colores, las unidades
+            de medida (y cuándo usar cada una) y las reglas de legibilidad del
+            texto.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Escribir colores con nombres, hexadecimal, RGB y HSL.</li>
+                <li>Distinguir unidades absolutas y relativas: <code>px</code>,
+                    <code>%</code>, <code>em</code>, <code>rem</code>,
+                    <code>vw</code>, <code>vh</code>.</li>
+                <li>Componer texto legible: familia, tamaño, interlineado y
+                    alineación.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>Las lecciones de <a href="01-introduccion-css.html">introducción</a>
+                y <a href="02-selectores.html">selectores</a>: aquí se llenan
+                de contenido las propiedades.</p>
+        </section>
+
+        <section>
+            <h2>1. Cómo escribir colores</h2>
+            <p>Hay cuatro formas habituales, todas válidas:</p>
+            <ul>
+                <li><strong>Nombre:</strong> <code>red</code>, <code>navy</code>,
+                    <code>teal</code>... Limitado, pero legible para pocas
+                    decenas de colores.</li>
+                <li><strong>Hexadecimal:</strong> <code>#ff0000</code> (rojo),
+                    <code>#1f4e79</code> (azul oscuro). Pares RR GG BB; cada
+                    par en hexadecimal (00 a ff). Se puede abreviar:
+                    <code>#f00</code> es igual que <code>#ff0000</code>.</li>
+                <li><strong>RGB:</strong> <code>rgb(255, 0, 0)</code>; cada
+                    canal de 0 a 255.</li>
+                <li><strong>HSL:</strong> <code>hsl(0, 100%, 50%)</code>;
+                    tono (0-360, ángulo de la rueda), saturación y luminosidad
+                    en porcentaje. Muy cómodo para variar claridad.</li>
+            </ul>
+            <p>Las cuatro formas escriben el mismo rojo:</p>
+            <p><span class="mancha" style="background: red;"></span>
+                <code>red</code> |
+                <span class="mancha" style="background: #ff0000;"></span>
+                <code>#ff0000</code> |
+                <span class="mancha" style="background: rgb(255,0,0);"></span>
+                <code>rgb(255, 0, 0)</code> |
+                <span class="mancha" style="background: hsl(0,100%,50%);"></span>
+                <code>hsl(0, 100%, 50%)</code></p>
+            <p>A <code>rgb()</code> puede añadírsele transparencia con
+                <code>rgba(0, 0, 0, 0.5)</code> (el último número, de 0 a 1,
+                es la opacidad).</p>
+        </section>
+
+        <section>
+            <h2>2. Unidades de medida</h2>
+            <p>Las absolutas son fijas; las relativas dependen de un contexto
+                (el padre, la raíz o la ventana). En pantallas se usa casi
+                siempre relativo.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Unidad</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">¿De qué depende?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>px</code></td>
+                        <td>Absoluta</td>
+                        <td>Píxeles de pantalla; fija y predecible</td>
+                    </tr>
+                    <tr>
+                        <td><code>%</code></td>
+                        <td>Relativa</td>
+                        <td>Del elemento padre (ancho, alto, fuente...)</td>
+                    </tr>
+                    <tr>
+                        <td><code>em</code></td>
+                        <td>Relativa</td>
+                        <td>Del tamaño de letra de SU padre (se encadena)</td>
+                    </tr>
+                    <tr>
+                        <td><code>rem</code></td>
+                        <td>Relativa</td>
+                        <td>Del tamaño de letra de la raíz (<code>html</code>,
+                            normalmente 16px)</td>
+                    </tr>
+                    <tr>
+                        <td><code>vw</code> / <code>vh</code></td>
+                        <td>Relativa</td>
+                        <td>Del ancho/alto de la ventana (1vw = 1% del ancho)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="demo-tipo">
+                <p class="base-16">Texto base: <code>font-size: 16px</code>.
+                    <span class="hijo-em">Hijo con <code>1.5em</code>: 1,5 × el
+                        tamaño de SU padre ⇒ 24px.</span></p>
+                <p class="base-16">Otro texto base.
+                    <span class="hijo-rem">Hijo con <code>1.5rem</code>: 1,5 ×
+                        el tamaño de la raíz (16px) ⇒ 24px, sin encadenarse al
+                        padre.</span></p>
+                <p class="con-vw">Esta banda mide <code>50vw</code>: la mitad
+                    del ancho de la ventana, cambie o no.</p>
+            </div>
+            <div class="aviso">
+                <p><strong>Regla práctica:</strong> <code>em</code> se
+                    encadena (un em dentro de un em se multiplica), así que
+                    para tamaños de letra suele preferirse <code>rem</code>,
+                    de comportamiento predecible. <code>em</code> sigue siendo
+                    útil para paddings proporcionales al propio texto.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Tipografía legible</h2>
+            <p>Consejos de base, todos demostrados debajo:</p>
+            <ul>
+                <li><strong><code>font-family</code>:</strong> lista de
+                    familias en orden; el navegador usa la primera disponible.
+                    Acaba siempre con una genérica (serif, sans-serif,
+                    monospace).</li>
+                <li><strong><code>font-size</code>:</strong> en <code>rem</code>
+                    para que respete la preferencia del usuario.</li>
+                <li><strong><code>line-height</code>:</strong> interlineado de
+                    1.5 en adelante para párrafos largos.</li>
+                <li><strong><code>text-align</code>:</strong>
+                    <code>left</code> / <code>right</code> / <code>center</code>
+                    / <code>justify</code>.</li>
+                <li><strong><code>text-transform</code></strong> y
+                    <code>letter-spacing</code>: para rótulos y títulos.</li>
+            </ul>
+            <div class="demo-tipo">
+                <h3>Un titular con la familia serif (Georgia)</h3>
+                <p class="espaciado">Texto con <code>line-height: 2</code>: el
+                    interlineado holgado hace que las líneas largas dejen de
+                    perderse.</p>
+                <p class="alineado-derecha">Alineación a la derecha
+                    (<code>text-align: right</code>) — adecuada para textos
+                    cortos o citas, no para párrafos largos.</p>
+                <p class="capitales">Texto en mayúsculas con espaciado entre
+                    letras, típico de rótulos y menús.</p>
+                <p class="pequena">Texto pequeño (<code>0.8rem</code>) con
+                    color gris: sigue siendo legible por el contraste, pero
+                    pide ser corto.</p>
+            </div>
+            <p>La <strong>legibilidad</strong> depende del contraste (texto
+                oscuro sobre fondo claro y al revés), de no abusar de párrafos
+                muy largos (<code>max-width</code> alrededor de 60-70
+                caracteres por línea) y de no cifrar información solo con
+                color (algunas personas no distinguen rojo y verde).</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Confundir em y rem:</strong> <code>em</code> mira
+                    al padre (se encadena), <code>rem</code> a la raíz. Si un
+                    em dentro de otro em «se dispara», ese es el motivo.</li>
+                <li><strong>Usar px para tamaños de letra:</strong> no respeta
+                    la preferencia de tamaño del navegador. Prefiere
+                    <code>rem</code>.</li>
+                <li><strong>Hex sin # o con valores inválidos:</strong>
+                    <code>ff0000</code> (sin #) no funciona; tampoco
+                    <code>#ff00</code>. Escribe siempre 3 o 6 dígitos con la
+                    almohadilla.</li>
+                <li><strong>Familias sin alternativa genérica:</strong>
+                    <code>font-family: Georgia</code> deja la página rota si
+                    no existe. Termina con <code>serif</code> o
+                    <code>sans-serif</code>.</li>
+                <li><strong>Miles de píxeles de ancho:</strong> las lecturas
+                    de 100% de ancho son cansadas; estrecha con
+                    <code>max-width</code>.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-tipografia.html</code> con su hoja
+                <code>mi-tipografia.css</code> enlazada.</p>
+            <ol>
+                <li><strong>Fácil — colores:</strong> escribe «manchas» con
+                    los cuatro formatos del mismo tono (por ejemplo, un azul)
+                    y anota qué formato se te hace más legible.</li>
+                <li><strong>Medio — unidades:</strong> un párrafo base de
+                    16px; dentro, un <code>span</code> con <code>1.5em</code>
+                    y otro con <code>1.5rem</code>. Predice el resultado antes
+                    de abrirlo.</li>
+                <li><strong>Difícil — párrafo legible:</strong> compón un
+                    párrafo con <code>font-size: 1rem</code>,
+                    <code>line-height: 1.6</code>, <code>max-width: 35rem</code>
+                    y un titular con <code>letter-spacing</code>. Compara la
+                    lectura con y sin esas reglas.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>.azul { color: blue; }           /* nombre */
+.azul { color: #0000ff; }        /* hex completo o #00f */
+.azul { color: rgb(0, 0, 255); } /* rgb */
+.azul { color: hsl(240, 100%, 50%); } /* hsl: 240 = azul */</code></pre>
+            <p>Hex y rgb son los más usados; hsl es muy cómodo para generar
+                escalas de un tono.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>.hijo-em  { font-size: 1.5em; }  /* = 24px si el padre es 16px */
+.hijo-rem { font-size: 1.5rem; } /* = 24px siempre que la raíz sea 16px */</code></pre>
+            <p>La diferencia aparece cuando hay anidamiento: <code>em</code>
+                multiplica sobre el padre inmediato.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>.parrafo {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 35rem;   /* unas 60-70 letras por línea */
+}</code></pre>
+            <p>Ancho y interlineado moderados: es el «reglaje» clásico de los
+                textos que se leen bien.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Los colores se escriben con nombre, hex, rgb o hsl. Las
+                unidades relativas (%, em, rem, vw, vh) se adaptan a su
+                contexto; <code>rem</code> es la opción por defecto para
+                tamaños de letra. Un texto legible combina familia con
+                alternativas, interlineado holgado y líneas no demasiado
+                largas.</p>
+            <ul>
+                <li>[ ] Escribo el mismo color en los cuatro formatos.</li>
+                <li>[ ] Distingo em de rem y vw de %.</li>
+                <li>[ ] Compongo un párrafo legible razonando cada regla.</li>
+            </ul>
+            <p>Siguiente: <a href="05-modelo-caja.html">El modelo de caja</a>.
+                Vuelve al <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="03-cascada-especificidad.html">Anterior: Cascada</a> |
+                <a href="05-modelo-caja.html">Siguiente: Modelo de caja →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

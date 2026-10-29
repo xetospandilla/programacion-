@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posicionamiento</title>
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .demo { border: 1px solid #bbb; padding: 0.6rem 0.8rem; margin: 0.5rem 0; background: #fffdf5; }
+
+        /* --- Demostraciones de esta lección --- */
+        .escenario { position: relative; border: 1px dashed #777; padding: 0.8rem 0.8rem 2.2rem; background: #fff; }
+        .p-caja { background: #e3f2fd; border: 1px solid #1565c0; padding: 0.2rem 0.5rem; margin: 0.2rem; }
+        .p-rel { position: relative; top: 14px; left: 22px; background: #fff8e1; border-color: #d97706; }
+        .p-abs { position: absolute; top: 10px; right: 10px; background: #fdecea; border-color: #b5332e; }
+        .p-fixed {
+            position: fixed; right: 12px; bottom: 12px;
+            background: #eef7ee; border: 1px solid #2e7d32;
+            padding: 0.3rem 0.6rem; font-size: 0.85rem;
+            z-index: 5;
+            /* pequeña y discreta para no molestar la lectura */
+            max-width: 45%;
+        }
+        .p-sticky {
+            position: sticky; top: 0;
+            background: #e8f0fe; border: 1px solid #1f4e79;
+            padding: 0.2rem 0.5rem; z-index: 4;
+        }
+        .p-z1 { position: relative; z-index: 1; background: #fdecea; }
+        .p-z2 { position: relative; z-index: 2; background: #e8f0fe; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 17: Posicionamiento</h1>
+        <p>Sacar cajas del flujo normal y moverlas con precisión:
+            <code>relative</code>, <code>absolute</code>, <code>fixed</code>,
+            <code>sticky</code> y el orden de apilado con
+            <code>z-index</code>.</p>
+    </header>
+
+    <main>
+        <!-- Un elemento sticky real: se queda pegado arriba al hacer scroll -->
+        <p class="p-sticky">Ejemplo sticky: esta barra se queda pegada al
+            borde superior mientras haces scroll por la página.</p>
+
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Distinguir los cinco valores de <code>position</code>.</li>
+                <li>Entender el contexto de posicionamiento (el «marco» del
+                    absolute).</li>
+                <li>Controlar qué elemento tapa a cuál con
+                    <code>z-index</code>.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>La lección de <a href="06-display-flujo.html">display y flujo</a>:
+                aquí movemos las cajas fuera de ese flujo.</p>
+        </section>
+
+        <section>
+            <h2>1. <code>static</code>: el punto de partida</h2>
+            <p>Es el valor por defecto: la caja sigue el flujo normal. Si le
+                pones <code>top</code>/<code>left</code>/etc., se ignoran:
+                las propiedades de desplazamiento solo actúan con los otros
+                valores.</p>
+        </section>
+
+        <section>
+            <h2>2. <code>relative</code>: desplazar sin salirse</h2>
+            <p>La caja se mueve <strong>respecto a su posición normal</strong>
+                con <code>top</code>, <code>right</code>, <code>bottom</code>,
+                <code>left</code>. El hueco original se conserva (los vecinos
+                no se enteran del movimiento).</p>
+            <div class="demo">
+                <div class="escenario">
+                    <div class="p-caja">Caja en flujo normal</div>
+                    <div class="p-caja p-rel">Esta está desplazada 14px hacia
+                        abajo y 22px a la derecha (relative)</div>
+                    <div class="p-caja">Tercera caja normal: el hueco de la
+                        anterior sigue ocupado</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. <code>absolute</code> y el contexto de posicionamiento</h2>
+            <p><code>absolute</code> saca la caja del flujo (los vecinos la
+                ignoran) y la posiciona respecto a su
+                <strong>ancestro posicionado</strong> más cercano: el primer
+                ancestro con <code>position</code> distinto de
+                <code>static</code> (normalmente un
+                <code>position: relative</code> sin desplazamiento). Si no
+                existe, toma la ventana del navegador.</p>
+            <div class="demo">
+                <div class="escenario" style="min-height:4.5rem;">
+                    <div class="p-caja">El escenario tiene
+                        <code>position: relative</code>: es el contexto.</div>
+                    <div class="p-abs">Esta caja es absolute: anclada a 10px
+                        del borde superior y 10px del derecho del escenario.</div>
+                </div>
+            </div>
+            <div class="aviso">
+                <p><strong>Error clásico:</strong> el absolute «huye» al fondo
+                    de la página porque el contenedor no está posicionado.
+                    Dale <code>position: relative</code> al contenedor (sin
+                    desplazarlo) y el anclaje será ese.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. <code>fixed</code> y <code>sticky</code></h2>
+            <p><code>fixed</code> ancla la caja a la <strong>ventana</strong>
+                (no al documento): permanece inmóvil al hacer scroll. Fíjate
+                en la cajita verde de la esquina inferior derecha de esta
+                página: es un ejemplo real de <code>fixed</code>.</p>
+            <div class="p-fixed">Demo fixed: fija a la ventana (abajo a la
+                derecha).</div>
+            <p><code>sticky</code> es híbrido: se comporta como
+                <code>relative</code> hasta que el scroll lo alcanza, y
+                entonces se queda «pegado» (recuerda la barra azul arriba de
+                esta página). Útil para menús y titulares persistentes.</p>
+        </section>
+
+        <section>
+            <h2>5. <code>z-index</code>: quién tapa a quién</h2>
+            <p>Cuando dos cajas coinciden, la que aparece más tarde en el HTML
+                suele tapar a la anterior. <code>z-index</code> ordena el eje
+                Z (a mayor número, más arriba), y solo funciona en elementos
+                <strong>posicionados</strong> (o flex/grid).</p>
+            <div class="demo">
+                <div class="escenario" style="min-height:3.4rem;">
+                    <div class="p-caja p-z1" style="left:10px; top:8px;">z-index 1</div>
+                    <div class="p-caja p-z2" style="left:70px; top:26px; position:relative;">z-index 2 (encima)</div>
+                </div>
+            </div>
+            <p>Números pequeños y con orden de importancia, no «hasta que se
+                vea»: la escalada de z-index acaba siendo inmantenible.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Absolute «perdido»:</strong> su ancestro no está
+                    posicionado. Confirma el <code>position: relative</code>
+                    del contenedor.</li>
+                <li><strong>z-index sin efecto:</strong> el elemento es
+                    <code>static</code>; pónle <code>position: relative</code>
+                    (o flex/grid) para que participe del apilado.</li>
+                <li><strong>Fixed que no se queda fijo:</strong> si un
+                    ancestro tiene <code>transform</code>/<code>filter</code>,
+                    se convierte en su contexto y ya no es la ventana.</li>
+                <li><strong>Modales que quedan bajo el contenido:</strong>
+                    revisa que el modal positionado tenga el z-index mayor del
+                    contexto, no solo de la página.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-posicion.html</code>.</p>
+            <ol>
+                <li><strong>Fácil — relative:</strong> dos párrafos; desplaza
+                    el segundo 12px abajo y 20px a la izquierda. Observa el
+                    espacio que conserva.</li>
+                <li><strong>Medio — absolute anclado:</strong> un contenedor
+                    con <code>position: relative</code> y una «etiqueta»
+                    absolute en su esquina superior derecha.</li>
+                <li><strong>Difícil — foco con z-index:</strong> dos cajas
+                    que se solapan con <code>z-index</code> distintos y
+                    explica en un comentario por qué una queda encima.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>.segundo { position: relative; top: 12px; left: -20px; }</code></pre>
+            <p><code>left</code> negativo desplaza a la izquierda; el hueco
+                original permanece.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>.contenedor { position: relative; }
+.etiqueta { position: absolute; top: 0; right: 0; }</code></pre>
+            <p>La etiqueta se ancla al contenedor porque él es su ancestro
+                posicionado más cercano.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>.encima { position: relative; z-index: 3; }
+.debajo { position: relative; z-index: 1; }</code></pre>
+            <p>Entre posicionados, el del z-index mayor se dibuja encima; a
+                igualdad, gana el último del HTML.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p><code>position</code> decide el anclaje: <code>static</code>
+                (flujo), <code>relative</code> (desplaza desde su sitio),
+                <code>absolute</code> (fuera del flujo, anclado al ancestro
+                posicionado), <code>fixed</code> (a la ventana) y
+                <code>sticky</code> (se pega al hacer scroll). El
+                <code>z-index</code> ordena el apilado entre posicionados.</p>
+            <ul>
+                <li>[ ] Explico cada valor con su anclaje.</li>
+                <li>[ ] Anclo un absolute al contenedor correcto.</li>
+                <li>[ ] Uso z-index con criterio, no por prueba y error.</li>
+            </ul>
+            <p>Siguiente: <a href="08-flexbox.html">Flexbox</a>. Vuelve al
+                <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="06-display-flujo.html">Anterior: Display y flujo</a> |
+                <a href="08-flexbox.html">Siguiente: Flexbox →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

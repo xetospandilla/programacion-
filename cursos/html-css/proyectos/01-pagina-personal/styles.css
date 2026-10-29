@@ -1,0 +1,157 @@
+/* ============================================================
+   Proyecto 01 — Página personal
+   Hoja de estilos del proyecto (separada del HTML) a propósito,
+   para practicar enlaces a CSS externo y las variables vistas en
+   la lección 24 del curso.
+   ============================================================ */
+
+/* --- Variables del "tema" personal (lección 24) --- */
+:root {
+    --color-primario: #1f4e79;
+    --color-acento: #b5332e;
+    --color-fondo: #f5f7fa;
+    --color-texto: #222;
+    --radio: 8px;
+    --espacio: 1rem;
+}
+
+/* --- Base: estilos para móvil primero (lección 22) --- */
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--color-texto);
+    background: var(--color-fondo);
+}
+
+/* Foco visible para poder navegar con teclado (lección 25) */
+:focus-visible {
+    outline: 3px solid var(--color-acento);
+    outline-offset: 2px;
+}
+
+/* --- Encabezado y navegación --- */
+.cabecera {
+    background: var(--color-primario);
+    color: #fff;
+    padding: var(--espacio);
+}
+
+.cabecera .interior {
+    max-width: 54rem;
+    margin: 0 auto;
+}
+
+.navegacion ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.2rem;
+}
+
+.navegacion a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.2rem 0;
+    border-bottom: 2px solid transparent;
+}
+
+.navegacion a:hover,
+.navegacion a:focus-visible {
+    border-bottom-color: #fff;
+}
+
+/* --- Zona principal --- */
+.principal {
+    max-width: 54rem;
+    margin: 0 auto;
+    padding: 0 var(--espacio);
+}
+
+section { margin: 2rem 0; }
+
+/* Presentación */
+.presentacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espacio);
+    text-align: center;
+}
+
+.presentacion img {
+    width: 9rem;
+    height: auto;
+    border-radius: 50%;
+    border: 3px solid var(--color-primario);
+}
+
+h1 { margin-bottom: 0.25rem; }
+
+.subtitulo {
+    font-size: 1.05rem;
+    color: #555;
+    margin-top: 0;
+}
+
+/* Aficiones */
+.aficiones {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio);
+}
+
+.aficion {
+    background: #fff;
+    border: 1px solid #dde3ea;
+    border-radius: var(--radio);
+    padding: 0 1rem;
+}
+
+/* Contacto y enlaces */
+.enlaces-externos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espacio);
+    margin-top: var(--espacio);
+}
+
+.enlaces-externos a {
+    background: var(--color-primario);
+    color: #fff;
+    border-radius: var(--radio);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+
+.enlaces-externos a:hover,
+.enlaces-externos a:focus-visible {
+    background: var(--color-acento);
+}
+
+/* --- Pie de página --- */
+.pie {
+    background: var(--color-primario);
+    color: #fff;
+    text-align: center;
+    padding: var(--espacio);
+    margin-top: 2rem;
+}
+
+.pie a { color: #fff; }
+
+/* --- Mejora para pantallas anchas (lección 22: min-width) --- */
+@media (min-width: 640px) {
+    .presentacion {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .aficiones { flex-direction: row; }
+
+    .aficion { flex: 1; }
+}

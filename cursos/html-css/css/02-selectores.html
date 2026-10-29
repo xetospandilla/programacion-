@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selectores</title>
+    <!-- Hoja externa de demostración con un selector por regla -->
+    <link rel="stylesheet" href="ejemplos/02-selectores.css">
+    <style>
+        /* Maquetación didáctica de la lección (soporte, no parte del tema) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .demo { border: 1px solid #bbb; padding: 0.6rem 0.8rem; margin: 0.5rem 0; background: #fffdf5; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 12: Selectores</h1>
+        <p>El selector es la parte de la regla que decide <em>a qué
+            elementos</em> se aplica el estilo. Hay muchos tipos: aquí vemos
+            los básicos, todos con ejemplos visibles en esta misma página.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Aplicar estilos por etiqueta, por clase y por ID.</li>
+                <li>Combinar selectores: descendiente, hijo directo y hermano
+                    adyacente.</li>
+                <li>Agrupar reglas con comas.</li>
+                <li>Seleccionar por atributos.</li>
+                <li>Saber cuándo conviene clase sobre ID.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>La <a href="01-introduccion-css.html">lección de introducción a
+                CSS</a>: reglas, propiedades y hoja externa. Y del bloque
+                HTML, conocer <code>class</code> e <code>id</code> como
+                atributos.</p>
+        </section>
+
+        <section>
+            <h2>1. La zona de demostración</h2>
+            <p>Toda la demo de esta lección vive en el bloque siguiente,
+                pintado por la hoja
+                <code>ejemplos/02-selectores.css</code>. Cada regla de esa
+                hoja demuestra un selector; veamos cuál hace qué.</p>
+            <div class="demo" id="zoo-demo">
+                <h2>Mi zoológico</h2>
+                <p>Párrafo normal: lo pinta la regla de descendientes.</p>
+                <p class="ave">Un águila: lleva la clase «ave».</p>
+                <p class="ave">Una gaviota: también lleva la clase «ave».</p>
+                <p id="mascota">Mi tortuga: lleva el id «mascota».</p>
+                <div>
+                    <p>Párrafo hijo directo de un <code>div</code>: le añade
+                        fondo la regla <code>#zoo-demo div &gt; p</code>.</p>
+                </div>
+                <h3>Alimentación</h3>
+                <p>Hermano adyacente del h3: la regla
+                    <code>#zoo-demo h3 + p</code> lo pinta morado.</p>
+                <p>Segundo párrafo: NO es adyacente al h3, así que no cambia.</p>
+                <p>Enlace de demostración de atributos:
+                    <a href="02-selectores.html">este enlace empieza por
+                    «02-»</a>.</p>
+                <p><label>Un campo de texto (selector de atributo):
+                    <input type="text" name="buscador"></label></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Por etiqueta, clase e ID</h2>
+            <ul>
+                <li><strong>Etiqueta:</strong> <code>p</code>, <code>h1</code>,
+                    <code>a</code>... aplica a todos los elementos con esa
+                    etiqueta. Es el más general.</li>
+                <li><strong>Clase:</strong> <code>.ave</code> (un punto delante).
+                    La clase se pone con el atributo <code>class="ave"</code> y
+                    puede repetirse en muchos elementos. En la demo, las aves
+                    quedan azules y en negrita.</li>
+                <li><strong>ID:</strong> <code>#mascota</code> (una
+                    almohadilla). Es único en la página. En la demo, la
+                    tortuga tiene borde verde discontinuo.</li>
+            </ul>
+            <pre><code>.ave { color: #1565c0; font-weight: bold; }
+#mascota { border: 2px dashed #2e7d32; }</code></pre>
+            <div class="aviso">
+                <p><strong>Regla práctica:</strong> usa clases para estilos;
+                    reserva los ID para anclar JavaScript o enlaces de página.
+                    Un ID duplicado rompe el documento y complica el CSS.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Descendiente y combinadores</h2>
+            <ul>
+                <li><strong>Descendiente (espacio):</strong>
+                    <code>#zoo-demo p</code> elige todo <code>p</code> que esté
+                    DENTRO de <code>#zoo-demo</code>, a cualquier profundidad.
+                    Es la forma de acotar estilos sin tocar al resto.</li>
+                <li><strong>Hijo directo (<code>&gt;</code>):</strong>
+                    <code>#zoo-demo div &gt; p</code> elige solo los
+                    <code>p</code> que son hijos INMEDIATOS del div (el de la
+                    demo tiene fondo verde claro).</li>
+                <li><strong>Hermano adyacente (<code>+</code>):</strong>
+                    <code>#zoo-demo h3 + p</code> elige el primer
+                    <code>p</code> que viene justo después de un
+                    <code>h3</code> (el de la demo, morado).</li>
+            </ul>
+            <pre><code>#zoo-demo p        { color: #37474f; }   /* descendiente */
+#zoo-demo div &gt; p { background: #f3f8f3; }  /* hijo directo */
+#zoo-demo h3 + p   { color: #6a1b9a; }      /* hermano adyacente */</code></pre>
+        </section>
+
+        <section>
+            <h2>4. Atributos y agrupación</h2>
+            <p><strong>Selector de atributo:</strong> entre corchetes se indica
+                el atributo y, opcionalmente, su valor o una parte de él:</p>
+            <pre><code>input[type="text"] { border: 2px solid #b0bec5; }
+a[href^="02-"]     { background: #fff8dc; }  /* href que EMPIEZA por 02- */</code></pre>
+            <p>Hay operadores como <code>^=</code> (empieza por),
+                <code>$=</code> (termina en) y <code>*=</code> (contiene). El
+                campo de texto de la demo y el enlace «02-» los aplican.</p>
+            <p><strong>Agrupación con comas:</strong> si dos selectores
+                comparten reglas, se ponen juntos:</p>
+            <pre><code>#zoo-demo h2, #zoo-demo h3 { color: #37474f; }</code></pre>
+            <p>El encabezado «Mi zoológico» y el «Alimentación» comparten el
+                mismo color gris y tipografía.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Espacio entre el punto y la clase o la
+                    almohadilla:</strong> <code>. ave</code> no funciona; debe
+                    ser <code>.ave</code>.</li>
+                <li><strong>Confundir descendiente con hijo:</strong> el
+                    espacio elige a cualquier profundidad; <code>&gt;</code>
+                    solo al nivel inmediato.</li>
+                <li><strong>Repetir un ID:</strong> los IDs son únicos; dos
+                    elementos con el mismo <code>id</code> invalidan la página.</li>
+                <li><strong>Reglas que no se aplican:</strong> revisa que el
+                    elemento tenga la clase/id escritos EXACTAMENTE igual en el
+                    HTML y en el CSS (mayúsculas incluidas).</li>
+                <li><strong>Selectores demasiado largos:</strong>
+                    <code>#a #b .c &gt; p &gt; span</code> es frágil: cualquier
+                    cambio de estructura lo rompe. Prefiere clases.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-selectores.html</code> con la estructura
+                mínima y una hoja <code>mi-selectores.css</code> enlazada.</p>
+            <ol>
+                <li><strong>Fácil — etiqueta y clase:</strong> haz que todos
+                    los <code>h2</code> sean granate y que una clase
+                    <code>.resaltado</code> ponga fondo amarillo claro a dos
+                    párrafos.</li>
+                <li><strong>Medio — descendiente y combinadores:</strong> dentro
+                    de un <code>&lt;div class="caja"&gt;</code> colorea los
+                    párrafos descendientes y añade un fondo distinto al hijo
+                    directo con <code>&gt;</code>. Explica en un comentario tu
+                    elección.</li>
+                <li><strong>Difícil — atributos:</strong> da borde azul a los
+                    enlaces cuyo <code>href</code> termine en
+                    <code>.pdf</code> (<code>$=</code>) y fondo a los inputs
+                    de tipo <code>email</code>.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>h2 { color: #800000; }
+.resaltado { background-color: #fff9c4; }</code></pre>
+            <p>La clase puede usarse en varios elementos a la vez, por eso
+                «dos párrafos» comparten la misma regla.</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>.caja p          { color: #1f4e79; }
+.caja div &gt; p   { background-color: #e8f0fe; }</code></pre>
+            <p>El primer selector toca todos los párrafos de la caja; el
+                segundo, solo los hijos directos de un div interno.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>a[href$=".pdf"]      { border: 2px solid #1565c0; }
+input[type="email"] { background-color: #e8f0fe; }</code></pre>
+            <p><code>$=</code> significa «termina en»; <code>^=</code> sería
+                «empieza por». El atributo va entero entre corchetes.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Los selectores básicos son etiqueta, clase (<code>.</code>) e
+                ID (<code>#</code>). Con el espacio se eligen descendientes,
+                con <code>&gt;</code> hijos directos y con <code>+</code>
+                hermanos adyacentes. Los corchetes seleccionan por atributos y
+                las comas agrupan. Las clases son la herramienta de uso
+                habitual; los ID, excepción.</p>
+            <ul>
+                <li>[ ] Escribo selectores de etiqueta, clase, ID y atributo.</li>
+                <li>[ ] Distingo descendiente de hijo directo y hermano.</li>
+                <li>[ ] Justifico por qué prefiero clases sobre IDs.</li>
+            </ul>
+            <p>Siguiente: <a href="03-cascada-especificidad.html">Cascada,
+                herencia y especificidad</a>. Vuelve al
+                <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="01-introduccion-css.html">Anterior: Introducción</a> |
+                <a href="03-cascada-especificidad.html">Siguiente: Cascada →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

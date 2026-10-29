@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablas en HTML</title>
+    <style>
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        table { border-collapse: collapse; margin: 0.4rem 0; }
+        th, td { border: 1px solid #999; padding: 0.3rem 0.6rem; text-align: left; }
+        caption { caption-side: bottom; font-style: italic; padding-top: 0.3rem; }
+        .mal, .bien { padding: 0.4rem 0.8rem; border-left: 4px solid; }
+        .mal { background: #fdecea; border-color: #c0392b; }
+        .bien { background: #eef7ee; border-color: #2f9e44; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 06: Tablas</h1>
+        <p>Cómo presentar datos en filas y columnas con etiquetas semánticas.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Construir una tabla de datos con <code>table</code>,
+                    <code>caption</code>, <code>thead</code>, <code>tbody</code>,
+                    <code>tr</code>, <code>th</code> y <code>td</code>.</li>
+                <li>Diferenciar encabezados (<code>th</code>) de datos
+                    (<code>td</code>).</li>
+                <li>Saber cuándo NO usar tablas (maquetar no es tabular).</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>Las lecciones anteriores: estructura mínima
+                (<a href="00-introduccion-html.html">intro</a>), encabezados y párrafos
+                (<a href="01-encabezados-parrafos.html">01</a>), y rutas relativas
+                (<a href="05-rutas.html">05</a>), porque aquí usaremos enlaces
+                e imágenes.</p>
+        </section>
+
+        <section>
+            <h2>1. La tabla en tres bloques</h2>
+            <p>Una tabla semántica separa tres zonas:</p>
+            <ul>
+                <li><code>&lt;caption&gt;</code>: el título o leyenda de la tabla.
+                    Se coloca justo después de la etiqueta de apertura.</li>
+                <li><code>&lt;thead&gt;</code>: la fila (o filas) de
+                    <strong>encabezados</strong>, con <code>&lt;th&gt;</code>.</li>
+                <li><code>&lt;tbody&gt;</code>: las filas de <strong>datos</strong>,
+                    con <code>&lt;td&gt;</code>.</li>
+            </ul>
+            <p>Cada fila es un <code>&lt;tr&gt;</code> (table row). Dentro de él
+                van celdas: <code>&lt;th&gt;</code> (table header) para encabezados
+                y <code>&lt;td&gt;</code> (table data) para valores.</p>
+            <pre><code>&lt;!-- Estructura básica de una tabla --&gt;
+&lt;table&gt;
+    &lt;caption&gt;Ejemplo: países y capitales&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;País&lt;/th&gt;
+            &lt;th scope="col"&gt;Capital&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;España&lt;/td&gt;
+            &lt;td&gt;Madrid&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Argentina&lt;/td&gt;
+            &lt;td&gt;Buenos Aires&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+            <p>Así se ve en el navegador:</p>
+            <table>
+                <caption>Ejemplo: países y capitales</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">País</th>
+                        <th scope="col">Capital</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>España</td>
+                        <td>Madrid</td>
+                    </tr>
+                    <tr>
+                        <td>Argentina</td>
+                        <td>Buenos Aires</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>2. Por qué <code>th</code> y <code>scope</code> importan</h2>
+            <p><code>&lt;th&gt;</code> no solo se ve en negrita: comunica a los
+                lectores de pantalla <em>qué</em> es cada columna, de modo que
+                una persona ciega puede navegar la tabla entendiendo qué dato
+                hay en cada cruce. El atributo <code>scope="col"</code> (o
+                <code>scope="row"</code>) refina esa relación: dice si el
+                encabezado corresponde a toda una columna o a toda una fila.</p>
+            <pre><code>&lt;tr&gt;
+    &lt;th scope="row"&gt;España&lt;/th&gt;
+    &lt;td&gt;Madrid&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+            <p>Aquí "España" es la etiqueta de SU fila; Madrid es un dato.</p>
+        </section>
+
+        <section>
+            <h2>3. Un ejemplo con datos reales: tabla de horarios</h2>
+            <pre><code>&lt;table&gt;
+    &lt;caption&gt;Horario de la asignatura&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;Hora&lt;/th&gt;
+            &lt;th scope="col"&gt;Lunes&lt;/th&gt;
+            &lt;th scope="col"&gt;Miércoles&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;09:00&lt;/th&gt;
+            &lt;td&gt;HTML&lt;/td&gt;
+            &lt;td&gt;CSS&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;10:30&lt;/th&gt;
+            &lt;td&gt;Práctica&lt;/td&gt;
+            &lt;td&gt;Práctica&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+            <table>
+                <caption>Horario de la asignatura</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Lunes</th>
+                        <th scope="col">Miércoles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">09:00</th>
+                        <td>HTML</td>
+                        <td>CSS</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">10:30</th>
+                        <td>Práctica</td>
+                        <td>Práctica</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Las horas son <code>th scope="row"</code>: encabezan su fila
+                cuando el lector recorre la tabla en horizontal.</p>
+            <p>Para unir celdas existen <code>colspan</code> y
+                <code>rowspan</code> (por ejemplo, una celda que ocupe dos
+                columnas con <code>colspan="2"</code>). Se usan con moderación:
+                complican la lectura para lectores de pantalla.</p>
+        </section>
+
+        <section>
+            <h2>4. Cuándo NO usar tablas</h2>
+            <p>Las tablas son para <strong>datos tabulares</strong>: valores que
+                tienen sentido cruzando filas y columnas (precios, horarios,
+                resultados...).</p>
+            <div class="mal">
+                <p><strong>MAL — usar una tabla para maquetar:</strong> en los
+                    años 90 se colocaban imágenes y textos con tablas invisibles.
+                    Hoy es una mala práctica: el contenido se vuelve difícil de
+                    leer, de adaptar a móviles y de mantener.</p>
+                <pre><code>&lt;!-- Esto es un error de diseño, no una tabla --&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;&lt;img src="logo.svg" alt="Logo"&gt;&lt;/td&gt;
+        &lt;td&gt;Menú de navegación&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+            </div>
+            <div class="bien">
+                <p><strong>BIEN — cada cosa en su sitio:</strong> el logo y la
+                    navegación van en etiquetas semánticas
+                    (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>; se
+                    ven en la lección de semántica) y la maquetación se hace con
+                    CSS. Las tablas quedan reservadas para los datos.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Olvidar <code>thead</code>/<code>tbody</code>:</strong>
+                    el navegador lo tolera, pero la estructura semántica (qué es
+                    encabezado y qué es dato) se pierde para la accesibilidad.</li>
+                <li><strong>Encabezados con <code>td</code>:</strong> usar
+                    <code>&lt;td&gt;</code> en la primera fila no comunica que
+                    son títulos. Usa <code>&lt;th&gt;</code>.</li>
+                <li><strong>Tablas anidadas (una dentro de otra):</strong> muy
+                    difícil de leer. Extrae los datos a una sola tabla o divide
+                    la información.</li>
+                <li><strong>Maquetar con tablas:</strong> ver el apartado 4. Si
+                    la tabla solo existe para "colocar cosas", la solución es
+                    CSS, no más tablas.</li>
+                <li><strong>Celdas sin contenido:</strong> una celda vacía para
+                    "empujar" el diseño. Si no hay dato, la fila/columna no
+                    debería existir (o usa <code>colspan</code> bien aplicado).</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Crea un archivo <code>mi-tabla.html</code> para cada ejercicio.</p>
+            <ol>
+                <li><strong>Fácil — clasificación:</strong> construye una tabla
+                    con <code>caption</code> "Clasificación de la liga" y
+                    columnas Posición, Equipo y Puntos; tres filas de datos.</li>
+                <li><strong>Medio — presupuesto:</strong> tabla con
+                    <code>thead</code> (Concepto, Precio) y
+                    <code>tbody</code> con tres filas; añade una fila final con
+                    "Total" como <code>th scope="row"</code>. El precio total
+                    no tiene que calcularse: es una celda más.</li>
+                <li><strong>Difícil — fusión:</strong> usa <code>colspan="2"</code>
+                    para que una celda "Usuario invitado" ocupe dos columnas en
+                    una tabla de acceso. Revisa que las filas siguientes sigan
+                    teniendo el número correcto de columnas.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta cada ejercicio antes de leer la solución.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>&lt;table&gt;
+    &lt;caption&gt;Clasificación de la liga&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;&lt;th scope="col"&gt;Posición&lt;/th&gt;&lt;th scope="col"&gt;Equipo&lt;/th&gt;&lt;th scope="col"&gt;Puntos&lt;/th&gt;&lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;Equipo A&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;Equipo B&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;Equipo C&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+            <p>Los encabezados van en <code>thead</code> (con <code>th</code>) y
+                los datos en <code>tbody</code> (con <code>td</code>).</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>&lt;tr&gt;
+    &lt;th scope="row"&gt;Total&lt;/th&gt;
+    &lt;td&gt;95 €&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+            <p>"Total" es la etiqueta de esa fila, por eso es <code>th scope="row"</code>;
+                el importe es el dato.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>&lt;tr&gt;
+    &lt;td colspan="2"&gt;Usuario invitado&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+            <p><code>colspan="2"</code> hace que esta celda ocupe el ancho de dos
+                columnas. Las filas siguientes deben seguir teniendo dos celdas
+                normales para que la cuadrícula no se descoloque.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Las tablas presentan datos tabulares con una estructura semántica:
+                <code>caption</code> (título), <code>thead</code>
+                (encabezados con <code>th</code>), <code>tbody</code> (datos con
+                <code>td</code>) y filas <code>tr</code>. El atributo
+                <code>scope</code> conecta los encabezados con sus filas o
+                columnas. Las tablas NO sirven para maquetar páginas.</p>
+            <ul>
+                <li>[ ] Escribo una tabla con captions, enlaces y datos.</li>
+                <li>[ ] Sé cuándo una celda es <code>th</code> o <code>td</code>.</li>
+                <li>[ ] Explico por qué no se maqueta con tablas.</li>
+            </ul>
+            <p>Siguiente: <a href="07-semantica.html">Semántica estructural</a>. O
+                vuelve al <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="05-rutas.html">Anterior: Rutas</a> |
+                <a href="07-semantica.html">Siguiente: Semántica →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

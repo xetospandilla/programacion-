@@ -1,0 +1,24 @@
+# Dependencias
+node_modules/
+
+# Binarios y artefactos de compilación
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.o
+*.out
+a.exe
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema
+Thumbs.db
+.DS_Store
+
+# Datos locales de base de datos (prácticas)
+*.db
+*.sqlite
+*.sqlite3

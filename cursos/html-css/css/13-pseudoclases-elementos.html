@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudo-clases y pseudo-elementos</title>
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 48rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+        .demo { border: 1px solid #bbb; padding: 0.6rem 0.8rem; margin: 0.5rem 0; background: #fffdf5; }
+
+        /* --- Demostraciones de la lección --- */
+
+        /* :hover cambia fondo Y borde (nunca solo color) */
+        .d-enlace { color: #1f4e79; }
+        .d-enlace:hover {
+            background: #e8f0fe;
+            outline: 2px solid #1f4e79;
+            border-radius: 4px;
+        }
+
+        /* :focus-visible: foco visible SOLO cuando llega por teclado.
+           Nunca quitamos el outline sin alternativa visible. */
+        .d-boton {
+            background: #e3f2fd; border: 1px solid #1565c0;
+            padding: 0.35rem 0.8rem; border-radius: 4px;
+            font: inherit;
+        }
+        .d-boton:focus-visible {
+            outline: 3px solid #b5332e;
+            outline-offset: 2px;
+        }
+
+        /* :active: el momento exacto de la pulsación */
+        .d-boton:active { transform: translateY(2px); }
+
+        /* ::before / ::after generan contenido decorativo */
+        .d-titulo::before { content: "» "; color: #b5332e; font-weight: bold; }
+        .d-titulo::after  { content: " «"; color: #b5332e; font-weight: bold; }
+
+        /* :checked y :disabled en controles de formulario */
+        .d-check:checked ~ .d-estado-check { font-weight: bold; color: #2e7d32; }
+        .d-campo:disabled { background: #eee; color: #888; }
+
+        /* Estado de los controles (no solo color: se usa texto) */
+        .d-campo { border: 1px solid #999; padding: 0.2rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 23: Pseudo-clases y pseudo-elementos</h1>
+        <p>Estados de los elementos (<code>:hover</code>, foco, marcado,
+            desactivado) y contenido decorativo (<code>::before</code>,
+            <code>::after</code>), con el teclado y la accesibilidad en
+            mente.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Aplicar <code>:hover</code>, <code>:focus-visible</code>,
+                    <code>:active</code>, <code>:checked</code> y
+                    <code>:disabled</code>.</li>
+                <li>Usar <code>::before</code> y <code>::after</code>.</li>
+                <li>Mantener el foco visible para quien navega con teclado.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>Selector de la lección <a href="02-selectores.html">02</a>
+                (etiquetas, clases) y formularios HTML (la lección
+                <a href="../html/08-formularios.html">08 del curso</a>), donde
+                aparecen checkbox y campos desactivados.</p>
+        </section>
+
+        <section>
+            <h2>1. Pseudo-clases de interacción</h2>
+            <p>Una pseudo-clase (un solo <code>:</code>) selecciona un
+                <strong>estado</strong>, no un elemento. Prueba estos con el
+                ratón y con el teclado (Tab):</p>
+            <div class="demo">
+                <p><a class="d-enlace" href="#">Enlace: al pasar el ratón
+                    cambia fondo y borde, no solo color</a></p>
+                <p><button class="d-boton" type="button">Botón: foco visible
+                    con teclado (:focus-visible) y hundido al pulsar
+                    (:active)</button></p>
+            </div>
+            <ul>
+                <li><code>:hover</code>: el ratón está encima. Nunca debe ser
+                    la única señal (móviles no tienen hover).</li>
+                <li><code>:focus-visible</code>: el foco llega POR TECLADO.
+                    Es el que se debe estilar con un anillo visible.
+                    <code>:focus</code> también incluye el clic del ratón y
+                    puede resultar molesto.</li>
+                <li><code>:active</code>: el instante exacto de la pulsación
+                    (antes de soltar).</li>
+            </ul>
+            <div class="aviso">
+                <p><strong>Accesibilidad de foco:</strong> nunca hagas
+                    <code>outline: none</code> sin ofrecer otra alternativa
+                    visible (fondo + borde, o un anillo con
+                    <code>outline-offset</code>). Quien navega solo con
+                    teclado necesita ver dónde está.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Estados de formulario: <code>:checked</code> y
+                <code>:disabled</code></h2>
+            <p>En un checkbox, <code>:checked</code> se activa cuando está
+                marcado; <code>:disabled</code> selecciona campos
+                desactivados (con el atributo <code>disabled</code> en el
+                HTML).</p>
+            <div class="demo">
+                <p><label><input class="d-check" type="checkbox"> Marca el
+                    checkbox: el texto de abajo se pondrá verde y en
+                    negrita</label></p>
+                <p class="d-estado-check">Este texto responde al estado
+                    marcado (:checked).</p>
+                <p><label>Campo desactivado:
+                    <input class="d-campo" type="text" disabled value="no editable"></label>
+                    (estilo gris por :disabled; además el HTML ya lo
+                    desactiva)</p>
+            </div>
+            <pre><code>.d-check:checked ~ .d-estado-check {
+    font-weight: bold;
+    color: #2e7d32;
+}</code></pre>
+            <p>El combinador <code>~</code> elige hermanos posteriores del
+                checkbox dentro del mismo contenedor.</p>
+        </section>
+
+        <section>
+            <h2>3. Pseudo-elementos: <code>::before</code> y
+                <code>::after</code></h2>
+            <p>Un pseudo-elemento (doble <code>::</code>) genera una caja
+                extra delante (<code>::before</code>) o detrás
+                (<code>::after</code>) del contenido. Sin la propiedad
+                <code>content</code> (texto o vacía <code>""</code>) no se
+                crean.</p>
+            <div class="demo">
+                <h3 class="d-titulo">Un titular con decoración generada</h3>
+                <p>Las comillas » y « las crea CSS, no existen en el HTML:
+                    <code>::before</code> y <code>::after</code> con
+                    <code>content</code>.</p>
+            </div>
+            <pre><code>.d-titulo::before { content: "» "; color: #b5332e; }
+.d-titulo::after  { content: " «"; color: #b5332e; }</code></pre>
+            <p>Se usan mucho para iconos, viñetas, bordes decorativos y
+                «flechas» de acordeones. El contenido generado se lee por los
+                lectores de pantalla según el navegador: no pongas
+                información importante solo ahí.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong><code>outline: none</code> sin alternativa:</strong>
+                    rompe la navegación por teclado. Estila
+                    <code>:focus-visible</code> con un anillo y
+                    <code>outline-offset</code>.</li>
+                <li><strong>Cambiar solo el color con :hover:</strong>
+                    insuficiente (y para daltónicos, invisible). Añade otra
+                    señal: fondo, borde, desplazamiento.</li>
+                <li><strong>::before sin content:</strong> no aparece.
+                    <code>content: ""</code> con un fondo también sirve.</li>
+                <li><strong>Usar ::before para texto de lectura:</strong> el
+                    contenido generado no es contenido real; guarda lo
+                    importante en el HTML.</li>
+                <li><strong>:focus en vez de :focus-visible para todo:</strong>
+                    <code>:focus</code> pinta también con el clic; reserva el
+                    anillo llamativo para <code>:focus-visible</code>.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <p>Parte de <code>mi-estados.html</code>.</p>
+            <ol>
+                <li><strong>Fácil — hover con dos señales:</strong> un enlace
+                    que al pasar el ratón cambie color Y fondo.</li>
+                <li><strong>Medio — foco por teclado:</strong> un botón con
+                    <code>:focus-visible</code> con anillo exterior
+                    (<code>outline-offset</code>). Pruébalo con Tab.</li>
+                <li><strong>Difícil — formulario con estados:</strong> un
+                    checkbox cuyo hermano posterior cambie con
+                    <code>:checked</code>, y un campo <code>disabled</code>
+                    con estilo claro (y texto que lo anuncie, no solo gris).</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <pre><code>a:hover { background: #e8f0fe; color: #1f4e79; }</code></pre>
+            <h3>Ejercicio 2</h3>
+            <pre><code>button:focus-visible {
+    outline: 3px solid #b5332e;
+    outline-offset: 2px;
+}</code></pre>
+            <h3>Ejercicio 3</h3>
+            <pre><code>.chk:checked ~ p { font-weight: bold; color: #2e7d32; }
+input:disabled + span { color: #888; font-style: italic; }</code></pre>
+            <p>El <code>+</code> elige el hermano inmediato; el texto
+                «(campo desactivado)» junto al valor da la información sin
+                depender del color.</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>Las pseudo-clases capturan estados (
+                <code>:hover</code>, <code>:focus-visible</code>,
+                <code>:active</code>, <code>:checked</code>,
+                <code>:disabled</code>) y los pseudo-elementos generan cajas
+                decorativas (<code>::before</code>/<code>::after</code> con
+                <code>content</code>). La regla de oro: nunca retirar el foco
+                ni comunicar solo con color.</p>
+            <ul>
+                <li>[ ] Estilo hover y foco con señal doble.</li>
+                <li>[ ] Aplico checked y disabled a un formulario.</li>
+                <li>[ ] Genero decoración con ::before y ::after.</li>
+            </ul>
+            <p>Siguiente: <a href="14-variables-css.html">Variables CSS</a>.
+                Vuelve al <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="12-diseno-responsive.html">Anterior: Responsive</a> |
+                <a href="14-variables-css.html">Siguiente: Variables CSS →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

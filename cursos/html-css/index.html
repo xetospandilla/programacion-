@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso de HTML y CSS</title>
+</head>
+<body>
+    <!-- Página de inicio del curso. Enlaza únicamente a lecciones que ya existen. -->
+    <h1>Curso de HTML y CSS</h1>
+    <p>
+        Este curso contiene lecciones prácticas de HTML (la estructura de las
+        páginas web) y de CSS (sus estilos). Para ver una lección, haz clic en
+        su enlace: la página se abrirá en tu navegador.
+    </p>
+
+    <h2>Lecciones de HTML</h2>
+    <p>El número de cada fila es el <strong>orden recomendado de estudio</strong>
+        y coincide con el nombre del archivo.</p>
+    <ul>
+        <li><a href="html/00-introduccion-html.html">00 - Introducción a HTML</a></li>
+        <li><a href="html/01-encabezados-parrafos.html">01 - Encabezados y párrafos</a></li>
+        <li><a href="html/02-listas.html">02 - Listas</a></li>
+        <li><a href="html/03-enlaces/enlaces01.html">03 - Enlaces, parte 1</a></li>
+        <li><a href="html/04-imagenes.html">04 - Imágenes</a></li>
+        <li><a href="html/05-rutas.html">05 - Rutas relativas y absolutas</a></li>
+        <li><a href="html/06-tablas.html">06 - Tablas</a></li>
+        <li><a href="html/07-semantica.html">07 - Semántica estructural</a></li>
+        <li><a href="html/08-formularios.html">08 - Formularios</a></li>
+        <li><a href="html/09-multimedia.html">09 - Multimedia</a></li>
+    </ul>
+    <p>La lección 03 se reparte en tres páginas que se recorren en orden:
+        <a href="html/03-enlaces/enlaces01.html">parte 1</a>,
+        <a href="html/03-enlaces/enlaces02.html">parte 2</a> y
+        <a href="html/03-enlaces/enlaces03.html">parte 3</a>.</p>
+
+    <h2>Para integrar con el curso de JavaScript</h2>
+    <p>
+        La práctica de DOM y eventos (lista de tareas) del curso de JavaScript
+        usa formularios y estructura de página:
+        <a href="../javascript/43-dom.html">43 - DOM</a> y
+        <a href="../javascript/44-eventos.html">44 - Eventos</a>.
+    </p>
+
+    <h2>Lecciones de CSS</h2>
+    <p>Terminadas (fundamentos):</p>
+    <ul>
+        <li><a href="css/01-introduccion-css.html">11 - Introducción a CSS</a></li>
+        <li><a href="css/02-selectores.html">12 - Selectores</a></li>
+        <li><a href="css/03-cascada-especificidad.html">13 - Cascada, herencia y especificidad</a></li>
+        <li><a href="css/04-colores-unidades-tipografia.html">14 - Colores, unidades y tipografía</a></li>
+        <li><a href="css/05-modelo-caja.html">15 - El modelo de caja</a></li>
+    </ul>
+    <p>Terminadas (avanzado):</p>
+    <ul>
+        <li><a href="css/06-display-flujo.html">16 - Display y flujo</a></li>
+        <li><a href="css/07-posicionamiento.html">17 - Posicionamiento</a></li>
+        <li><a href="css/08-flexbox.html">18 - Flexbox</a></li>
+        <li><a href="css/09-flexbox-practica.html">19 - Práctica de flexbox</a></li>
+        <li><a href="css/10-grid.html">20 - Grid</a></li>
+        <li><a href="css/11-grid-practica.html">21 - Práctica de grid</a></li>
+        <li><a href="css/12-diseno-responsive.html">22 - Diseño responsive</a></li>
+        <li><a href="css/13-pseudoclases-elementos.html">23 - Pseudo-clases y pseudo-elementos</a></li>
+        <li><a href="css/14-variables-css.html">24 - Variables CSS</a></li>
+        <li><a href="css/15-accesibilidad-depuracion.html">25 - Accesibilidad y depuración</a></li>
+    </ul>
+    <p>También existe la demostración introductoria de
+        <a href="css/integrarCSS/index.html">cómo integrar CSS en una página</a>.</p>
+    <h2>Proyectos integradores</h2>
+    <p>Cuatro proyectos completos, progresivos y sin servidor: se abren con
+        doble clic en su <code>index.html</code>. El 04 además incluye
+        JavaScript (recomendado después de las lecciones 43-44 del curso de JS).</p>
+    <ul>
+        <li><a href="proyectos/01-pagina-personal/index.html">01 - Página personal</a>
+            — estructura semántica, anclas, imagen local y variables
+            (<em>requisitos: HTML 00-09; CSS 11, 22, 24</em>).</li>
+        <li><a href="proyectos/02-landing-responsive/index.html">02 - Landing responsive</a>
+            — presentación de producto ficticio, tarjetas Flexbox y diseño
+            mobile-first (<em>requisitos: CSS 18-22</em>).</li>
+        <li><a href="proyectos/03-portfolio-grid/index.html">03 - Portfolio con Grid</a>
+            — cuadrícula de proyectos con Grid y formulario accesible
+            (<em>requisitos: CSS 18-21 y formularios</em>).</li>
+        <li><a href="proyectos/04-app-tareas/index.html">04 - App de tareas</a>
+            — HTML + CSS + JavaScript: lista de tareas con DOM y eventos
+            (<em>requisitos: CSS completo; JS 43-44</em>).</li>
+    </ul>
+    <p>Cada proyecto incluye su <code>README.md</code> con objetivos, mejoras
+        propuestas y una lista de comprobación manual.</p>
+
+    <h2>Estado del curso</h2>
+    <p>
+        <strong>Terminado:</strong> lecciones de HTML (00-09), lecciones de CSS
+        (11-25) y los cuatro proyectos integradores.
+        <em>Auditoría:</em> revisión estática realizada; las comprobaciones
+        visuales (navegador, teclado y responsive) quedan pendientes por no
+        disponer de navegador. Inventario en <code>cursos/INVENTARIO.md</code>.
+    </p>
+
+    <h2>Cómo navegar este curso</h2>
+    <p>
+        La ruta recomendada es seguir los números en orden (00, 01, 02...).
+        Cada lección incluye un enlace para volver a esta página (el índice
+        del curso) y, salvo la primera y la última de cada bloque, enlaces
+        «Anterior» y «Siguiente» para retroceder o avanzar en la secuencia.
+    </p>
+</body>
+</html>

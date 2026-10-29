@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox en la práctica</title>
+    <!-- Hoja externa: es el CSS "de verdad" de la mini-página de práctica -->
+    <link rel="stylesheet" href="ejemplos/09-flexbox-practica.css">
+    <style>
+        /* Maquetación didáctica de la lección (soporte) */
+        body { font-family: system-ui, sans-serif; line-height: 1.6; max-width: 52rem; margin: 0 auto; padding: 1rem; }
+        section { border-bottom: 1px solid #ddd; padding: 0.5rem 0; }
+        code { background: #f0f0f0; padding: 0.1rem 0.3rem; border-radius: 4px; }
+        pre { background: #f6f6f6; border: 1px solid #ddd; padding: 0.8rem; overflow-x: auto; }
+        .aviso { background: #fff3cd; border-left: 4px solid #d97706; padding: 0.5rem 0.8rem; }
+        .soluciones { background: #eef7ee; border-left: 4px solid #2f9e44; padding: 0.5rem 0.8rem; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lección 19: Flexbox en la práctica</h1>
+        <p>Un mini-proyecto: navegación, tarjetas y distribución de
+            información con Flexbox. Esta lección NO se explica sola: cada
+            decisión está comentada en la hoja
+            <code>ejemplos/09-flexbox-practica.css</code>.</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>Objetivos</h2>
+            <ul>
+                <li>Aplicar flexbox a tres piezas reales: menú, tarjetas y
+                    fila de datos.</li>
+                <li>Leer y mantener una hoja CSS externa con comentarios.</li>
+                <li>Conseguir que la composición se adapte con
+                    <code>flex-wrap</code>.</li>
+            </ul>
+            <h3>Conocimientos previos</h3>
+            <p>La lección <a href="08-flexbox.html">Flexbox</a> (teoría): aquí
+                no hay teoría nueva, solo composición.</p>
+        </section>
+
+        <section>
+            <h2>1. La pieza completa</h2>
+            <p>Esto es lo que montamos abajo: una cabecera con menú, una
+                galería de tarjetas y una fila de etiquetas. Abre la hoja
+                <code>ejemplos/09-flexbox-practica.css</code> junto a esta
+                página para seguir el hilo; cada bloque está comentado.</p>
+
+            <!-- Mini-página de práctica: estructura tomada de la lección de
+                 semántica (header, nav, main, aside, footer) -->
+            <div class="p-sitio">
+                <nav class="p-nav" aria-label="Menú de práctica">
+                    <span class="marca">Mi sitio</span>
+                    <a href="#">Inicio</a>
+                    <a href="#">Servicios</a>
+                    <a href="#">Blog</a>
+                    <a href="#" class="boton">Contacto</a>
+                </nav>
+
+                <main>
+                    <div class="p-tarjetas">
+                        <article class="p-tarjeta">
+                            <h3>Tarjeta 1</h3>
+                            <p>Descripción breve del primer servicio o
+                                producto.</p>
+                        </article>
+                        <article class="p-tarjeta">
+                            <h3>Tarjeta 2</h3>
+                            <p>Otra descripción, con texto suficiente para
+                                ver cómo se reparten las alturas.</p>
+                        </article>
+                        <article class="p-tarjeta">
+                            <h3>Tarjeta 3</h3>
+                            <p>La tercera tarjeta de la galería.</p>
+                        </article>
+                        <article class="p-tarjeta">
+                            <h3>Tarjeta 4</h3>
+                            <p>Una más para forzar el salto de línea en
+                                pantallas estrechas.</p>
+                        </article>
+                    </div>
+
+                    <div class="p-fila">
+                        <span class="etiqueta">Etiqueta 1</span>
+                        <span class="etiqueta">Etiqueta 2</span>
+                        <span class="etiqueta">Etiqueta 3</span>
+                        <span class="etiqueta">Etiqueta 4</span>
+                        <span class="etiqueta">Etiqueta 5</span>
+                    </div>
+                </main>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Las decisiones, una a una</h2>
+            <p><strong>Navegación (.p-nav):</strong></p>
+            <pre><code>.p-nav {
+    display: flex;          /* hijos en línea */
+    align-items: center;    /* same línea vertical */
+    gap: 1rem;              /* separación uniforme */
+    flex-wrap: wrap;        /* en móvil, el menú baja sin romperse */
+}
+.p-nav .marca { margin-right: auto; }  /* empuja el resto a la derecha */</code></pre>
+            <p><code>margin-right: auto</code> en el logo absorbe todo el
+                espacio sobrante: los enlaces quedan pegados a la derecha sin
+                calcular anchos.</p>
+            <p><strong>Tarjetas (.p-tarjetas):</strong></p>
+            <pre><code>.p-tarjetas { display: flex; flex-wrap: wrap; gap: 1rem; }
+.p-tarjeta { flex: 1 1 180px; }</code></pre>
+            <p>Base mínima de 180px: caben 2-3 por línea según el ancho y el
+                wrap las baja de forma natural. Es el "grid de tarjetas" sin
+                Grid.</p>
+            <p><strong>Fila de datos (.p-fila):</strong></p>
+            <pre><code>.p-fila {
+    display: flex;
+    justify-content: space-between;  /* extremos pegados, huecos iguales */
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}</code></pre>
+            <p>Las etiquetas se reparten todo el ancho; al encoger, hacen
+                wrap y quedan alineadas.</p>
+        </section>
+
+        <section>
+            <h2>Errores frecuentes y cómo corregirlos</h2>
+            <ul>
+                <li><strong>Menú que se rompe en móvil:</strong> falta
+                    <code>flex-wrap: wrap</code> en el nav o en la fila.</li>
+                <li><strong>Botón del menú que se cae:</strong> con
+                    <code>margin-left: auto</code> en la marca debe quedar
+                    siempre pegado a la derecha; revisa que el `<span>` de la
+                    marca sea el primero.</li>
+                <li><strong>Tarjetas con alturas dispares que se ven
+                    raras:</strong> stretch (por defecto) iguala la altura de
+                    cada línea; si prefieres que no estiren, usa
+                    <code>align-items: flex-start</code>.</li>
+                <li><strong>Gap no aplicado:</strong> <code>gap</code>
+                    funciona solo en contenedores flex/grid; si el elemento
+                    no es flex, no separa nada.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ejercicios</h2>
+            <ol>
+                <li><strong>Fácil — variar la base:</strong> cambia
+                    <code>flex: 1 1 180px</code> por <code>1 1 240px</code> y
+                    observa cuántas tarjetas entran por línea. Anótalo.</li>
+                <li><strong>Medio — menú con dos botones:</strong> añade un
+                    segundo botón al nav y comprueba que el
+                    <code>margin-right: auto</code> de la marca sigue
+                    empujando a ambos a la derecha.</li>
+                <li><strong>Difícil — fila de datos vertical en móvil:</strong>
+                    añade una media query sencilla (se ve en la lección de
+                    responsive) que ponga <code>flex-direction: column</code>
+                    a la fila cuando la pantalla sea muy estrecha.</li>
+            </ol>
+        </section>
+
+        <section class="soluciones">
+            <h2>Soluciones razonadas</h2>
+            <p><em>Intenta los ejercicios antes de leer esto.</em></p>
+            <h3>Ejercicio 1</h3>
+            <p>Con base 240px entran dos tarjetas en la mayoría de pantallas
+                en vez de tres o cuatro. La base mínima es «cuánto espacio
+                exige cada ítem como mínimo».</p>
+            <h3>Ejercicio 2</h3>
+            <pre><code>&lt;a href="#" class="boton"&gt;Contacto&lt;/a&gt;
+&lt;a href="#" class="boton secundario"&gt;Ayuda&lt;/a&gt;</code></pre>
+            <p>Con la marca usando <code>margin-right: auto</code>, todo lo
+                que venga después queda a la derecha, da igual cuántos
+                enlaces haya.</p>
+            <h3>Ejercicio 3</h3>
+            <pre><code>@media (max-width: 420px) {
+    .p-fila { flex-direction: column; align-items: flex-start; }
+}</code></pre>
+            <p>En pantallas muy estrechas las etiquetas se apilan en vertical
+                y desaparece la barra «ancha».</p>
+        </section>
+
+        <section>
+            <h2>Resumen y autoevaluación</h2>
+            <p>La práctica hace servir lo aprendido: menú con
+                <code>margin-right: auto</code>, tarjetas con
+                <code>flex: 1 1 180px</code> + wrap + gap, y filas con
+                <code>justify-content: space-between</code>. La hoja externa
+                con comentarios es el modelo de trabajo real.</p>
+            <ul>
+                <li>[ ] Monto navegación + tarjetas + fila con flexbox.</li>
+                <li>[ ] Explico cada propiedad de la hoja de práctica.</li>
+                <li>[ ] Adapto la composición solo con wrap y bases.</li>
+            </ul>
+            <p>Siguiente: <a href="10-grid.html">Grid</a>. Vuelve al
+                <a href="../index.html">índice del curso</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <p><a href="../index.html">← Volver al índice</a> |
+                <a href="08-flexbox.html">Anterior: Flexbox</a> |
+                <a href="10-grid.html">Siguiente: Grid →</a></p>
+        </nav>
+    </footer>
+</body>
+</html>

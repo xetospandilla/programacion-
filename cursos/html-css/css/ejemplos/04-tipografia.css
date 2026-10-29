@@ -1,0 +1,41 @@
+/* Hoja externa de demostración de la lección 04-colores-unidades-tipografia.html.
+   Acotada a la zona .demo-tipo para no pisar la maquetación de la lección. */
+.demo-tipo .base-16 {
+    font-size: 16px;                     /* tamaño base para comparar em y rem */
+}
+
+.demo-tipo .hijo-em {
+    font-size: 1.5em;                    /* 1.5 x el tamaño de SU padre */
+}
+
+.demo-tipo .hijo-rem {
+    font-size: 1.5rem;                   /* 1.5 x el tamaño de la raíz (16px) */
+}
+
+.demo-tipo .con-vw {
+    width: 50vw;                         /* la mitad del ancho de la ventana */
+    background-color: #e3f2fd;
+    padding: 0.2rem 0.4rem;
+}
+
+.demo-tipo h3 {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.demo-tipo .espaciado {
+    line-height: 2;                      /* interlineado holgado */
+}
+
+.demo-tipo .alineado-derecha {
+    text-align: right;
+}
+
+.demo-tipo .capitales {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.demo-tipo .pequena {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
