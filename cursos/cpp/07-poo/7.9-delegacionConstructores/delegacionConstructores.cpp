@@ -6,12 +6,31 @@ Consiste en que un constructor "delegue" el trabajo realizado a otro constructor
 
 Sirve para evitar la duplicidad de código bajo algunos escenarios.
 -----------------------------------------------------------------------------------------------------------------------------
-En el caso de este ejerciocio, se puede hacer tanto por parámetros opcionales como por delegación de constructores,
-pero en casos en los que no es posible actuar con parámetros opcionales ya que son dependientes de otros. 
-En esos casos deberemos utilizar delegación de constructores.
+En este ejercicio se puede resolver tanto con parámetros opcionales como con delegación de constructores.
+La delegación resulta útil cuando los valores dependen unos de otros o cuando hay que ejecutar lógica
+que no se puede expresar con un simple valor por defecto.
 -----------------------------------------------------------------------------------------------------------------------------
+Dos alternativas válidas (no se pueden usar a la vez):
+
+1) Un solo constructor con parámetro opcional:
+       CuentaBancaria( string t, double s = 0.0 ): titular( t ), saldo( s ) { ... }
+
+2) Dos constructores, donde el de un solo parámetro delega en el otro:
+       CuentaBancaria( string t, double s ): titular( t ), saldo( s ) { ... }
+       CuentaBancaria( string t ): CuentaBancaria( t, 0.0 ) {}
+
+¿Por qué no pueden coexistir estas dos declaraciones?
+       CuentaBancaria( string titular, double saldo )
+       CuentaBancaria( string t, double s = 0.0 )
+
+El valor por defecto no forma parte de la firma (los tipos de los parámetros). Para el compilador
+las dos declaraciones son la misma función, así que la segunda no es una sobrecarga independiente:
+sería una redeclaración de la primera. Si las dos llevan cuerpo, el error es de redefinición;
+si una es solo declaración, la otra únicamente añade el valor por defecto, pero sigue siendo
+la misma función. Por eso hay que elegir una de las dos alternativas.
 
 #include <iostream>
+#include <string>
 using namespace std;
 
 class CuentaBancaria
@@ -21,22 +40,14 @@ class CuentaBancaria
         double saldo;
 
     public:
-        //  Constructor -> Tiene en cuenta que conocemos ambos datos.
+        //  Alternativa con delegación: el constructor completo hace el trabajo real.
         CuentaBancaria( string titular, double saldo ): titular( titular ), saldo( saldo )
         {
             cout << "Cuenta creada, para el cliente " << titular << " con un saldo de " << saldo << endl;
         }
 
-        //  Constructor -> Tiene en cuenta que conocemos el titular pero no el saldo, usando delegación de constructores.
+        //  Este constructor delega en el anterior con saldo 0.0.
         CuentaBancaria( string titular ): CuentaBancaria( titular, 0.0 ) {}
-
-
-//  Mismo caso pero con parametros opcionales:
-    CuentaBancaria( string t, double s = 0.0 ): titular( t ), saldo( s ) 
-    {
-        cout << "Cuenta creada, para el cliente " << titular << " con un saldo de " << saldo << endl;
-    }
-
 };
 
 int main()
@@ -59,27 +70,34 @@ class Figura
 
     public:
 /*
-        //  Constructor con parámetros opcionales:
+        //  Alternativa con parámetro opcional. Sustituye a los dos constructores
+        //  siguientes; no se pueden tener todos a la vez.
+        //  El valor por defecto no cambia la firma, igual que en CuentaBancaria.
+        //  Con un solo argumento, h valdría 0 y el área saldría 0.
         Figura( int b, int h = 0 ): base( b ), altura( h ), area( b*h ) 
         {
-            cout << "La figura tiene una base de " << base << " y una altura de " << altura << " y una área de " << area << endl;
+            cout << "La figura tiene una base de " << base << " y una altura de " << altura << " y un área de " << area << endl;
         }
 */
 
-        //Constructor con delegación de constructores:
+        //  Constructor con delegación de constructores.
+        //  El constructor de dos parámetros hace el cálculo real.
         Figura( int b, int h ): base( b ), altura( h ), area( b*h )
         {
-            cout << "La figura tiene una base de " << base << " y una altura de " << altura << " y una área de " << area << endl;
+            cout << "La figura tiene una base de " << base << " y una altura de " << altura << " y un área de " << area << endl;
         }
 
-        Figura( int lado ) : Figura( lado, lado ) {};
+        //  Un cuadrado delega en el constructor anterior con base = altura = lado.
+        Figura( int lado ) : Figura( lado, lado ) {}
 };
 
 int main()
 {
     Figura rectangulo( 3, 4 );
 
-    Figura cuadrado( 7 ); //    Al intentar hacer lo mismo con un cuadrado( indicando un solo un lado, ya que su aréa es lado por lado), el cáldulo será erróneo.
+    //  Con un solo lado, el constructor delega en Figura( lado, lado ),
+    //  así que el área del cuadrado es correcta (7 * 7 = 49).
+    Figura cuadrado( 7 );
 
     return 0;
 }
