@@ -2,38 +2,38 @@
 -----------------------------------------------------------------------------------------------------------------------------
 Friend of a Class
 -----------------------------------------------------------------------------------------------------------------------------
-Qué es?
+    Qué es?
 -----------------------------------------------------------------------------------------------------------------------------
-    - Caracterísitca del lenguaje que permite dar acceso a funciones u otras clases a los campos privados
-    o protegidos de una clase.
+        - Caracterísitca del lenguaje que permite dar acceso a funciones u otras clases a los campos privados
+        o protegidos de una clase.
 -----------------------------------------------------------------------------------------------------------------------------
-Para qué sirven?
+    Para qué sirven?
 -----------------------------------------------------------------------------------------------------------------------------
-    - Para que ciertas funciones o incluso otras clases sí puedan acceder a esos miembros internos sin
-    ser parte de la clase.
+        - Para que ciertas funciones o incluso otras clases sí puedan acceder a esos miembros internos sin
+        ser parte de la clase.
 -----------------------------------------------------------------------------------------------------------------------------
-    Precacuciones: Rompe la encapsulación( no del todo, pero la romp )
+        Precacuciones: Rompe la encapsulación( no del todo, pero la romp )
 -----------------------------------------------------------------------------------------------------------------------------
-Donde se declaran
+    Donde se declaran
 -----------------------------------------------------------------------------------------------------------------------------
-    - Dentro de la clase, escribiendo 'friend' antes de la función o clase.
+        - Dentro de la clase, escribiendo 'friend' antes de la función o clase.
 -----------------------------------------------------------------------------------------------------------------------------
-Cuando usar friend en vez de getters y setters:
+    Cuando usar friend en vez de getters y setters:
 -----------------------------------------------------------------------------------------------------------------------------
-    - Necesitas acceso a múltiples campos privados de golpe.
+        - Necesitas acceso a múltiples campos privados de golpe.
 
-    - Cuando además el acceso lo quieres rápido sin tener que dessarrollar getters
+        - Cuando además el acceso lo quieres rápido sin tener que dessarrollar getters
 
-    - Cuando hay relación estrecha entre clases y funciones.
+        - Cuando hay relación estrecha entre clases y funciones.
 
-    - Cuando necesitas acceso puntual a campos o atributos
+        - Cuando necesitas acceso puntual a campos o atributos
 -----------------------------------------------------------------------------------------------------------------------------
-Reglas de oro al usar 'friend'
+    Reglas de oro al usar 'friend'
 -----------------------------------------------------------------------------------------------------------------------------
-    - Primero intentar usar getters/setters
+        - Primero intentar usar getters/setters
 
-    - Solo usa frien si tienes una buena razón técnica para ello( relación especial, rendimiento,
-    diseño de operadores, etc. ).
+        - Solo usa frien si tienes una buena razón técnica para ello( relación especial, rendimiento,
+        diseño de operadores, etc. ).
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>

@@ -2,36 +2,42 @@
 -----------------------------------------------------------------------------------------------------------------------------
 Sobrecarga de Operadores
 -----------------------------------------------------------------------------------------------------------------------------
-Qué és la sobrecarga de operadores?
+    Qué és la sobrecarga de operadores?
 -----------------------------------------------------------------------------------------------------------------------------
-    - Mecanismo que permite cambiar el comportamiento por deferto de los operadores cuando los aplicamos a objetos propios.
+
+        - Mecanismo que permite cambiar el comportamiento por deferto de los operadores cuando los aplicamos a objetos propios.
+
 -----------------------------------------------------------------------------------------------------------------------------
-Para qué sirve?
+    Para qué sirve?
 -----------------------------------------------------------------------------------------------------------------------------
-    - Para que los objetos de una clase puedan interactuar de "forma natural" con los operadores igual
-    que los tipos primitivos.
+
+        - Para que los objetos de una clase puedan interactuar de "forma natural" con los operadores igual
+        que los tipos primitivos.
+
 -----------------------------------------------------------------------------------------------------------------------------
-Cómo se sobrecarga un operador?
+    Cómo se sobrecarga un operador?
 -----------------------------------------------------------------------------------------------------------------------------
+
     - Utilizando la palabra reservada 'operator' seguida del operador que se quiere sobrecargar.
+
 -----------------------------------------------------------------------------------------------------------------------------
-Qué operadores podemos sobrecargar?
+    Qué operadores podemos sobrecargar?
 -----------------------------------------------------------------------------------------------------------------------------
-    - Artiméticos: +,-,*,/,%
+        - Artiméticos: +,-,*,/,%
 
-    - Relacionales: ==,!=,<,>,<=,>=
+        - Relacionales: ==,!=,<,>,<=,>=
 
-    - De asingación: =,+=,-=,etc.
+        - De asingación: =,+=,-=,etc.
 
-    - De acceso: [],(),->,*
+        - De acceso: [],(),->,*
 -----------------------------------------------------------------------------------------------------------------------------
-IMPORTANTE
+    IMPORTANTE
 -----------------------------------------------------------------------------------------------------------------------------
-    - No se pueden crear operadores nuevos.
+        - No se pueden crear operadores nuevos.
 
-    - No puedes cambiar la precedencia ni cantidad de operadores de un operador.
+        - No puedes cambiar la precedencia ni cantidad de operadores de un operador.
 
-    - Hay operadores que no se pueden sobrecargar( .*, sizeof, etc. )
+        - Hay operadores que no se pueden sobrecargar( .*, sizeof, etc. )
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
