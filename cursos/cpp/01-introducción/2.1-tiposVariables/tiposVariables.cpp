@@ -41,7 +41,7 @@ Tipos de datos en C++
         · long double -> Parte decimal de 19 dígitos de tamaño ocho bytes.
                 RgValores: 3,3e -4932 a 1,2 4932.
 
-        - Booleanos -> condiciones que pueden ser verdaderas o falsas:
+- Booleanos -> condiciones que pueden ser verdaderas o falsas:
 
         · bool -> Para valores lógicos verdadero/falso de tamaño un byte.
                 RgValores: true / false.
