@@ -6,7 +6,7 @@ Bucles
 
 - Surgen por la necesidad de ejecutar varias veces el mismo código en un programa.
 
-- Los bucles están formados por un cabecera y un cuerpo.    
+- Los bucles están formados por una cabecera y un cuerpo.    
 
     - Cabecera: contiene la condición del bucle.
 
@@ -18,7 +18,7 @@ Bucles
 
     - Una vez por cada elemento de una colección.
 
-    - Mientras una condición se verdad durante la ejecución del programa.
+    - Mientras una condición sea verdad durante la ejecución del programa.
 
     - Hasta que la condición se convierta en falsa durante la ejecución de un programa.
 
@@ -32,10 +32,10 @@ Tipos de bucles
 -------------------------------------------------------------------------------------------------------
 - Determinados:
 
-    - Sabemos que nates de ejecutar un programa, cuántas veces se ejecutará el código
+    - Sabemos que antes de ejecutar un programa, cuántas veces se ejecutará el código
     en su interior.
 
-    - El C++ suelen ser bucles for.
+    - En C++ suelen ser bucles for.
 
 - Indeterminados:
 

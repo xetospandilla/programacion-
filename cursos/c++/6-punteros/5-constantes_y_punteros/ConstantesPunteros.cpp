@@ -9,12 +9,12 @@ Constantes y Punteros
 
 2. Punteros constantes: 
 
-    - Puntero cuya dirección de memoría no puede cambiar después de su inicialización; sin embargo, el valor al que apunta sí
+    - Puntero cuya dirección de memoria no puede cambiar después de su inicialización; sin embargo, el valor al que apunta sí
     que puede ser modificado, a menos que también sea constante.
 
 3. Punteros constantes a constantes:
 
-    - Puntero que no pueda cambiar la dirección de memoría a la que apunta ni modificar el valor almacenado en esa dirección.
+    - Puntero que no pueda cambiar la dirección de memoria a la que apunta ni modificar el valor almacenado en esa dirección.
 --------------------------------------------------------------------------------------------------------------------------------
 */
 

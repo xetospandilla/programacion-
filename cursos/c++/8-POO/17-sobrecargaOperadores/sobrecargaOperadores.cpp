@@ -41,6 +41,7 @@ Sobrecarga de Operadores
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Empleado
@@ -58,14 +59,14 @@ class Empleado
         // }
 
         //   sobrecargar del operador +
-        Empleado operator + ( const Empleado &otro )
+        Empleado operator + ( const Empleado &otro ) const
         {
             double nuevoSueldo = this->sueldo + otro.sueldo;
 
             return Empleado( "Nuevo Empleado", nuevoSueldo );
         }
 
-        bool operator == ( const Empleado& otro )
+        bool operator == ( const Empleado& otro ) const
         {
             return this->sueldo == otro.sueldo;
         }
@@ -78,6 +79,8 @@ class Empleado
 ostream& operator << ( ostream& salida, const Empleado& e )
 {
     salida << "Empleado: " << e.nombre << ", Sueldo: " << e.sueldo << "€\n";
+
+    return salida;
 }
 /*
 int main()
@@ -116,9 +119,20 @@ class MiClase
             datos = new int( valor );
         }
 
+        //  Constructor de copia( copia profunda )
+        MiClase( const MiClase& otro ): datos( new int( *otro.datos ) ) {}
+
+        //  Acceso de solo lectura para comprobar la copia
+        int valor() const
+        {
+            return *datos;
+        }
+
         //  Sobrecarga del operador asignación( copia profunda )
         MiClase& operator = ( const MiClase& otro )
         {
+            if( this == &otro ) return *this;   // Evita la autoasignación
+
             delete datos;
 
             datos = new int( *otro.datos );
@@ -135,11 +149,29 @@ class MiClase
 
 int main()
 {
+    Empleado emp1( "Ana", 2000 );
+    Empleado emp2( "Luis", 2000 );
+
+    cout << emp1 + emp2;                                  // operator+ y operator<<
+
+    if( emp1 == emp2 )                                    // operator==
+    {
+        cout << "El salario de ambos empleados es igual.\n";
+    }
+    else{
+        cout << "El salario de ambos empleados es diferente.\n";
+    }
 
     MiClase a(5);
     MiClase b(10);
+    MiClase copia( a );                                   // constructor de copia
 
-    b = a;
+    b = a;                                                // asignación
+    b = b;                                                // autoasignación
+
+    cout << "MiClase -> a: " << a.valor()
+         << ", b: " << b.valor()
+         << ", copia: " << copia.valor() << endl;
 
     return 0;
 }

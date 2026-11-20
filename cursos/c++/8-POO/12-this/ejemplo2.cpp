@@ -37,7 +37,10 @@ class CuentaBancaria
 int main()
 {
     CuentaBancaria c1;
+    c1.setSaldo( 1000 );
+
     CuentaBancaria c2;
+    c2.setSaldo( 2000 );
 
     c1.compararCuentas( c2 );   //  Objetos distintos.
     c1.compararCuentas( c1 );   //  El mismo objeto.

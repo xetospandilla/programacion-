@@ -45,9 +45,9 @@ Uso del Override
         - Mejora la legibilidad del código: Cualquier desarrollador que lea la clase derivada sabe al instante que ese 
         método proviene y redefine uno de la clase padre, sin tener que ir a revisar la jerarquía completa.
 
-        - Previene errores de mantenimiento o refactorización: Si en proyectos grandes se cambia la visibilidad, el 
-        tipo de retorno, se elimina el método base o se añaden sobrecargas, 'override' actúa como red de seguridad 
-        detectando cualquier desajuste entre padre e hija.
+        - Previene errores de mantenimiento o refactorización: Si se cambia la firma del método base (nombre,
+        parámetros, tipo de retorno o 'const'), se elimina o deja de ser virtual, 'override' actúa como red de
+        seguridad detectando el desajuste entre padre e hija.
 
         - Claridad semántica: Expresa de forma explícita la intención del programador ("estoy modificando un 
         comportamiento heredado, no creando uno nuevo"). Es considerada una buena práctica estándar en C++ moderno.
@@ -55,6 +55,7 @@ Uso del Override
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Persona
@@ -86,7 +87,8 @@ class Persona
 class Alumno : public Persona
 {
     private:
-        string *estudios;
+        string *estudios;   //  Propiedad dinámica: el destructor libera este recurso.
+                            //  Aquí no se copian objetos; si se hiciera, haría falta la regla de tres.
 
     public:
 
@@ -125,7 +127,7 @@ class Alumno : public Persona
 class Profesor : public Persona
 {
     private:
-        string *materia;
+        string *materia;    //  Propiedad dinámica: el destructor libera este recurso (ver nota en Alumno).
 
     public:
 

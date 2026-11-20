@@ -60,12 +60,17 @@ Bucles Infinitos
 -------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
+#include <random>
 #include <thread>
 #include <chrono>
 using namespace std;
 
 double leerTemperatura() {
-    return 20.0 + (rand() % 21); // genera entre 20 y 40
+    random_device rd;
+    mt19937 generador( rd() );
+    uniform_int_distribution<int> distribucion( 20, 40 );
+
+    return distribucion( generador ); // genera entre 20 y 40
 }
 
 void esperarSegundos(int segundos) {
@@ -74,12 +79,17 @@ void esperarSegundos(int segundos) {
 
 int main() {
     const double tempLimite = 35.0;
-    while (true) {
+    while (true) {   // Bucle infinito controlado: se sale escribiendo 'n'
         double tempActual = leerTemperatura();
         cout << "Temperatura actual: " << tempActual << "°C" << endl;
         if (tempActual > tempLimite) {
             cout << "ALERTA: Temperatura elevada detectada: " << tempActual << "°C" << endl;
         }
+
+        char continuar;
+        cout << "¿Continuar? (s/n): ";
+        if (!(cin >> continuar) || continuar == 'n' || continuar == 'N') break;
+
         esperarSegundos(3);
     }
 }

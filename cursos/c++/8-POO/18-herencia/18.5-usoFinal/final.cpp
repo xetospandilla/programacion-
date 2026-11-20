@@ -40,6 +40,7 @@ Uso del final
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Persona
@@ -71,7 +72,8 @@ class Persona
 class Alumno : public Persona
 {
     private:
-        string *estudios;
+        string *estudios;   //  Propiedad dinámica: el destructor libera este recurso.
+                            //  Aquí no se copian objetos; si se hiciera, haría falta la regla de tres.
 
     public:
 
@@ -111,7 +113,7 @@ class Alumno : public Persona
 class Profesor final : public Persona
 {
     private:
-        string *materia;
+        string *materia;    //  Propiedad dinámica: el destructor libera este recurso (ver nota en Alumno).
 
     public:
 
@@ -144,6 +146,13 @@ class Profesor final : public Persona
     Al colocar 'final' justo después del nombre de la clase, bloqueamos por completo
     la herencia a partir de ella. Ninguna otra clase podrá heredar ni los métodos
     ni los atributos de Profesor.
+
+    Estas dos líneas no se pueden compilar, muestran los errores que 'final' provoca:
+
+        class Ayudante : public Profesor {};                // ERROR: Profesor es final.
+        class AlumnoAvanzado : public Alumno {
+            void mostrarDatos() override {}                 // ERROR: mostrarDatos es final en Alumno.
+        };
 */
 
 int main()

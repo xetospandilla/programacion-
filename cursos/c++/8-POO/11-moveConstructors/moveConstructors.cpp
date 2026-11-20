@@ -42,6 +42,8 @@ del objeto original se garantiza que no habrá conflictos u errores como una dob
 
     - El destructor puede trabajar con un puntero nulo sin problema: "delete nullptr" es una operación válida y
       no hace nada. Por eso un objeto del que se han movido los recursos puede destruirse con seguridad.
+
+    - Ese objeto sigue siendo válido, pero está vacío: si se copia, su copia también tendrá el puntero a nullptr.
 -----------------------------------------------------------------------------------------------------------------------------
 Pendiente para más adelante:
 -----------------------------------------------------------------------------------------------------------------------------
@@ -78,7 +80,8 @@ class Ejemplo
         //  Constructor copia: reserva memoria nueva y copia el contenido (copia profunda).
         Ejemplo( const Ejemplo &origen )
         {
-            ptr = new int( *origen.ptr );
+            //  Si el origen ya fue movido, su puntero es nullptr y no hay contenido que copiar.
+            ptr = origen.ptr ? new int( *origen.ptr ) : nullptr;
         }
 
         ~Ejemplo()
@@ -94,6 +97,8 @@ int main()
     //  std::move( *obj1 ) no mueve nada: solo convierte *obj1 en un rvalue para que se seleccione
     //  el constructor de movimiento. La propiedad del entero pasa de *obj1 a obj2.
     Ejemplo obj2 = std::move( *obj1 );
+
+    Ejemplo obj3 = *obj1;   //  Copiar un objeto ya movido es seguro: su puntero vale nullptr.
 
     delete obj1;    //  Destruye el objeto del heap. Su ptr ya vale nullptr, así que no libera el recurso movido.
 

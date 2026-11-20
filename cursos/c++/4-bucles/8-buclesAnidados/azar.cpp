@@ -4,17 +4,19 @@ Juego de azar
 -------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
-#include <cstdlib> //Para rand() y srand()
-#include <ctime> // para time()
+#include <random> //Para random_device, mt19937 y uniform_int_distribution
 using namespace std;
 
 int main(){
 
-    srand(time(nullptr)); //Hace que capture el instante haciendo que sea diferente cada vez.
+    random_device rd;
+    mt19937 generador( rd() );
+    uniform_int_distribution<int> distribucion( 1, 100 );
+
     char continuar;
 
     do{
-        int numeroSecreto = rand() % 100 + 1;
+        int numeroSecreto = distribucion( generador ); // número entre 1 y 100
 
         int intentos = 0;
 

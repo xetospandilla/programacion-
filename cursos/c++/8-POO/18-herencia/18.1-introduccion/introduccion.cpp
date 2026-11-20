@@ -14,12 +14,14 @@ Herencia
     Principio de es-un
 -----------------------------------------------------------------------------------------------------------------------------
 
-        Principio en programación, que facilita saber que clase está heradando de otra. Ya que por norma
-        la clase hija suele ir debajo de la clase padre, de la que está heredando.
+        Principio que ayuda a decidir cuándo una clase debe heredar de otra: la clase derivada debe ser
+        un tipo más específico de la base (por ejemplo, Alumno es una Persona). No depende del orden
+        en que se escriban las clases.
 
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Persona
@@ -62,7 +64,7 @@ class Alumno : public Persona
 
 };
 
-//  Clase derivada o subclase Alumno
+//  Clase derivada o subclase Profesor
 class Profesor : public Persona
 {
     private:

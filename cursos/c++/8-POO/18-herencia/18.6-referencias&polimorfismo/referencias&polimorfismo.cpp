@@ -37,10 +37,10 @@ Referencias y polimorfismo
     Ventajas y desventajas de este diseño en C++
 -----------------------------------------------------------------------------------------------------------------------------
 
-        - Ventaja (Rendimiento - "No pagas por lo que no usas"): En C++ tú decides cuándo activar el polimorfismo.
-        Si no usas referencias/punteros, evitas el coste de las tablas virtuales (vtable), saltos indirectos y
-        consumo extra de memoria, permitiendo resoluciones en tiempo de compilación (inline). Por eso es el estándar
-        en videojuegos, motores gráficos y sistemas embebidos.
+        - Ventaja (Rendimiento - "No pagas por lo que no usas"): En C++ tú decides cuándo usar el polimorfismo.
+        Si no usas referencias/punteros, la llamada se resuelve en tiempo de compilación y evitas la indirección
+        de la vtable. Eso sí: una clase con métodos virtuales ya tiene vtable y vptr aunque se use por valor.
+        Por eso C++ es habitual en videojuegos, motores gráficos y sistemas embebidos.
 
         - Desventaja: Al dar tanta libertad al programador, es más fácil cometer errores lógicos (como olvidar el '&'
         y provocar object slicing sin darse cuenta).
@@ -48,7 +48,6 @@ Referencias y polimorfismo
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
-#include <string>
 using namespace std;
 
 class Animal

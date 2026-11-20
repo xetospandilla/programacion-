@@ -3,19 +3,19 @@
 Aritmética de Punteros
 -------------------------------------------------------------------------------------------------------------------------------
 - La aritmética de punteros es un concepto en programarción, especialmente relevante en lenguajes como C++ y C, que permite
-realizar operaciones aritméticas sobre punteros. Los punteros son variables que almacenan direcciones de memoría, y la
-aritmética de punteros se utiliza para calcular direcciones de memoría, lo que permite accder y manipular datos en diferentes
-posiciones de un array o bloque de memoría.
+realizar operaciones aritméticas sobre punteros. Los punteros son variables que almacenan direcciones de memoria, y la
+aritmética de punteros se utiliza para calcular direcciones de memoria, lo que permite acceder y manipular datos en diferentes
+posiciones de un array o bloque de memoria.
 
 - Podemos:
 
     - Incrementar un puntero(++): Al incrementar un puntero, se aumenta su valor para que se apunte al siguiente elemento
-    de un arreglo. El incremento se realiza en base al tamaño del tipo de dato al que apunta el puntero. Por emplo si un
-    puntero de tipo int, apunta al inicio del arreglo, al incrementar el punrtero, este apuntará 4 bytes adelante en memoría,
+    de un arreglo. El incremento se realiza en base al tamaño del tipo de dato al que apunta el puntero. Por ejemplo si un
+    puntero de tipo int, apunta al inicio del arreglo, al incrementar el puntero, este apuntará 4 bytes adelante en memoria,
     es decir, al siguiente entero del arreglo.
 
     - Decrecimiento a un puntero(--): Similar al incremento, pero en la dirección opuesta. Al decrementar un puntero, 
-    se disminuye su valor para que apunte al elemnto anterior en un arreglo.
+    se disminuye su valor para que apunte al elemento anterior en un arreglo.
 
     - Suma (+): se puede sumar un entero a un puntero para que el puntero avance varios elementos en un arreglo.
     Al igual que el incremento, el avance se cálcula multiplicando el número entero por el tamaño del tipo de daro

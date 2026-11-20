@@ -8,13 +8,13 @@ Uso static I
 ------------------------------------------------------------------------------------------------------------------------------
 ¿Qué significa que un atributo o método sea static?
 
-    - Atribtributos:
+    - Atributos:
 
         - Son compartidos por todas las instancias de clase.
 
         - No dependen de un objeto/instancia en particular.
 
-        - Se almacenan en un solo lugar de la memoría y no se replica en cada instancia.
+        - Se almacenan en un solo lugar de la memoria y no se replica en cada instancia.
 
     - Métodos static:
 
@@ -28,12 +28,12 @@ Utilidad del static:
 
     - Obtener información de la clase sin necesidad de instanciarla.
 
-    - Funciones de utiliada en clase especializadas( ejm: Math -> cálculos matemáticos )
+    - Funciones de utilidad en clases especializadas( ej: Math -> cálculos matemáticos )
 
-    - 
+    - Contar instancias o generar identificadores compartidos, como hace este ejemplo.
 -----------------------------------------------------------------------------------------------------------------------------
 NOTA:
-    A partir de la version 17 de C++, se le puede agregar la palabra 'inline' antes de la declaración para poder tener
+    A partir de la versión 17 de C++, se le puede agregar la palabra 'inline' antes de la declaración para poder tener
     la inicialización y la definición dentro de la propia clase.
 -----------------------------------------------------------------------------------------------------------------------------
 */

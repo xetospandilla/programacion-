@@ -46,6 +46,8 @@ class Asignatura{
 
         // Obtener nota máxima
         double max(){
+            if(notas.empty()) return 0;   // Evita acceder a notas[0] sin datos
+
             double maximo = notas[0];
             for(double n : notas){
                 if(n > maximo) maximo = n;
@@ -55,6 +57,8 @@ class Asignatura{
 
         // Obtener nota mínima
         double min(){
+            if(notas.empty()) return 0;   // Evita acceder a notas[0] sin datos
+
             double minimo = notas[0];
             for(double n : notas){
                 if(n < minimo) minimo = n;
@@ -107,20 +111,33 @@ class Alumno{
         double mediaGeneral(){
             double suma = 0;
             for(auto &a : asignaturas){
-                suma += a.media();
+                suma += a.media();   // Una asignatura sin notas aporta media 0
             }
             return asignaturas.empty() ? 0 : suma / asignaturas.size();
         }
 
         // Mostrar la mejor y peor nota del alumno
         void mejorPeorNota(){
-            double mejor = -1e9, peor = 1e9;
+            bool hayNotas = false;
+            double mejor = 0, peor = 0;
+
             for(auto &a : asignaturas){
                 for(double n : a.notas){
-                    if(n > mejor) mejor = n;
-                    if(n < peor) peor = n;
+                    if(!hayNotas){
+                        mejor = peor = n;
+                        hayNotas = true;
+                    }else{
+                        if(n > mejor) mejor = n;
+                        if(n < peor) peor = n;
+                    }
                 }
             }
+
+            if(!hayNotas){
+                cout << "El alumno no tiene notas." << endl;
+                return;
+            }
+
             cout << "Mejor nota: " << mejor << " | Peor nota: " << peor << endl;
         }
 };

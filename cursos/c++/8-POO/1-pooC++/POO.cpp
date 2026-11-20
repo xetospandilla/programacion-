@@ -3,7 +3,7 @@
 Programación orientada a objeto
 -----------------------------------------------------------------------------------------------------------------------------
 
-- POO Conteptos:
+- POO Conceptos:
 
     - Clase
 
@@ -31,7 +31,7 @@ Programación orientada a objeto
 
         - Unidades de código muy grandes en aplicaciones complejas.
 
-        - En aplicaciones complejas el cópdigo resulta díficil de descifrar.
+        - En aplicaciones complejas el código resulta difícil de descifrar.
 
         - Poco reutilizable.
 
@@ -62,18 +62,18 @@ Programación orientada a objeto
 -------------------------------------------------------------------------------------
 - Programación Orientada a objetos:
 
-    - Algunos ejemplos de lenguajes: C++. Java, Visual.NET, etc.
+    - Algunos ejemplos de lenguajes: C++, Java, Visual.NET, etc.
 
     - Ventajas:
 
         - Programas divididos en "trozos", "partes", "módulos" o "clases". Modularización.
         El código está separado en partes.
 
-        - Muy reutilizable. Herencia. (Coger algo que hemos programado en un programa y llevarlo tal cuál
-        a otro programay usarlo tal cuál. Pudiendo hederar características).
+        - Muy reutilizable. Herencia. (Coger algo que hemos programado en un programa y llevarlo tal cual
+        a otro programa y usarlo tal cual. Pudiendo heredar características).
 
         - Si existe fallo en alguna línea de código, el programa continuará
-        con su funcionamiento. Tratamiendo de Excepciones.
+        con su funcionamiento. Tratamiento de Excepciones.
 
         - Encapsulamiento.(Ocultar una parte del código al exterior, para que no se vea su interior).
 -----------------------------------------------------------------------------------------------------------------------------

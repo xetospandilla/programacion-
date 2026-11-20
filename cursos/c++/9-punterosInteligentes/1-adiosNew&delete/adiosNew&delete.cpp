@@ -30,8 +30,8 @@ Smart Pointers (Punteros Inteligentes): Adiós a new y delete
         - Son objetos envoltorio (wrappers) que gestionan automáticamente la memoria dinámica en el heap y ejecutan
         'delete' por nosotros en su destructor cuando dejan de existir (anticipo del principio RAII).
 
-        - A diferencia del Garbage Collector de Java (que pasa periódicamente), aquí la liberación es determinista e
-        inmediata en cuanto el objeto sale de su ámbito (scope).
+        - A diferencia del Garbage Collector de Java (que libera la memoria en un momento no determinista), aquí la
+        liberación es determinista e inmediata en cuanto el objeto sale de su ámbito (scope).
 
     Tipos:
 

@@ -52,6 +52,7 @@ Smart Pointers (Punteros Inteligentes): shared_ptr y RAII
 */
 #include <iostream>
 #include <memory>
+#include <string>
 using namespace std;
 
 // --------------------------------------------------------------------------------------------------------------------------

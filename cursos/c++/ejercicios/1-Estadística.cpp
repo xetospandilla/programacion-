@@ -16,9 +16,10 @@ Usa vectores para almacenar los números, switch-case para el menú y funciones 
 
 #include <iostream>
 #include <vector>
+#include <limits>
 using namespace std;
 
-class Estadistica {
+class CalculadoraVector {
 private:
     vector<double> datos;
 
@@ -26,14 +27,28 @@ public:
     void introducirNumeros() {
         int tam;
         cout << "Cuantos valores quieres meter dentro: ";
-        cin >> tam;
+        if(!(cin >> tam) || tam < 0){
+            cout << "Cantidad no válida." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            return;
+        }
 
         double valor;
         for(int v = 0; v < tam; v++){
             cout << "Introduce el valor " << v+1 << ": ";
-            cin >> valor;
-            datos.push_back(valor);
+            if(!(cin >> valor)){
+                cout << "Valor no válido. Se descarta esta entrada." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                return;
+            }
+            datos.push_back(valor); // Se añade a los valores ya introducidos.
         }
+    }
+
+    void vaciar() {
+        datos.clear(); // Utilidad adicional para empezar una lista nueva.
     }
 
     void mostrarNumeros() const {
@@ -55,24 +70,24 @@ public:
 
     double max() const {
         if(datos.empty()) return 0;
-        double max = datos[0];
-        for(int i = 1; i < datos.size(); i++)
-            if(datos[i] > max) max = datos[i];
-        return max;
+        double mayor = datos[0];
+        for(size_t i = 1; i < datos.size(); i++)
+            if(datos[i] > mayor) mayor = datos[i];
+        return mayor;
     }
 
     double min() const {
         if(datos.empty()) return 0;
-        double min = datos[0];
-        for(int i = 1; i < datos.size(); i++)
-            if(datos[i] < min) min = datos[i];
-        return min;
+        double menor = datos[0];
+        for(size_t i = 1; i < datos.size(); i++)
+            if(datos[i] < menor) menor = datos[i];
+        return menor;
     }
 };
 
 int main(){
     int opcion;
-    Estadistica est;
+    CalculadoraVector est;
     do{
         cout << "=======================================" << endl;
         cout << "           MENÚ DE OPCIONES            " << endl;
@@ -83,9 +98,21 @@ int main(){
         cout << "4. Calcular media.                     " << endl;
         cout << "5. Mostrar número máximo.              " << endl;
         cout << "6. Mostrar número mínimo.              " << endl;
-        cout << "7. Salir.                              " << endl;
+        cout << "7. Vaciar la lista.                    " << endl;
+        cout << "8. Salir.                              " << endl;
         cout << "=======================================" << endl;
-        cin >> opcion;
+        cout << "Elige una opción: ";
+        if(!(cin >> opcion)){
+            if(cin.eof()){
+                cout << "Entrada agotada. Saliendo..." << endl;
+                break;
+            }
+            cout << "Opción no válida." << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            opcion = 0;
+            continue;
+        }
 
         switch(opcion){
             case 1: est.introducirNumeros(); break;
@@ -100,9 +127,11 @@ int main(){
 
             case 6: cout << "Mínimo: " << est.min() << endl; break;
 
-            case 7: cout << "Saliendo..." << endl; break;
+            case 7: est.vaciar(); break;
 
-            default: cout << "Opción no valida" << endl; break;
+            case 8: cout << "Saliendo..." << endl; break;
+
+            default: cout << "Opción no válida" << endl; break;
         }
-    }while(opcion != 7); return 0;
+    }while(opcion != 8); return 0;
 }

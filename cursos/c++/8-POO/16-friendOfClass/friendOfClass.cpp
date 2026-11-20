@@ -4,7 +4,7 @@ Friend of a Class
 -----------------------------------------------------------------------------------------------------------------------------
     Qué es?
 -----------------------------------------------------------------------------------------------------------------------------
-        - Caracterísitca del lenguaje que permite dar acceso a funciones u otras clases a los campos privados
+        - Característica del lenguaje que permite dar acceso a funciones u otras clases a los campos privados
         o protegidos de una clase.
 -----------------------------------------------------------------------------------------------------------------------------
     Para qué sirven?
@@ -12,7 +12,7 @@ Friend of a Class
         - Para que ciertas funciones o incluso otras clases sí puedan acceder a esos miembros internos sin
         ser parte de la clase.
 -----------------------------------------------------------------------------------------------------------------------------
-        Precacuciones: Rompe la encapsulación( no del todo, pero la romp )
+        Precauciones: Rompe la encapsulación( no del todo, pero la rompe )
 -----------------------------------------------------------------------------------------------------------------------------
     Donde se declaran
 -----------------------------------------------------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ Friend of a Class
 -----------------------------------------------------------------------------------------------------------------------------
         - Necesitas acceso a múltiples campos privados de golpe.
 
-        - Cuando además el acceso lo quieres rápido sin tener que dessarrollar getters
+        - Cuando además el acceso lo quieres rápido sin tener que desarrollar getters
 
         - Cuando hay relación estrecha entre clases y funciones.
 
@@ -32,7 +32,7 @@ Friend of a Class
 -----------------------------------------------------------------------------------------------------------------------------
         - Primero intentar usar getters/setters
 
-        - Solo usa frien si tienes una buena razón técnica para ello( relación especial, rendimiento,
+        - Solo usa friend si tienes una buena razón técnica para ello( relación especial, rendimiento,
         diseño de operadores, etc. ).
 -----------------------------------------------------------------------------------------------------------------------------
 */
@@ -70,5 +70,10 @@ int main()
 {
     Caja c( 5.0, 3.0 );
     // cout << "Área de la caja: " << calcularArea( c ) << endl; 
+
+    //  Inspector puede leer los atributos privados de Caja porque es friend.
+    Inspector inspector;
+    inspector.mostrarDimensiones( c );
+
     return 0;
 }

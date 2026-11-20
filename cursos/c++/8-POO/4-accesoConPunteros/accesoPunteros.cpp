@@ -2,17 +2,17 @@
 -----------------------------------------------------------------------------------------------------------------------------
 Acceso a propiedades y métodos mediante punteros
 -----------------------------------------------------------------------------------------------------------------------------
-- Gestión de memoría dinámica. generar punteros de manera dinámica. ("new").
+- Gestión de memoria dinámica: generar punteros de manera dinámica ("new").
 
-- Para poder hacer trabajo con Herencia y poliformismo.
+- Para poder trabajar con herencia y polimorfismo.
 
-- Estrucuturas de daros dinámicas.
+- Estructuras de datos dinámicas.
 
-- Paso de obketos a funciones.
+- Paso de objetos a funciones.
 
 - Manejo de APIs y Bibliotecas.
 
-- Patrondes de diseño.
+- Patrones de diseño.
 
 - Callbacks y manejo de eventos.
 
@@ -39,8 +39,7 @@ class coche{
     public:
 
         void setPrecio(double p){
-            if(p > 0) precio = p;
-            if(p < 0) precio = abs(p);
+            if(p < 0){precio = abs(p);} else {precio = p;}
         }
 
         double getPrecio(){

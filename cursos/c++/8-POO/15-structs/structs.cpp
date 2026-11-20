@@ -1,10 +1,10 @@
 /*
 -----------------------------------------------------------------------------------------------------------------------------
-Uso static I
+Uso de structs
 ------------------------------------------------------------------------------------------------------------------------------
 ¿Que són?
 
-    - Estructuras muy similares a las clases donde se agrupan variables vajo un mismo nombre.
+    - Estructuras muy similares a las clases donde se agrupan variables bajo un mismo nombre.
 -----------------------------------------------------------------------------------------------------------------------------
 ¿Para qué sirven?
 
@@ -18,10 +18,11 @@ Cuando usar un Struct y cuando una Clase:
 
     - Usar Struct cuando solo necesites guardar y acceder a datos de forma directa.
 
-    - Usar Class cuando quieras encapsular, validad o proteger datos.
+    - Usar Class cuando quieras encapsular, validar o proteger datos.
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
+#include <string>
 using namespace std;
 
 struct Persona
@@ -40,8 +41,8 @@ int main()
 {
     Persona p;
 
-    p.nombre( "Juan" );
-    p.edad( 18 );
+    p.nombre = "Juan";
+    p.edad = 18;
 
     cout << p.getDatos();
 }

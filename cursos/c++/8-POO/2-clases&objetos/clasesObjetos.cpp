@@ -8,8 +8,8 @@ Clases y objetos
 
 - Objeto
 
-    - Ejemplar perteneciente a una clase. (Los objetos son derivados de una clase, ya que tiene unas características
-    cómunes).
+    - Ejemplar perteneciente a una clase. (Los objetos son derivados de una clase, ya que tienen unas características
+    comunes).
 
     - Pueden tener propiedades y métodos:
 
@@ -25,6 +25,9 @@ using namespace std;
 
 
 class coche{
+
+    //En 'class', los miembros son privados por defecto: desde main() todavía no se puede usar
+    //cocheMaria.arrancar(). El siguiente apartado muestra cómo hacerlos públicos con 'public:'.
 
     //Atributos o propiedades:
     string modelo;
@@ -61,7 +64,7 @@ int main(){
 
     coche cocheJuan;
 
-    return 0; //BreackPont: Sirve para ejecutar un programa hasta antes de este punto.
+    return 0; //Breakpoint: sirve para ejecutar el programa hasta antes de este punto.
 
 }
 //---------------------------------------------------------------------------------------------------------------------------

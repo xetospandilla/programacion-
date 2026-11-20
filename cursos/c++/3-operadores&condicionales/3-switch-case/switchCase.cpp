@@ -67,7 +67,7 @@ int main() {
             break;
         case 3:
             cout << "Saliendo del programa..." << endl;
-            break;
+            return 0; // Termina main() y, por tanto, el programa.
         default:
             cout << "Opcion no valida." << endl;
             break;

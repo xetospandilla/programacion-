@@ -8,6 +8,6 @@ del bucle.
 
 - Pero además necesita que el cuerpo del bucle se ejecute al menos una vez.
 
-- Sintaxis: do{ cuerpodel bucle }while(condición a evaluar);
+- Sintaxis: do{ cuerpo del bucle }while(condición a evaluar);
 -------------------------------------------------------------------------------------------------------
 */

@@ -31,7 +31,7 @@ Condiciones
 #include <iostream>
 using namespace std;
 
-class RegistroTemperaturas
+class RegistroTemperatura
 {
     private:
         //  Atributos de la clase:
@@ -39,7 +39,7 @@ class RegistroTemperaturas
     
     public:
         //  Constructor de la clase:
-        RegistroTemperaturas( double tempInicial ): temperatura( tempInicial ) {}
+        RegistroTemperatura( double tempInicial ): temperatura( tempInicial ) {}
 
         //  Método actualizarTemperatura()
         void actualizarTemperatura( double nuevaTemp )
@@ -47,40 +47,42 @@ class RegistroTemperaturas
             this->temperatura = nuevaTemp;
         }
 
-        //  Método esSuperiorA()
-        bool esSuperiorA( const RegistroTemperaturas &otro ) const
+        //  Método obtenerTemperatura()
+        double obtenerTemperatura() const
         {
-            if( this->temperatura < otro.temperatura )
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return this->temperatura;
+        }
+
+        //  Método esSuperiorA()
+        bool esSuperiorA( const RegistroTemperatura &otro ) const
+        {
+            return this->obtenerTemperatura() > otro.obtenerTemperatura();
         }
 
         //  Método mostrarInformación()
         void mostrarInformacion() const
         {
-            cout << "Temperatura almacenada: " << this->temperatura << endl;
+            cout << "Temperatura almacenada: " << this->obtenerTemperatura() << endl;
         }
 
 };
 
 int main()
 {
-    RegistroTemperaturas t1( 200.0 );
-    RegistroTemperaturas t2( 300.0 );
+    RegistroTemperatura t1( 200.0 );
+    RegistroTemperatura t2( 300.0 );
 
     t1.mostrarInformacion();
     t2.mostrarInformacion();
 
-    t1.esSuperiorA( t2 );
+    cout << "Getter -> t1: " << t1.obtenerTemperatura()
+         << ", t2: " << t2.obtenerTemperatura() << endl;
+
+    cout << boolalpha << "¿t1 > t2?: " << t1.esSuperiorA( t2 ) << endl;
 
     t1.actualizarTemperatura( 400.0 );
 
-    t1.esSuperiorA( t2 );
+    cout << "¿t1 > t2?: " << t1.esSuperiorA( t2 ) << endl;
 
     return 0;
 }

@@ -5,36 +5,25 @@ Desde el main(), pide los tres números al usuario, llama a la función y muestr
 -------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
-#include <vector>
+#include <iomanip>
 using namespace std;
 
-double mediaVector(){
-    
-    vector<double> nums(3);
-    for(int i = 0; i < nums.size(); i++){
-        cout << "Introduzca un elemento: " << endl;
-        cin >> nums[i];
-    }
-
-    cout << "------------------------------------------" << endl;
-    cout << " Los valores escogidos son: ";
-    for (double valor:nums){
-        cout << valor << ", ";
-    }
-    cout << endl;
-    cout << "------------------------------------------" << endl;
-
-    double suma = 0;
-    for(double valor : nums){
-        suma += valor;
-    } double media = suma / nums.size();
-
-    cout << "La media de esos tres valores: " << media << endl;
-    cout << "------------------------------------------" << endl;
-    return media;
+double mediaTres(double a, double b, double c){
+    return (a + b + c) / 3;
 }
 
 int main(){
-    double media = mediaVector();
-    cout << "La media de los tres números dió" << media << endl; return 0;
+    double a, b, c;
+
+    cout << "Introduzca tres números reales: " << endl;
+    cin >> a >> b >> c;
+
+    double media = mediaTres(a, b, c);
+
+    cout << "------------------------------------------" << endl;
+    cout << "Los valores escogidos son: " << a << ", " << b << ", " << c << endl;
+    cout << "La media de esos tres valores: " << fixed << setprecision(2) << media << endl;
+    cout << "------------------------------------------" << endl;
+
+    return 0;
 }

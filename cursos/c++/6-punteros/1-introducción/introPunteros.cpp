@@ -4,9 +4,9 @@ Punteros
 -------------------------------------------------------------------------------------------------------------------------
 //Introducción: 
 
-    - Los punteros son una caracteristica fundamental en C++ que permiten una gestión eficiente y detallada  de la memoría
-    y detallada de la memoría y otros recursos del hardware. los punteros son variables cuya función principal es almacenar
-    direcciones de memoría.
+    - Los punteros son una característica fundamental en C++ que permiten una gestión eficiente y detallada de la memoria
+    y de otros recursos del hardware. Los punteros son variables cuya función principal es almacenar
+    direcciones de memoria.
 
     - Qué puede haber en las direcciones de memoria almacenadas por los punteros:
         - Variables primitivas.
@@ -14,8 +14,8 @@ Punteros
         - Clases.
         - Otro puntero.
         - Funciones.
-        - Bloque de memoría dinámica.
-        - Bloque de memoría reservada.
+        - Bloque de memoria dinámica.
+        - Bloque de memoria reservada.
         - Etc.
 
     - Para que sirven?:
@@ -28,12 +28,12 @@ Punteros
 
     - Que ventajas tienen los lenguajes que utilizan punteros:
 
-        - Control directo de la memoría.
+        - Control directo de la memoria.
         - Flexibilidad en manejo de datos.
         - Interacción con hardware a bajo nivel. 
         - Paso de parámetros por referencia.
         - Compatibilidad con C.
 
-        Sin punteros: Hay más simplicidad en el desarrollo. Mayor seguridad. Menor preocupación por fallos de memoría.
+        Sin punteros: Hay más simplicidad en el desarrollo. Mayor seguridad. Menor preocupación por fallos de memoria.
 -------------------------------------------------------------------------------------------------------------------------
 */

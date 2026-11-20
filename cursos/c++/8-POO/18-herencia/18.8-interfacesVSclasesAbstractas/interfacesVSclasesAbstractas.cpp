@@ -54,19 +54,18 @@ Interfaces vs Clases abstractas
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
-#include <string>
 using namespace std;
 
 // Interfaz (por convención en C++ suele nombrarse con 'I' delante: IVolador)
-class Volador
+class IVolador
 {
     public:
         virtual void puedoVolar() = 0;
 
-        virtual ~Volador() {};
+        virtual ~IVolador() {};
 };
 
-class Pajaro : public Volador
+class Pajaro : public IVolador
 {
     public:
         void puedoVolar() override
@@ -75,7 +74,7 @@ class Pajaro : public Volador
         }
 };
 
-class Avion : public Volador
+class Avion : public IVolador
 {
     public:
         void puedoVolar() override
@@ -84,7 +83,7 @@ class Avion : public Volador
         }
 };
 
-class Murcielago : public Volador
+class Murcielago : public IVolador
 {
     public:
         void puedoVolar() override
@@ -93,7 +92,7 @@ class Murcielago : public Volador
         }
 };
 
-class Superman : public Volador
+class Superman : public IVolador
 {
     public:
         void puedoVolar() override
@@ -110,9 +109,9 @@ int main()
     Superman s;
 
     // Podemos agrupar objetos totalmente distintos bajo la misma interfaz común:
-    Volador* voladores[] = { &p, &a, &m, &s };
+    IVolador* voladores[] = { &p, &a, &m, &s };
 
-    for ( Volador* v : voladores )
+    for ( IVolador* v : voladores )
     {
         v->puedoVolar();
     }

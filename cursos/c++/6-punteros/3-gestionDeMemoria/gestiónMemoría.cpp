@@ -38,7 +38,7 @@ using namespace std;
 
 int main(){
 
-    int *int_ptr{nullptr}; //No debemos inicializar punteros si no sabemos a donde apuntarán.
+    int *int_ptr{nullptr}; //Debemos inicializar a nullptr cuando aún no apunta a un objeto válido.
     //Con esto nos aseguramos de que el puntero apunte a nulo y no a algún elemento residual.
 
     int_ptr = new int;//Así asignamos un espacio de la memoría en el Heap apra un entero.
@@ -50,7 +50,7 @@ int main(){
 
     *int_ptr = 10;
 
-    cout << "Valor antes del delete: " << endl;
+    cout << "Valor antes del delete: " << *int_ptr << endl;
 
     delete int_ptr; //Liberación de memoría. Dejando ese espacio en la memoría libre para asignarse de nuevo.
     //Después de esto el puntero se convierte en un puntero colgante, ya que mantiene la dirección de memoría borrada.

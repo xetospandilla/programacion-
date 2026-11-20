@@ -1,6 +1,6 @@
 /*
 -----------------------------------------------------------------------------------------------------------------------------
-Poliformismo
+Polimorfismo
 -----------------------------------------------------------------------------------------------------------------------------
     Sirve para
 -----------------------------------------------------------------------------------------------------------------------------
@@ -21,13 +21,14 @@ Poliformismo
     del objeto derivado.
 
     - Efectivamente, tiene una ligera penalización de rendimiento. El compilador crea una tabla
-    de funciones virtuales (vtable) y añade un puntero oculto (vptr) a cada objeto, lo que implica un pequeño gasto extra 
-    de memoria y una indirección adicional al resolver qué función llamar en tiempo de ejecución
-    (aunque en la práctica suele ser despreciable frente a la flexibilidad que aporta).
+    de funciones virtuales por clase (vtable) y un puntero oculto (vptr) en cada objeto con métodos virtuales,
+    lo que implica un pequeño gasto extra de memoria y una indirección adicional al resolver qué función
+    llamar en tiempo de ejecución (aunque en la práctica suele ser despreciable frente a la flexibilidad que aporta).
 
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Persona
@@ -70,7 +71,7 @@ class Alumno : public Persona
 
 };
 
-//  Clase derivada o subclase Alumno
+//  Clase derivada o subclase Profesor
 class Profesor : public Persona
 {
     private:
@@ -98,10 +99,14 @@ int main()
     Alumno a1( "Laura", 20, "Ingeniería Informática" );
     Profesor p1( "Carlos", 45, "Programación en C++" );
 
-    Persona *persona1 = &a1;
-    Persona *persona2 = &p1;
+    //  Un mismo recorrido sirve para todos los objetos de la jerarquía.
+    Persona *personas[] = { &a1, &p1 };
 
-    persona1->mostrarDatos();
+    for ( Persona *persona : personas )
+    {
+        persona->mostrarDatos();
+        cout << "----------" << endl;
+    }
 
     return 0;
 

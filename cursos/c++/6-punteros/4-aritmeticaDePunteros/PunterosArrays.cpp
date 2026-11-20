@@ -4,9 +4,9 @@ Punteros y Arrays
 -------------------------------------------------------------------------------------------------------------------------------
 - En C++ un array es básicamente un puntero al primer elemento del array.
 
-    - El valor del nombre del array es la dirección en memoría del primer elemento del arrya.
+    - El valor del nombre del array es la dirección en memoria del primer elemento del array.
 
-    - CUando se usa el nombre del array sin ningún índice se obtiene la dirección en memoría del primer elemento del array.
+    - Cuando se usa el nombre del array sin ningún índice se obtiene la dirección en memoria del primer elemento del array.
 
     - Cuando un puntero apunta al mismo tipo de dato que los elementos de un array, es casi en todos los escenarios,
     puedes usar el nombre del puntero y el nombre del array intercambiable para realizar operaciones similares,
@@ -23,9 +23,9 @@ int main(){
     int nums[] = {10,20,30,40};
 
     //-----------------------------------------------------------------------------------
-    cout << nums << endl; //Dirección de memoría del primer elemento del array.
+    cout << nums << endl; //Dirección de memoria del primer elemento del array.
 
-    cout << *nums << endl; //Valor de lo que hay almacenado en esa dirección de memoría.
+    cout << *nums << endl; //Valor de lo que hay almacenado en esa dirección de memoria.
     //-----------------------------------------------------------------------------------
     int *p_nums(nums);
     //-----------------------------------------------------------------------------------

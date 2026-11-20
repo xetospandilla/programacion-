@@ -67,52 +67,17 @@ class Rectangulo
             return ( this->base * 2 ) + ( this->altura * 2 );
         }
 
-        //  Método mostrarInformación()
+        //  Método mostrarInformacion(): muestra dimensiones, área y perímetro.
         void mostrarInformacion() const
         {
-            char opcion;
-            double area, perimetro;
-
             cout << "--------------------" << endl;
             cout << "Datos del Rectangulo" << endl;
             cout << "--------------------" << endl;
             cout << "Base: " << this->base << endl;
             cout << "Altura: " << this->altura << endl;
+            cout << "Area: " << this->calcularArea() << endl;
+            cout << "Perimetro: " << this->calcularPerimetro() << endl;
             cout << "--------------------" << endl;
-
-            cout << "Desea obtener el área( A ) o el perímetro( P )?( Introduzca 'S' para ambas )" << endl;
-            cin >> opcion;
-
-            switch( opcion )
-            {
-                case 'A':
-
-                    cout << "--------------------" << endl;
-                    cout << "Área: " << this->calcularArea() << endl;
-                    cout << "--------------------" << endl;
-
-                    break;
-
-                case 'P':
-
-                    cout << "--------------------" << endl;
-                    cout << "Perimetro: " << this->calcularPerimetro() << endl;
-                    cout << "--------------------" << endl;
-
-                    break;
-
-                case 'S':
-                    
-                    cout << "--------------------" << endl;
-                    cout << "Area: " << this->calcularArea() << endl;
-                    cout << "Perimetro: " << this->calcularPerimetro() << endl;
-                    cout << "--------------------" << endl;
-
-                    break;
-
-                default:
-                    break;
-            }
         }
 
 };
@@ -120,9 +85,13 @@ class Rectangulo
 int main()
 {
 
-    Rectangulo r1;
-    Rectangulo r2( 10.0, 5.0 );
+    Rectangulo r1;                  // Constructor por defecto: 1 y 1.
+    Rectangulo r2( 10.0, 5.0 );     // Dimensiones elegidas para la prueba.
 
+    cout << "Rectangulo 1" << endl;
+    r1.mostrarInformacion();
+
+    cout << "Rectangulo 2" << endl;
     r2.mostrarInformacion();
 
     return 0;

@@ -1,45 +1,45 @@
 /*
 -----------------------------------------------------------------------------------------------------------------------------
-Destrcutores
+Destructores
 -----------------------------------------------------------------------------------------------------------------------------
 - Método especial.
 
-- Invocado durante la creación de un objeto.
+- Invocado al destruir un objeto (al salir del ámbito o al aplicar delete).
 
-- Mismo nombre que el constructor pero e precedido de -.
+- Mismo nombre que la clase, precedido de ~.
 
 - No devuelven tipo(no return).
 
 - No admiten sobrecarga. Solo un destructor por clase.
 
-- Útil para liberar memoría y recursos.
+- Útil para liberar memoria y recursos.
 
 - Nota: Todas las clases tienen destructor por defecto.
 -----------------------------------------------------------------------------------------------------------------------------
 -Se usa cuando:
 
   - Si tu clase asigna memoria dinámica con new o new[], debes liberar esa memoria en el destructor usando delete
-  o delete[]. Si no lo haces, tendrás fugas de memoría.
+  o delete[]. Si no lo haces, tendrás fugas de memoria.
 
   - Archivos abiertos:
 
-    - Si tu clase abre archivos, deberías cerrarlos en el destrcutor para liberar correctamente esos recursos.
+    - Si tu clase abre archivos, deberías cerrarlos en el destructor para liberar correctamente esos recursos.
 
-  - Conexiones de redo o BDD:
+  - Conexiones de red o BDD:
 
-    -Si tu clase establce conexiones a bases de datos o redes, el destructor deber cerrarlas para evitar mantener recutsos
+    -Si tu clase establece conexiones a bases de datos o redes, el destructor debería cerrarlas para evitar mantener recursos
     innecesarios abiertos.
 
   - Handles / Recursos del sistema:
 
-    -Cualquier otro recurso del sistema operativo, como descriptores de archivos, muetxes, o recursos gráficos, también deben
+    -Cualquier otro recurso del sistema operativo, como descriptores de archivos, mutex o recursos gráficos, también deben
     ser liberados adecuadamente en el destructor.
 -----------------------------------------------------------------------------------------------------------------------------
-Diferencias entre tipos de memoría:
+Diferencias entre tipos de memoria:
 
-  - Tipo de memoría:
+  - Tipo de memoria:
 
-    - Atomática.(Pila)
+    - Automática.(Pila)
 
     - Dinámica.(montón)
 
@@ -51,7 +51,7 @@ Diferencias entre tipos de memoría:
 
     - Heap(montón)
 
-    - Memoría estática
+    - Memoria estática
 
   - Asignación:
 
@@ -100,7 +100,7 @@ class Rectangulo{
         string nombre;
 
     public:
-        Rectangulo(string nom){ //Esto es un constructor.Se invoca automáticamente al declarar una variable con está clase.
+        Rectangulo(string nom){ //Esto es un constructor. Se invoca automáticamente al declarar una variable con esta clase.
             ancho = 10; alto = 5;
 
             nombre = nom;
@@ -120,7 +120,7 @@ class Rectangulo{
             nombre = nom;
         }
 
-        ~Rectangulo(){ //Esto es un contructor y esto elimina la memoría del Heap.
+        ~Rectangulo(){ //Se invoca al destruir el objeto; aquí solo imprime, porque no hay memoria del Heap que liberar.
           cout << "Destructor invocado para el objeto: " << nombre << endl;
 
         }
@@ -129,15 +129,15 @@ class Rectangulo{
 
 int main(){
 
-    Rectangulo r1("r1"); //Con esto ya es está invocando al método contructor de la clase.
-                //C++ asume que tienes un constrcutor por defecto.
+    Rectangulo r1("r1"); //Se invoca el constructor con un parámetro definido más arriba.
+                //El compilador solo genera uno por defecto si no se declara ningún constructor.
 
     Rectangulo r2(12,"r2");
 
     Rectangulo r3(17,9,"r3");
 
     /*Cómo estamos trabajando en el stack de momento. Lo que se eliminará primero será r3, después r2 y por último, r1.
-    Ya que no hay punteros declarados ni nada que gestiones memoría dinámica.*/
+    Ya que no hay punteros declarados ni nada que gestiones memoria dinámica.*/
     return 0;
 }
 //---------------------------------------------------------------------------------------------------------------------------

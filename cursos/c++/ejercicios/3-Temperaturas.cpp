@@ -38,6 +38,7 @@ class temperatura{
     public:
     //Introducir valores:
     void introducirDatos(){
+        valores.clear();   // Cada tanda sustituye a la anterior
         double temps;
         for(int i = 0; i < 7; i++){
             cout << "Introduzca un valor: ";
@@ -56,9 +57,11 @@ class temperatura{
     }
     //Calcular la media:
     double media(){
-        double sum;
+        if(valores.empty()){ cout << "No hay temperaturas registradas." << endl; return 0; }
+
+        double sum = 0.0;
         double media;
-        for(int i = 0; i < valores.size(); i++){
+        for(size_t i = 0; i < valores.size(); i++){
             sum += valores[i];
         }
         media = sum / valores.size();
@@ -66,15 +69,19 @@ class temperatura{
     }
     //Temeperatura máxima:
     double máximo(){
+        if(valores.empty()){ cout << "No hay temperaturas registradas." << endl; return 0; }
+
         double max = valores[0];
-        for(int i = 0; i < valores.size(); i++){
+        for(size_t i = 0; i < valores.size(); i++){
             if(max < valores[i]){ max = valores[i]; }
         } return max;
     }
     //Temeperatura mínima:
     double mínimo(){
+        if(valores.empty()){ cout << "No hay temperaturas registradas." << endl; return 0; }
+
         double min = valores[0];
-        for(int i = 0; i < valores.size(); i++){
+        for(size_t i = 0; i < valores.size(); i++){
             if(min > valores[i]){ min = valores[i];}
         } return min;
         }

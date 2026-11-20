@@ -2,17 +2,17 @@
 -------------------------------------------------------------------------------------------------------
 Vectores
 -------------------------------------------------------------------------------------------------------
-- Es una clase de la librería estándar de C++. Está clase crea estructuras contenedoras
-para almacenar datos secuanciales.
+- Es una clase de la biblioteca estándar de C++. Esta clase crea estructuras contenedoras
+para almacenar datos secuenciales.
 
 - los vectores pueden crecer o decrecer en tamaño de forma dinámica.
 
 - Tienen una sintaxis muy similar a los arrays.
 
-- Proporcionan múltiples para chequear límites, tamaño, comprovar si existe un elemento, etc.
+- Proporcionan múltiples funciones para comprobar límites, tamaño, si existe un elemento, etc.
 
-- Almacenan los valores en posiciones contiguas de la memoria y también en posiciones separadas
-accesibles a traves de punteros.
+- Almacenan los valores en posiciones contiguas de memoria; también se puede acceder a ellos
+mediante punteros.
 -------------------------------------------------------------------------------------------------------
 Características:
 
@@ -22,7 +22,7 @@ Características:
 
 - Se accede a los elementos almacenados con su posición o su índice.
 
-- El primer elementos siempre tienen índice 0.
+- El primer elemento siempre tiene índice 0.
 
 - El último siempre tiene índice size-1.
 
@@ -33,6 +33,7 @@ Características:
 
 #include <iostream>
 #include <vector>
+#include <cstddef>
 using namespace std;
 
 int main(){
@@ -46,23 +47,23 @@ int main(){
 
     //Para acceder a valores del vector:
 
-    int i = 0;
+    size_t i = 0; // size() devuelve un size_t, no un int.
 
     while(i<salario_base.size()){
         cout << salario_base[i] << endl;
         i++;
     }
 
-    /*Este bucle hace que mientras la variable del salario base sea menor que 0, entre en el while.
-    Dentro haciendo que el tamañao del vector vaya aumentando de uno en uno, hasta llegar a 350.*/
+    /*Este bucle recorre el vector mientras i sea menor que su tamaño (350).
+    En cada vuelta muestra un salario y aumenta i en uno; el vector no cambia de tamaño.*/
 }
 /*-----------------------------------------------------------------------------------------------------
 Cosas importantes:
 
-- "nombre del vector".at("posicón dentro del vector") => Hace una comprobación de limites.
-Si existe la posición que existe. Si no, nos dará error.
+- "nombre del vector".at("posición dentro del vector") => Hace una comprobación de límites.
+Si la posición existe, devuelve el valor; si no, nos dará error.
 
-- "nombre del vector.size"() => devuelve el número de elementos del vector.
+- "nombre del vector".size() => devuelve el número de elementos del vector.
 
-- "nombre del vector".push_back => Añade un elemento al final del vector.
+- "nombre del vector".push_back("valor") => Añade un elemento al final del vector.
 -----------------------------------------------------------------------------------------------------*/

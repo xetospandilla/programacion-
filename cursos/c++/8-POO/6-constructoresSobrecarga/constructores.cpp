@@ -6,9 +6,9 @@ Constructores
 
 - Invocado durante la creación de un objeto.
 
-- Tiene como finalidad dar estado incial a los objetos.
+- Tiene como finalidad dar estado inicial a los objetos.
 
-- Tiene el mismo número que la clase.
+- Tiene el mismo nombre que la clase.
 
 - No devuelven tipo(no return).
 
@@ -27,7 +27,7 @@ class Rectangulo{
         int ancho; int alto;
 
     public:
-        Rectangulo(){ //Esto es un constructor.Se invoca automáticamente al declarar una variable con está clase.
+        Rectangulo(){ //Esto es un constructor. Se invoca automáticamente al declarar una variable con esta clase.
             ancho = 10; alto = 5;
             //Todas las variables declaradas con esta clase, tendrán este estado inicial.
         }
@@ -45,8 +45,8 @@ class Rectangulo{
 
 int main(){
 
-    Rectangulo r1; //Con esto ya es está invocando al método contructor de la clase.
-                //C++ asume que tienes un constrcutor por defecto.
+    Rectangulo r1; //Se invoca el constructor sin parámetros definido más arriba.
+                //El compilador solo genera uno por defecto si no se declara ningún constructor.
 
     Rectangulo r2(12);
 

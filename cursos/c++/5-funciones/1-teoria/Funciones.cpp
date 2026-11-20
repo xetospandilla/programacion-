@@ -93,13 +93,13 @@ Paso por valor:
 - Cambios dentro de la función **no afectan** a la variable original.
 
 Paso por referencia:
-- La función recibe la dirección de la variable.
+- La función recibe un alias de la variable, no una copia.
 - Cambios dentro de la función **afectan** a la variable original.
 - Sintaxis: usar & en el parámetro.
 
 Ejemplo:
 */
-void cambiarValor(int x) { x = 100; }      // paso por valor
+void cambiarValor(int x) { x = 100; cout << "Dentro de la función, x = " << x << endl; } // paso por valor
 void cambiarValorRef(int &x) { x = 100; }  // paso por referencia
 
 // Uso:

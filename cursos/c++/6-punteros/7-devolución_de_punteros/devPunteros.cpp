@@ -20,6 +20,7 @@ Devolución de punteros
 EJM:
 */
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Coche{

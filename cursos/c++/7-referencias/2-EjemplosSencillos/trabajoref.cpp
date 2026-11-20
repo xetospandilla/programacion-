@@ -92,6 +92,7 @@ int main()
 //
 //  Resultado esperado:
 //      Antes: porValor=5, porReferencia=5
+//      Dentro de la función, x = 105
 //      Despues: porValor=5, porReferencia=105
 //---------------------------------------------------------------------------------------------------------------------------
 #if EJEMPLO_ACTIVO == 3
@@ -99,6 +100,7 @@ int main()
 void incrementarPorValor(int x)
 {
     x += 100;           // modifica la copia
+    cout << "Dentro de la función, x = " << x << endl;
 }
 
 void incrementarPorReferencia(int& x)

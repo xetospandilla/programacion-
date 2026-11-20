@@ -12,7 +12,7 @@ Importancia de 'const' en C++:
 
     - Optimización:
 
-        - Permite al compilador hace optimizaciones cuando sabe que un método no cambiará el estado del objeto.
+        - Permite al compilador hacer optimizaciones cuando sabe que un método no cambiará el estado del objeto.
 
     - Buenas prácticas de programación:
 
@@ -75,8 +75,8 @@ int main()
 
 
     const Empleado emp2( "Ana", "Gómez", 4500 ); 
-    //  Al ser const, no se puede modificar. Su contenido siempre será el mismo y no podrá ser modificado ni si quiera con métodos.
-    //  Solo podrá llamar métodos const.
+    //  Al ser const, no se puede modificar: solo podrá llamar a métodos const.
+    emp2.mostrarInfo();
 
     cout << "Modificando el salario..." << endl;
     emp.setSalario( 3500 );

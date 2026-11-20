@@ -48,8 +48,9 @@ Diamond Problem (Problema del Diamante) y sus soluciones
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
-#include <string>
 using namespace std;
+
+// El programa siguiente aplica la solución 3: una sola base abstracta (Animal) y dos interfaces sin estado.
 
 // Clase base abstracta (contiene estado y comportamiento común a todos los animales)
 class Animal

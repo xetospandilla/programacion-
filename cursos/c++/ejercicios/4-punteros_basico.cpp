@@ -51,3 +51,4 @@ int *v2 = &var2;
 int *v3 = &var3;
 int *v4 = &var4;
 //Funcion para almacenar los valores:
+// Ejercicio interrumpido aquí: queda pendiente la función y el main.

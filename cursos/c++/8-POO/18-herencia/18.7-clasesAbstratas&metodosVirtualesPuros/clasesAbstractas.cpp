@@ -50,7 +50,6 @@ Clases abstractas y métodos virtuales puros
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
-#include <string>
 using namespace std;
 
 // Clase abstracta (actúa como contrato)

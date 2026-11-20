@@ -27,6 +27,7 @@ Destructores Virtuales
 -----------------------------------------------------------------------------------------------------------------------------
 */
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Persona
@@ -58,7 +59,8 @@ class Persona
 class Alumno : public Persona
 {
     private:
-        string *estudios;
+        string *estudios;   //  Este objeto es propietario de la memoria dinámica que libera su destructor.
+                            //  Aquí no se copian objetos; si se hiciera, haría falta la regla de tres.
 
     public:
 
@@ -90,7 +92,7 @@ class Alumno : public Persona
 class Profesor : public Persona
 {
     private:
-        string *materia;
+        string *materia;    //  Propiedad dinámica: el destructor libera este recurso (ver nota en Alumno).
 
     public:
 
